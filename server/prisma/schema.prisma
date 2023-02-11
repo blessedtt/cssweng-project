@@ -8,41 +8,42 @@ datasource db {
 }
 
 model product {
-  product_ID       	Int               @id @default(autoincrement())
-  name     			String            @db.VarChar(255)
-  type     			Int?
-  stock    			Int               @default(0)
-  last_updated     	DateTime          @db.DateTime(0)
-  last_updated_by  	Int?
-  desc     			String            @db.VarChar(255)
-  cat_name 			String?           @db.VarChar(255)
-  brand    			String?           @db.VarChar(255)
-  sales	   			Int
-  revenue  			Int
-  avg_value  		Int
-  user             	user?             @relation(fields: [last_updated_by], references: [user_ID], onUpdate: NoAction, map: "fk_last_by")
-  product_category 	product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_type")
+  product_ID       Int               @id @default(autoincrement())
+  name             String            @db.VarChar(255)
+  type             Int?
+  stock            Int               @default(0)
+  last_updated     DateTime          @db.DateTime(0)
+  last_updated_by  Int?
+  desc             String            @db.VarChar(255)
+  cat_name         String?           @db.VarChar(255)
+  brand            String?           @db.VarChar(255)
+  sell_price       Int
+  sales            Int
+  revenue          Int?
+  avg_value        Int?
+  user             user?             @relation(fields: [last_updated_by], references: [user_ID], onUpdate: NoAction, map: "fk_last_by")
+  product_category product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_type")
 
-  @@index([last_updated_by], map: "fk_last_by_idx")
   @@index([type], map: "fk_type_idx")
+  @@index([last_updated_by], map: "fk_last_by_idx")
 }
 
 model product_category {
-  category_ID   Int       @id @unique(map: "category_id_UNIQUE") @default(autoincrement())
-  name 			String    @unique(map: "category_name_UNIQUE") @db.VarChar(255)
-  products      product[]
+  category_ID Int       @id @unique(map: "category_id_UNIQUE") @default(autoincrement())
+  name        String    @unique(map: "category_name_UNIQUE") @db.VarChar(255)
+  products    product[]
 }
 
 model user {
-  user_ID        Int           @id @default(autoincrement())
-  type      Int
-  pass      String        @db.VarChar(255)
-  email     String        @unique(map: "user_email_UNIQUE") @db.VarChar(255)
-  firstname String        @db.VarChar(255)
-  lastname  String        @db.VarChar(255)
-  fullname  String?       @db.VarChar(45)
-  products       product[]
-  user_category  user_category @relation(fields: [type], references: [utype_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_utype")
+  user_ID       Int           @id @default(autoincrement())
+  type          Int
+  pass          String        @db.VarChar(255)
+  email         String        @unique(map: "user_email_UNIQUE") @db.VarChar(255)
+  firstname     String        @db.VarChar(255)
+  lastname      String        @db.VarChar(255)
+  fullname      String?       @db.VarChar(45)
+  product       product[]
+  user_category user_category @relation(fields: [type], references: [utype_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_utype")
 
   @@index([type], map: "fk_utype_idx")
 }
@@ -54,8 +55,8 @@ model user_category {
 }
 
 model session {
-  id        	String   @id
-  sid       	String   @unique
-  data      	String	 @db.Text
-  expiresAt   	DateTime
+  id        String   @id
+  sid       String   @unique
+  data      String   @db.Text
+  expiresAt DateTime
 }
