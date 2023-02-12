@@ -8,6 +8,8 @@ if (!global.prisma) {
   global.prisma = new PrismaClient()
 }
 
+app.use(express.json());
+
 //view engine //TODO: change to appropriate view engine
 app.engine('html', require('ejs').renderFile)
 

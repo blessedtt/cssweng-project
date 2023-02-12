@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+//route functions
 const { addCategory, removeCategory, getCategories } = require('./modules/category');
 const { addProduct, removeProduct, getProducts } = require('./modules/product');
 const { getFilteredProducts } = require('./modules/filterProduct')
@@ -11,12 +12,10 @@ const { getFilteredProducts } = require('./modules/filterProduct')
 
 //user authentication modules
 const { isPublic, isPrivate } = require('./modules/uauth/userAuth');
-const { regValidation, loginValidation} = require('./modules/uauth/userValidation');
-const { registerUser, loginUser } = require('./modules/uauth/userController');
+const { loginValidation, registerValidation } = require('./modules/uauth/userValidation');
+const { loginUser, registerUser } = require('./modules/uauth/userController');
 
-//TODO: When connecting to the frontend, ensure that the fields sent follow the req.body parameter names
-
-
+//TODO: When connecting to the frontend, ensure that the fields sent follow the parameter names
 /********************
  *     CATEGORY 
  ********************/
@@ -31,24 +30,24 @@ app.use('/get/category', async (req, res, next) =>{
 })
 
 //add category render
-app.get('/add/category', (req,res) =>{
+app.get('/category/add', (req,res) =>{
 	res.render('addcategorytest.html');
 })
 
 //remove category render
-app.get('/remove/category', (req, res) =>{
+app.get('/category/remove', (req, res) =>{
 	res.render('removecategorytest.html');
 });
 
-/** req.body parameters:
+/** req.param parameters:
  *      name - name of category
 */
-app.post('/add/category/submit', addCategory);
+app.post('/category/add', addCategory);
 
-/** req.body parameters:
+/** req.param parameters:
  *      name - name of category
 */
-app.post('/remove/category/submit', removeCategory);
+app.post('/category/remove', removeCategory);
 
 
 /****************
@@ -56,7 +55,7 @@ app.post('/remove/category/submit', removeCategory);
  ****************/
 
 //add product render
-app.get('/add/product', (req,res) =>{
+app.get('/product/add', (req,res) =>{
 	res.render('addproducttest.html');
 })
 
@@ -67,19 +66,17 @@ app.get('/add/product', (req,res) =>{
  *      brand - brand of product
  *      price - price of product
 */
-app.post('/add/product/submit', addProduct)
+app.post('/product/add', addProduct)
 
 //remove product render
-app.get('/remove/product', (req, res) =>{
+app.get('/product/remove', (req, res) =>{
 	res.render('removeproducttest.html');
 })
-
-app.post('/remove/product/submit', removeProduct)
 
 /** req.body parameters:
  * 		id - product ID to remove
  */
-app.post('/remove/product/submit', getProducts);
+app.post('/product/remove', removeProduct)
 
 //get products as array
 app.use('/get/product', async (req, res, next) =>{
@@ -95,7 +92,7 @@ app.use('/get/product', async (req, res, next) =>{
  **************/
 //TODO this might not be final version, but this is my current implementation
 
-app.use('/get/product/filter', async (req, res) =>{
+app.use('/product/filter', async (req, res) =>{
 	products = await getFilteredProducts();
 	console.log(products);
 	//TODO: send filtered products to view

@@ -21,18 +21,22 @@ exports.addCategory = async (req,res) => {
 		return result;
 	})
 	.catch((err) =>{
-		console.dir(err);
+		res.json(err);
 		res.status(400);
 	});
 };
 
 //removes category from database
+/** req.body
+ * 		name - name of category to remove
+ */
 exports.removeCategory = (req,res) =>{
 	prisma.product_category.delete({
 	   where:{
 			name: req.body.name
 	   } 
 	}).then((result) =>{
+		console.log("removed category.");
 		res.status(200);
 	}).catch((err) =>{
 		console.dir(err);
