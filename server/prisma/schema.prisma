@@ -8,20 +8,21 @@ datasource db {
 }
 
 model product {
-  product_ID       Int              @id @default(autoincrement())
-  product_name     String           @db.VarChar(255)
-  product_type     Int
-  product_stock    Int              @default(0)
-  last_updated     DateTime         @db.DateTime(0)
-  last_updated_by  Int?
-  product_desc     String           @db.VarChar(255)
-  product_cat_name String?          @db.VarChar(255)
-  product_brand    String?          @db.VarChar(255)
-  user             user?            @relation(fields: [last_updated_by], references: [user_ID], map: "fk_last_by")
-  product_category product_category @relation(fields: [product_type], references: [category_ID], onDelete: NoAction, onUpdate: NoAction, map: "fk_type")
+  product_ID       Int               @id @default(autoincrement())
+  name             String            @db.VarChar(255)
+  type             Int?
+  stock            Int               @default(0)
+  last_updated     DateTime          @db.DateTime(0)
+  desc             String?           @db.VarChar(255)
+  cat_name         String?           @db.VarChar(255) @default(dbgenerated("CONCAT(`name`, ' - ', `desc`)"))
+  brand            String?           @db.VarChar(255)
+  sell_price       Int
+  sales            Int               @default(0)
+  revenue          Int?              @default(dbgenerated("`sales` * `sell_price`"))
+  avg_value        Int?              @default(dbgenerated("`stock` * `sell_price`"))
+  product_category product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_type")
 
-  @@index([last_updated_by], map: "fk_last_by_idx")
-  @@index([product_type], map: "fk_type_idx")
+  @@index([type], map: "fk_type_idx")
 }
 
 model product_category {
@@ -32,13 +33,15 @@ model product_category {
 
 model user {
   user_ID       Int           @id @default(autoincrement())
-  user_name     String        @db.VarChar(255)
-  user_type     Int
-  user_pass      String        @db.VarChar(255)
-  products      product[]
-  user_category user_category @relation(fields: [user_type], references: [utype_ID], map: "fk_utype")
+  type          Int
+  pass          String        @db.VarChar(255)
+  email         String        @unique(map: "user_email_UNIQUE") @db.VarChar(255)
+  firstname     String        @db.VarChar(255)
+  lastname      String        @db.VarChar(255)
+  fullname      String?       @db.VarChar(45)
+  user_category user_category @relation(fields: [type], references: [utype_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_utype")
 
-  @@index([user_type], map: "fk_utype_idx")
+  @@index([type], map: "fk_utype_idx")
 }
 
 model user_category {
