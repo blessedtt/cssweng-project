@@ -1,11 +1,4 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -13,56 +6,114 @@
   }
 }
 
+
+
 .Container {
+  color:#FAF8F1;
+  font-family:'Inter', sans-serif;
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows: 1fr 1fr 1fr; 
+  grid-template-columns: 0.2fr 1fr 1fr; 
+  grid-template-rows: 0.2fr 1fr 1fr; 
   gap: 0px 0px; 
   grid-template-areas: 
     "sidebar nav     nav"
     "sidebar content content"
     "sidebar content content";
   height:100vh;
-  width:100%;
+  
 }
 .sidebar { 
   padding:5px;
   grid-area: sidebar; 
-  background-color:#61dafb;
+  background-color:#A67438;
+  
+}
+#title{
+  font-weight:900;
+  font-style:bold;
+  font-size:33px;
+  line-height:40px;
+  text-align:center;
+  text-transform:uppercase;
+  top:3vh;
+  float:left;
+  position:relative;
+}
+#sidecontent{
+  position:relative;
+  top:5vh;
+  font-style:normal;
+  font-weight:400;
+  font-size: 33px;
+  line-height:40px;
 }
 .nav { 
+
   padding:5px;
   grid-area: nav; 
-  background-color:red;
-  height:10vh;
+  background-color:#A67438;
+
 }
 .content { 
   padding:5px;
   grid-area: content; 
-  background-color:yellow;
-  height:90vh;
+  background-color:#FAF8F1;
+  
+}
+.inner{
+  position:relative;
+  top:-5px;
+  left:-5px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 10fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "date item brand product stock status sales revenue ave"
+    "date item brand product stock status sales revenue ave";
+  height:100%;
+  overflow-x:scroll;
+}
+.inner div{
+  text-transform:uppercase;
+}
+.outer{
+  background:#DD9D34;
+  position:relative;
+  top:-5px;
+  left:-5px;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  display:flex;
+  align-items:center;
+  text-align:center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.date{
+  background:red;
 }
-
-.App-link {
-  color: #61dafb;
+.item{
+    background:red;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.brand{
+  background:red;
+}
+.product{
+    background:red;
+}
+.stock{
+  background:red;
+}
+.status{
+  background:red;
+}
+.sales{
+  background:red;
+}
+.revenue{
+  background:red;
+}
+.ave{
+  background:red;
 }
