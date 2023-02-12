@@ -4,37 +4,47 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-const {addCategory, removeCategory} = require('./modules/category');
+const {addCategory, removeCategory, getCategories} = require('./modules/category');
+const { addProduct, removeProduct, getProducts } = require('./modules/product');
 
 //user authentication modules
 const { isPublic, isPrivate } = require('./modules/uauth/userAuth');
-const { regValidation, loginValidation} = require('./modules/userValidation');
-const { registerUser, loginUser } = require('./modules/userController');
+const { regValidation, loginValidation} = require('./modules/uauth/userValidation');
+const { registerUser, loginUser } = require('./modules/uauth/userController');
 
-//view controller
-const view = require('./modules/viewController');
+//TODO: When connecting to the frontend, ensure that the fields sent follow the req.body parameter names
 
-//TODO: When connecting to frontend, ensure that the fields follow the req.body parameter names
 
+/********************
+ *     CATEGORY 
+ ********************/
+
+//get categories as array
+app.use('/get/category', async (req, res, next) =>{
+	categories = await getCategories()
+	console.log(categories);
+	//TODO: send array data to view
+	//res.send(categories);
+	next();
+})
 
 //add category render
 app.get('/add/category', (req,res) =>{
-    res.render('addcategorytest.html');
+	res.render('addcategorytest.html');
 })
-
-/** req.body parameters:
- *      name - name of product
-*/
-app.post('/add/category/submit', addCategory);
 
 //remove category render
 app.get('/remove/category', (req, res) =>{
-    res.render('removecategorytest.html');
+	res.render('removecategorytest.html');
 });
 
 /** req.body parameters:
- *      name - name of product
+ *      name - name of category
+*/
+app.post('/add/category/submit', addCategory);
+
+/** req.body parameters:
+ *      name - name of category
 */
 app.post('/remove/category/submit', removeCategory)
-
 module.exports = app;

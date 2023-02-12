@@ -16,7 +16,7 @@ app.set('views', 'public');
 app.use('/public', express.static((process.env.PWD || __dirname) + '/public'));
 
 //session handling module
-const {handleSession} = require('./modules/session');
+const {handleSession} = require('./modules/uauth/session');
 app.use(handleSession)
 
 //run server
