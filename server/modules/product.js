@@ -35,8 +35,11 @@ exports.addProduct = async (req, res) => {
 		}
 	}).then((result) => {
 		console.dir(result, {depth:null});
+		res.status(200);
+		return result;
 	}).catch((err) => {
 		console.dir(err, {depth: null});
+		res.status(400);
 	})
 }
 
@@ -44,7 +47,7 @@ exports.addProduct = async (req, res) => {
 //removes a product from the database
 /** parameters:
  * 	req.body
- * 		id - product ID to remove from database
+ * 		id - product ID to remove
 */
 exports.removeProduct = async (req, res) => {
 	const id = req.body.id;
@@ -54,7 +57,9 @@ exports.removeProduct = async (req, res) => {
 		}
 	}).then(() => {
 		console.log("Deleted entry.");
+		res.status(200);
 	}).catch((err) => {
 		console.dir(err, {depth: null});
+		res.status(400);
 	})
 };

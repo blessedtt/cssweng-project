@@ -19,8 +19,13 @@ async function getFilteredProducts(filterName){
 			product_type: {
 				connect: { category_name: filterName }
 		}}
+	}).then((result) =>{
+		res.status(200);
+		return result;
+	}).catch((err)=>{
+		res.status(500);
+		console.log(err);
 	})
-
 }
 
 //add new category filter to list of products
@@ -51,6 +56,6 @@ exports.removeFilterProducts = (req, res) => {
 		});
 		res.render('/table', {filterProducts});
 	} else {
-		res.renmder('/table');
+		res.render('/table');
 	}
 }
