@@ -2,6 +2,7 @@ const {PrismaClient} = require("@prisma/client");
 const prisma = global.prisma
 
 const { validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 exports.loginUser = async (req, res) => {
 	const errors = validationResult(req);
@@ -18,7 +19,7 @@ exports.loginUser = async (req, res) => {
 		})
 		.then((result) => {
 			//TODO: encrypt password for register and login check
-			if (result.user_pass === password){
+			if (bcrypt.compareSync(password, result.pass)){
 				//store user email and fullname to session cookie
 				req.session.user = {
 					email: result.user_email, 
@@ -32,7 +33,7 @@ exports.loginUser = async (req, res) => {
 				console.log(req.session);
 				res.redirect("/login-success");
 			} else {
-				//TODO: login error redirect/recheck on frontend
+				//TODO: login error redirect or recheck on frontend
 				res.redirect("/login-error");
 			}
 
