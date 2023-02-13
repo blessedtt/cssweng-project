@@ -9,6 +9,9 @@ const Category = require('./modules/category');
 const Product = require('./modules/product');
 const { getFilteredProducts } = require('./modules/filterProduct')
 
+//error handler
+const apiErrorHandler = require('./modules/errorhandling/apiErrorHandler');
+
 //TODO: When connecting to the frontend, ensure that the fields sent follow the parameter names
 /********************
  *     CATEGORY 
@@ -94,5 +97,7 @@ app.use('/product/filter', async (req, res) =>{
 	res.send(products);
 	next();
 })
+
+app.use(apiErrorHandler);
 
 module.exports = app;

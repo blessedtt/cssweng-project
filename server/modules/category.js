@@ -1,28 +1,40 @@
 //global prisma client
 prisma = global.prisma
 
+const { DBConstraintError } = require('./errorhandling/DBErrorAPI');
 //Category class - Manages all product category-related operations on the database
+
+const DBErrorAPI = require('./errorhandling/DBErrorAPI');
 
 class Category{
 
 	//queries database to get all categories
-	static async getCategories(){
+	static async getCategories(req, res, next){
 		const categories = await prisma.product_category.findMany({})
+		.catch((err)=>{
+			console.log(err);
+			next(DBErrorAPI.DBError(err.code));
+			return;
+		});
 		return categories;
 	}
 
 	//adds category to database
-	static async addCategory(req,res, next){
+	static async addCategory(req, res, next){
 		await prisma.product_category.create({
 			data:{
 				name: req.body.name
 			}
 		}).then((result) =>{
 			console.dir(result, {depth: null})
+			next();
 			res.status(201).json("successfully added category");
+			return;
 		})
 		.catch((err) =>{
-			next(err);
+			console.log(err)
+			next(DBErrorAPI.DBError(err.code));
+			return;
 		});
 	};
 
@@ -30,7 +42,7 @@ class Category{
 	/** req.body
 	 * 		name - name of category to remove
 	 */
-	static async removeCategory(req,res){
+	static async removeCategory(req, res, next){
 		await prisma.product_category.delete({
 		where:{
 				name: req.body.name
@@ -38,9 +50,11 @@ class Category{
 		}).then((result) =>{
 			console.log("removed category.");
 			res.status(200).json("successfully removed category");
+			next();
+			return;
 		}).catch((err) =>{
-			res.status(400).json("require")
-			next(err);
+			next(DBErrorAPI.DBError(err.code));
+			return;
 		});
 	};
 

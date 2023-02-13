@@ -17,10 +17,6 @@ app.engine('html', require('ejs').renderFile)
 app.set('views', 'public');
 app.use('/public', express.static((process.env.PWD || __dirname) + '/public'));
 
-//session handling module
-const {handleSession} = require('./modules/uauth/session');
-app.use(handleSession)
-
 //run server
 const PORT_NO = process.env.PORT || 3001
 app.listen(PORT_NO, () => {

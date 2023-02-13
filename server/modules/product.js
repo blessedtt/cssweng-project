@@ -1,14 +1,20 @@
 //global prisma client
 const prisma = global.prisma;
 
+const DBErrorAPI = require('./errorhandling/DBErrorAPI');
+
 /**
  * Product class - Manages all product-related operations on the database
  */
 class Product{
 //gets all products in database
-	static async getProducts(next){
+	static async getProducts(req, res, next){
 		const products = await prisma.product.findMany({})
-		.catch((err) => {next(err)})
+		.catch((err) => {
+			console.log(err);
+			next(DBErrorAPI.DBError(err.code));
+			return;
+		})
 		return products;
 	}
 
@@ -38,11 +44,14 @@ class Product{
 				sell_price: Number(price),
 			}
 		}).then((result) => {
-			console.dir(result, {depth:null});
-			return result;
+			console.dir(result, {depth: null})
+			res.status(201).json("successfully added product");
+			next(result);
+			return;
 		}).catch((err) => {
-			console.dir(err, {depth: null});
-			next(err);
+			console.log(err);
+			next(DBErrorAPI.DBError(err.code));
+			return;
 		})
 	}
 
@@ -52,7 +61,7 @@ class Product{
 	 * 	req.body
 	 * 		id - product ID to remove
 	*/
-	static async removeProduct(req, res){
+	static async removeProduct(req, res, next){
 		const id = req.body.id;
 		await prisma.product.delete({
 			where: {
@@ -61,9 +70,10 @@ class Product{
 		}).then(() => {
 			console.log("Deleted entry.");
 			res.status(200);
+			return;
 		}).catch((err) => {
-			console.dir(err, {depth: null});
-			next(err);
+			next(DBErrorAPI.DBError(err.code));
+			return;
 		})
 	};
 }
