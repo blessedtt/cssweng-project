@@ -5,15 +5,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 //route functions
-const { addCategory, removeCategory, getCategories } = require('./modules/category');
-const { addProduct, removeProduct, getProducts } = require('./modules/product');
+const Category = require('./modules/category');
+const Product = require('./modules/product');
 const { getFilteredProducts } = require('./modules/filterProduct')
-
-
-//user authentication modules
-const { isPublic, isPrivate } = require('./modules/uauth/userAuth');
-const { loginValidation, registerValidation } = require('./modules/uauth/userValidation');
-const { loginUser, registerUser } = require('./modules/uauth/userController');
 
 //TODO: When connecting to the frontend, ensure that the fields sent follow the parameter names
 /********************
@@ -22,7 +16,7 @@ const { loginUser, registerUser } = require('./modules/uauth/userController');
 
 //get categories as array
 app.use('/get/category', async (req, res, next) =>{
-	categories = await getCategories()
+	categories = await Category.getCategories()
 	console.log(categories);
 	//TODO: send array data to view
 	res.send(categories);
@@ -42,12 +36,12 @@ app.get('/category/remove', (req, res) =>{
 /** req.param parameters:
  *      name - name of category
 */
-app.post('/category/add', addCategory);
+app.post('/category/add', Category.addCategory);
 
 /** req.param parameters:
  *      name - name of category
 */
-app.post('/category/remove', removeCategory);
+app.post('/category/remove', Category.removeCategory);
 
 
 /****************
@@ -59,6 +53,11 @@ app.get('/product/add', (req,res) =>{
 	res.render('addproducttest.html');
 })
 
+//remove product render
+app.get('/product/remove', (req, res) =>{
+	res.render('removeproducttest.html');
+})
+
 /** req.body parameters: 
  * 		pname - product name
  *      category - category ID of product
@@ -66,21 +65,17 @@ app.get('/product/add', (req,res) =>{
  *      brand - brand of product
  *      price - price of product
 */
-app.post('/product/add', addProduct)
+app.post('/product/add', Product.addProduct)
 
-//remove product render
-app.get('/product/remove', (req, res) =>{
-	res.render('removeproducttest.html');
-})
 
 /** req.body parameters:
  * 		id - product ID to remove
  */
-app.post('/product/remove', removeProduct)
+app.post('/product/remove', Product.removeProduct)
 
 //get products as array
 app.use('/get/product', async (req, res, next) =>{
-	products = await getProducts()
+	products = await Product.getProducts();
 	console.log(products);
 	//TODO: send array data to view
 	res.send(products);
