@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Table } from './components/Table';
-import { IoAddCircleOutline, IoPencil } from 'react-icons/io5';
+import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 function App() {
   return(
@@ -13,23 +13,41 @@ function App() {
         </span>
        
       </div>
+    
       <div class ="nav">
-        <span id ="home_text">HOME</span>
+       
         <ul>
-          <li>
-            <IconContext.Provider
-              value ={{ color: 'white', size:'44px'}}
-            >
-              <IoAddCircleOutline />
-            </IconContext.Provider>
+
+          <li id = 'first'>
+              HOME
           </li>
           <li>
-            <IconContext.Provider
-              value ={{ color: 'white', size:'44px'}}
-            >
-                <IoPencil />
+            <a href=''>
+              <IconContext.Provider
+                value ={{ color: '#FFFFFFFF', size:'44px'}}
+              >
+                <IoAddCircleOutline />
+              </IconContext.Provider>
+             </a>
+           </li>
+           <li>
+            <a href=''>
+              <IconContext.Provider
+                  value ={{ color: '#FFFFFFFF', size:'44px'}}
+              >
+                  <IoPencil />
+                </IconContext.Provider>
+              </a>
+            </li>
+          <a href=''>
+            <li>
+              <IconContext.Provider
+                value ={{ color: '#FFFFFFFF', size:'44px'}}
+              >
+                <IoTrashSharp />
             </IconContext.Provider>
-          </li>
+            </li>
+          </a>
         </ul>
         
       </div>
