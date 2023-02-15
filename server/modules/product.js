@@ -42,6 +42,7 @@ class Product{
 				desc: desc,
 				brand: brand,
 				sell_price: Number(price),
+				cat_name: pname.concat(" - ", desc),
 			}
 		}).then((result) => {
 			console.dir(result, {depth: null})
