@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { Table } from './components/Table'
+import { Table } from './components/Table';
+import { IoAddCircleOutline, IoPencil } from 'react-icons/io5';
+import { IconContext } from 'react-icons';
 function App() {
   return(
     <div className="Container">
@@ -12,7 +14,24 @@ function App() {
        
       </div>
       <div class ="nav">
-        <h1>HOME</h1>
+        <span id ="home_text">HOME</span>
+        <ul>
+          <li>
+            <IconContext.Provider
+              value ={{ color: 'white', size:'44px'}}
+            >
+              <IoAddCircleOutline />
+            </IconContext.Provider>
+          </li>
+          <li>
+            <IconContext.Provider
+              value ={{ color: 'white', size:'44px'}}
+            >
+                <IoPencil />
+            </IconContext.Provider>
+          </li>
+        </ul>
+        
       </div>
 
 

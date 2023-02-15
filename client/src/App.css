@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap');
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -48,13 +48,27 @@
 }
 .nav{ 
 
-  padding:5px;
+  padding:1px;
   grid-area: nav; 
   background-color:#A67438;
 
 }
-.nav h1{
+.nav #home_text{
+  
   margin-left:2vw;
+  font-weight:600;
+  font-size:33px;
+
+}
+.nav ul{
+  list-style:none;
+  padding-left:0;
+  margin-left:160vh;
+}
+.nav ul li{
+  display:inline;
+  padding:5px;
+  
 }
 .content { 
   padding:5px;
