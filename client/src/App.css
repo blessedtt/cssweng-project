@@ -28,9 +28,8 @@
   background-color:#A67438;
   
 }
-#title{
+#title h1{
   font-weight:900;
-  font-style:bold;
   font-size:33px;
   line-height:40px;
   text-align:center;
@@ -41,23 +40,29 @@
 }
 #sidecontent{
   position:relative;
-  top:5vh;
+  top:10vh;
   font-style:normal;
   font-weight:400;
   font-size: 33px;
   line-height:40px;
 }
-.nav { 
+.nav{ 
 
   padding:5px;
   grid-area: nav; 
   background-color:#A67438;
 
 }
+.nav h1{
+  margin-left:2vw;
+}
 .content { 
   padding:5px;
   grid-area: content; 
-  background-color:#FAF8F1;
+  /* background-color:#FAF8F1; */
+  background:#FFFFFFFF     ;
+  overflow-x:scroll;
+  overflow-y:scroll;
   
 }
 .inner{
@@ -108,9 +113,7 @@
 .status{
   background:red;
 }
-.sales{
-  background:red;
-}
+
 .revenue{
   background:red;
 }
