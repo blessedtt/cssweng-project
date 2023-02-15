@@ -27,8 +27,8 @@ class Category{
 			}
 		}).then((result) =>{
 			console.dir(result, {depth: null})
-			next();
 			res.status(201).json("successfully added category");
+			next(result);
 			return;
 		})
 		.catch((err) =>{

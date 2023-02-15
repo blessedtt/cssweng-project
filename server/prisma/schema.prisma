@@ -27,8 +27,8 @@ model product {
 }
 
 model product_category {
-  category_ID   Int       @id @unique(map: "category_id_UNIQUE")
-  category_name String    @db.VarChar(255)
+  category_ID   Int       @id @unique(map: "category_id_UNIQUE") @default(autoincrement())
+  name String    @db.VarChar(255)
   products      product[]
 }
 
