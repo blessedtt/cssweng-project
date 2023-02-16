@@ -77,13 +77,7 @@ app.post('/product/add', Product.addProduct)
 app.post('/product/remove', Product.removeProduct)
 
 //get products as array
-app.use('/get/product', async (req, res, next) =>{
-	products = await Product.getProducts();
-	console.log(products);
-	//TODO: send array data to view
-	res.send(products);
-	next();
-});
+app.use('/product/get', Product.getProducts);
 
 /************** 
  * 	 FILTERS
@@ -94,7 +88,7 @@ app.use('/product/filter', async (req, res) =>{
 	products = await getFilteredProducts();
 	console.log(products);
 	//TODO: send filtered products to view
-	res.send(products);
+	res.send({data: products});
 	next();
 })
 

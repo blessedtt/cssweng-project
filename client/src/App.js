@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import ProductTableHOC from "./components/ProductTableHOC";
 import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
+
+import ProductTableHook from './components/ProductTableHook';
+
 function App() {
   return(
     <div className="Container">
@@ -51,12 +53,10 @@ function App() {
         </ul>
         
       </div>
-
-
       
       <main className ="content">
         
-        <ProductTableHOC />
+        <ProductTableHook />
         
       </main>
     </div>

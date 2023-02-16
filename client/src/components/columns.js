@@ -1,11 +1,11 @@
 export const COLUMNS = [
     {
         Header: 'DATE UPDATED',
-        accessor: 'date_updated'
+        accessor: 'last_updated'
     },
     {
         Header: 'ITEM NO.',
-        accessor: 'item_no'
+        accessor: 'product_ID'
     },
     {
         Header: 'BRAND',
@@ -13,15 +13,11 @@ export const COLUMNS = [
     },
     {
         Header: 'PRODUCT',
-        accessor: 'product'
+        accessor: 'name'
     },
     {
         Header: 'ON-HAND STOCK',
         accessor: 'stock'
-    },
-    {
-        Header: 'STATUS',
-        accessor: 'status'
     },
     {
         Header: 'SALES',

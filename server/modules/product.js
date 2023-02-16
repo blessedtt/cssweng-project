@@ -9,13 +9,20 @@ const DBErrorAPI = require('./errorhandling/DBErrorAPI');
 class Product{
 //gets all products in database
 	static async getProducts(req, res, next){
-		const products = await prisma.product.findMany({})
+		await prisma.product.findMany({
+			include: {
+				product_category: true
+			}
+		})
+		.then((result) =>{
+			res.json(result);
+			return;
+		})
 		.catch((err) => {
-			console.log(err);
+			console.log(err)
 			next(DBErrorAPI.DBError(err.code));
 			return;
 		})
-		return products;
 	}
 
 	//adds products to the database
