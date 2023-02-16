@@ -4,6 +4,13 @@ import MOCK_DATA from './MOCK_DATA.json'
 import { COLUMNS} from './columns'
 import './table_style.css'
 
+
+const Button1 = () => {
+    <button>
+        test
+    </button>
+}
+
 export const Table = () => {
     // data will not be recreated at every render
     const columns = useMemo(() => COLUMNS, [])
@@ -47,7 +54,13 @@ export const Table = () => {
                             <tr {...row.getRowProps()}>
                                 {
                                     row.cells.map( cell =>{
-                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        return <td {...cell.getCellProps()}>
+                                            <button>
+                                            {
+                                            cell.render('Cell')
+                                            }
+                                            </button>
+                                            </td>
                                     })
                                 }
                             </tr>

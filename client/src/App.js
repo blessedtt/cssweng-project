@@ -3,6 +3,7 @@ import './App.css';
 import { Table } from './components/Table';
 import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
+import { Popup } from 'reactjs-popup';
 function App() {
   return(
     <div className="Container">
@@ -31,14 +32,18 @@ function App() {
              </a>
            </li>
            <li>
-            <a href=''>
+            <Popup trigger = {  
+              <button>
               <IconContext.Provider
                   value ={{ color: '#FFFFFFFF', size:'44px'}}
               >
                   <IoPencil />
                 </IconContext.Provider>
-              </a>
-            </li>
+                </button>
+               } >
+                <div><h1>TEST</h1>></div>
+            </Popup>
+          </li>
           <a href=''>
             <li>
               <IconContext.Provider

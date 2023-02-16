@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap'); 
+/* fonts used in this webapp */
 
 
 
-.Container {
+.Container { 
   color:#FAF8F1;
   font-family:'Inter', sans-serif;
   display:grid;
@@ -15,8 +16,10 @@
     "sidebar content content"
     "sidebar content content";
   height:100vh;
-  
 }
+/* contains sidebar, navbar and table */
+
+/* sidebar containing categories */
 .sidebar { 
   padding:10px;
   grid-area: sidebar; 
@@ -41,6 +44,10 @@
   font-size: 33px;
   line-height:40px;
 }
+
+
+
+
 .nav{ 
 
   padding:1px;
@@ -72,6 +79,10 @@
   font-size:44px;
   right:65vw;
 }
+
+
+
+
 
 .content { 
   padding:5px;
