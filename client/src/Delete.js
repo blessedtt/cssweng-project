@@ -3,11 +3,12 @@ import { Table } from './components/Table';
 import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 import { Popup } from 'reactjs-popup';
-function App() {
-  return(
-    <div className="Container">
+
+function Delete(){
+    return(
+      <div className="Container">
       <div class ="sidebar">
-        <span id ="title"><h1>inventory tracker</h1></span>
+        <span id ="title"><h1>d tracker</h1></span>
         <span id = "sidecontent">
           Hello!
         </span>
@@ -17,7 +18,7 @@ function App() {
       <div class ="nav">
        
         <ul>
-
+  
           <li id = 'first'>
               HOME
           </li>
@@ -66,15 +67,14 @@ function App() {
         </ul>
         
       </div>
-
-
+  
+  
       
       <main class ="content">
         <Table />
         
       </main>
     </div>
-  );
-}
-export default App;
-
+    );
+  }
+export default Delete;
