@@ -24,6 +24,10 @@ export const COLUMNS = [
         accessor: 'status'
     },
     {
+        Header: '',
+        accessor: 'edit'
+    },
+    {
         Header: 'SALES',
         accessor: 'sales'
     },

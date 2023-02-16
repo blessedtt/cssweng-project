@@ -55,6 +55,7 @@ export const Table = () => {
                                 {
                                     row.cells.map( cell =>{
                                         return <td {...cell.getCellProps()}>
+                                            
                                             <button>
                                             {
                                             cell.render('Cell')

@@ -23,25 +23,36 @@ function App() {
               HOME
           </li>
           <li>
-            <a href=''>
-              <IconContext.Provider
-                value ={{ color: '#FFFFFFFF', size:'44px'}}
-              >
-                <IoAddCircleOutline />
-              </IconContext.Provider>
-             </a>
+            <Popup trigger =
+              {
+                <button>
+                    <IconContext.Provider
+                      value ={{ color: '#FFFFFFFF', size:'44px'}}
+                    >
+                    <IoAddCircleOutline />
+                  </IconContext.Provider>
+                </button>
+              } >
+                <div class = 'add'>
+                  <h1>ADD</h1>
+                </div>
+              </Popup>
+                
            </li>
            <li>
-            <Popup trigger = {  
+            <Popup trigger = 
+              {  
               <button>
-              <IconContext.Provider
+                <IconContext.Provider
                   value ={{ color: '#FFFFFFFF', size:'44px'}}
-              >
+                >
                   <IoPencil />
                 </IconContext.Provider>
-                </button>
-               } >
-                <div><h1>TEST</h1>></div>
+              </button>
+              } >
+                <div class = 'edit'>
+                  <h1>TEST</h1>
+                </div>
             </Popup>
           </li>
           <a href=''>
