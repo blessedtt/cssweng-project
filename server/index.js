@@ -17,6 +17,12 @@ app.engine('html', require('ejs').renderFile)
 app.set('views', 'public');
 app.use('/public', express.static((process.env.PWD || __dirname) + '/public'));
 
+//proxy to circument 'Access-Control-Allow-Origin' error
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 //run server
 const PORT_NO = process.env.PORT || 3001
 app.listen(PORT_NO, () => {

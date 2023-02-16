@@ -48,7 +48,6 @@ class Category{
 				name: req.body.name
 		} 
 		}).then((result) =>{
-			console.log("removed category.");
 			res.status(200).json("successfully removed category");
 			next();
 			return;

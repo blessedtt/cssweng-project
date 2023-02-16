@@ -1,13 +1,15 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
-import MOCK_DATA from './MOCK_DATA.json'
 import { COLUMNS} from './columns'
 import './table_style.css'
 
-export const Table = () => {
+
+
+function Table(props){
     // data will not be recreated at every render
     const columns = useMemo(() => COLUMNS, [])
-    const data = useMemo(() => MOCK_DATA, [])
+    const data = useMemo(() => props.products, [])
+
     // used alongside useTable (react table)
 
     const tableInstance = useTable({
@@ -58,3 +60,5 @@ export const Table = () => {
         </table>
     )
 }
+
+export default Table;

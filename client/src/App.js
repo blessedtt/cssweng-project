@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import { Table } from './components/Table';
+import ProductTableHOC from "./components/ProductTableHOC";
 import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 function App() {
   return(
     <div className="Container">
-      <div class ="sidebar">
+      <div className ="sidebar">
         <span id ="title"><h1>inventory tracker</h1></span>
         <span id = "sidecontent">
           Hello!
@@ -14,7 +14,7 @@ function App() {
        
       </div>
     
-      <div class ="nav">
+      <div className ="nav">
        
         <ul>
 
@@ -54,8 +54,9 @@ function App() {
 
 
       
-      <main class ="content">
-        <Table />
+      <main className ="content">
+        
+        <ProductTableHOC />
         
       </main>
     </div>
