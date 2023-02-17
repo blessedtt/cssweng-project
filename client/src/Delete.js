@@ -1,25 +1,24 @@
 import './App.css';
+import { Table } from './components/Table';
 import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 import { Popup } from 'reactjs-popup';
 
-import ProductTableHook from './components/ProductTableHook';
-
-function App() {
-  return(
-    <div className="Container">
-      <div className ="sidebar">
-        <span id ="title"><h1>inventory tracker</h1></span>
+function Delete(){
+    return(
+      <div className="Container">
+      <div class ="sidebar">
+        <span id ="title"><h1>d tracker</h1></span>
         <span id = "sidecontent">
           Hello!
         </span>
        
       </div>
     
-      <div className ="nav">
+      <div class ="nav">
        
         <ul>
-
+  
           <li id = 'first'>
               HOME
           </li>
@@ -34,7 +33,7 @@ function App() {
                   </IconContext.Provider>
                 </button>
               } >
-                <div className = 'add'>
+                <div class = 'add'>
                   <h1>ADD</h1>
                 </div>
               </Popup>
@@ -51,7 +50,7 @@ function App() {
                 </IconContext.Provider>
               </button>
               } >
-                <div className = 'edit'>
+                <div class = 'edit'>
                   <h1>TEST</h1>
                 </div>
             </Popup>
@@ -68,14 +67,14 @@ function App() {
         </ul>
         
       </div>
+  
+  
       
-      <main className ="content">
-        
-        <ProductTableHook />
+      <main class ="content">
+        <Table />
         
       </main>
     </div>
-  );
-}
-export default App;
-
+    );
+  }
+export default Delete;
