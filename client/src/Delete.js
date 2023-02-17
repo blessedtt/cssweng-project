@@ -8,11 +8,22 @@ function Delete(){
     return(
       <div className="Container">
       <div class ="sidebar">
-        <span id ="title"><h1>d tracker</h1></span>
-        <span id = "sidecontent">
-          Hello!
+        <span id ="title"><h1>inventory tracker</h1></span>
+        <span class = "sidecontent">
+          <span id ="hello">
+            Hello!
+          </span>
+          <span id = "cancel_btn">
+            <button>
+              Cancel
+            </button>
+          </span>
+          <span id = "delete_btn">
+            <button>
+              Delete
+            </button>
+          </span>
         </span>
-       
       </div>
     
       <div class ="nav">

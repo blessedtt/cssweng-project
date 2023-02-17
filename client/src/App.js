@@ -8,7 +8,7 @@ function App() {
     <div className="Container">
       <div class ="sidebar">
         <span id ="title"><h1>inventory tracker</h1></span>
-        <span id = "sidecontent">
+        <span class = "sidecontent">
           Hello!
         </span>
        
