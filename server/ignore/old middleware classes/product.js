@@ -1,7 +1,7 @@
 //global prisma client
 const prisma = global.prisma;
 
-const DBErrorAPI = require('./errorhandling/DBErrorAPI');
+const DBErrorAPI = require('../middleware/errorhandling/DBErrorAPI');
 
 /**
  * Product class - Manages all product-related operations on the database

@@ -1,7 +1,6 @@
 const ErrorAPI = require('./ErrorAPI');
 
 function apiErrorHandler(err, req, res, next){
-
     if (err instanceof ErrorAPI){
         res.status(err.code).json(err.message);
         return;

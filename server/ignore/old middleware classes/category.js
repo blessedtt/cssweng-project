@@ -1,10 +1,10 @@
 //global prisma client
 prisma = global.prisma
 
-const { DBConstraintError } = require('./errorhandling/DBErrorAPI');
+const { DBConstraintError } = require('../middleware/errorhandling/DBErrorAPI');
 //Category class - Manages all product category-related operations on the database
 
-const DBErrorAPI = require('./errorhandling/DBErrorAPI');
+const DBErrorAPI = require('../middleware/errorhandling/DBErrorAPI');
 
 class Category{
 
@@ -56,10 +56,6 @@ class Category{
 			return;
 		});
 	};
-
-	static editCategory(req, res){
-		//TODO in sprint 2 :)
-	}
 
 }
 

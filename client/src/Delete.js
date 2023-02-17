@@ -1,5 +1,5 @@
 import './App.css';
-import { Table } from './components/Table';
+import Table from './components/ProductTableHook';
 import { IoAddCircleOutline, IoPencil, IoTrashSharp, } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 import { Popup } from 'reactjs-popup';
