@@ -36,7 +36,7 @@
   float:left;
   position:relative;
 }
-#sidecontent{
+.sidecontent{
   position:relative;
   top:10vh;
   font-style:normal;
@@ -44,7 +44,50 @@
   font-size: 33px;
   line-height:40px;
 }
+.sidecontent button{
+  background:none;
+  color:inherit;
+  border:none;
+  padding:0;
+  cursor:pointer;
+  outline:inherit;
+  font-style:inherit;
+  font-size:inherit;
+  font-weight:400;
+}
 
+#cancel_btn{
+  position:relative;
+  top:40vh;
+  text-align:center;
+  justify-content:center;
+  display:flex;
+  flex-direction:row;
+  background:#B8ABA9;
+  border:solid 5px #B8ABA9;
+  border-radius:15px;
+  padding:10px 20px;
+}
+#cancel_btn:hover{
+  background:#c6bab8;
+  border:solid 5px #c6bab8;
+}
+#delete_btn{
+  position:relative;
+  top:45vh;
+  text-align:center;
+  justify-content:center;
+  display:flex;
+  flex-direction:row;
+  background:#ff2200;
+  border:solid 5px #ff2200;
+  border-radius:15px;
+  padding:10px 20px;
+}
+#delete_btn:hover{
+  background:#ff4f34;
+  border:solid 5px #ff4f34;
+}
 
 
 
@@ -70,7 +113,6 @@
 .nav ul li{
   display:inline;
   padding:5px;
-  
 }
 .nav button{
   background:none;
@@ -81,11 +123,12 @@
   outline:inherit;
 }
 #first{
+  display:flex;
   position:absolute;
-  margin-right:10vw;
+  margin-right:1vw;
   font-weight:600;
   font-size:44px;
-  right:65vw;
+  right:75vw;
 }
 .add{
   background:red;
