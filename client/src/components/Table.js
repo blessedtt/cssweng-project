@@ -49,7 +49,7 @@ export const Table = () => {
                         <Checkbox {...getToggleAllRowsSelectedProps()} />
                     ),
                     Cell: ({row}) => (
-                        <Checkbox {...row.getToggleRowSelectedProps} />
+                        <Checkbox {...row.getToggleRowSelectedProps()} />
                     )
                 }, 
                 ...columns
@@ -68,6 +68,7 @@ export const Table = () => {
     } = tableInstance
 
     return (
+    <>
         <table {...getTableProps()}>
             <thead>
                 {
@@ -107,5 +108,19 @@ export const Table = () => {
                 }
             </tbody>
         </table>
+        <pre>
+            <code>
+                {JSON.stringify(
+                    {
+                        selectedFlatRows: selectedFlatRows.map((row) => row.original),
+                    },
+                    null,
+                    2
+                )
+
+                }
+            </code>
+        </pre>
+        </>
     )
 }
