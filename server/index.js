@@ -18,9 +18,10 @@ app.engine('html', require('ejs').renderFile)
 app.set('views', 'views');
 app.use('/public', express.static((process.env.PWD || __dirname) + '/public'));
 
-//proxy to circument 'Access-Control-Allow-Origin' error
+//proxy to allow access to scripts to localhost:3000 (frontend react server)
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
