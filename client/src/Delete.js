@@ -5,7 +5,34 @@ import { IconContext } from 'react-icons';
 import Popup from './components/Popup';
 import { useState } from 'react';
 
+import { useForm } from 'react-hook-form';
+
+
 function Delete(){
+
+
+    //form validation using react-hook-form
+    //todo: place onto seperate file
+    const { register, handleSubmit } = useForm();  
+    const onSubmit = (data) => {
+      console.log(data);
+
+      fetch('http://localhost:3001/product/add', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+    }).then((res) => {
+        console.log(res);
+        return res.json();
+    })
+
+      //todo: add data to database
+      //todo: place onto seperate file
+
+    }
+
     const [buttonPopup, setButtonPopup] = useState(false);
     const [successPopup, setSuccessPopup] = useState(false);
     return(
@@ -72,38 +99,31 @@ function Delete(){
       </main>
 
       
-
+      {/* TODO: Please put this in a seperate component file */}
       <Popup trigger = {buttonPopup}>
               <h5 className='header'>Add New Product</h5>
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <ul>
                   <li>
-                    <label for = 'brand'>
-                      Brand
-                    </label>
-                    <input type = 'text' id ='brand'></input>
+                    <label for ='product'> Product </label>
+                    <input type='text' {...register('pname')}></input>
                   </li>
 
                   <li>
-                    <label for ='product'>
-                      Product
-                    </label>
-                    <input type = 'text' id = 'product'></input>
+                    <label for = 'brand'>Brand</label>
+                    <input type='text' {...register('brand')}></input>
                   </li>
 
                   <li>
-                    <label for = 'sell-price'>
-                      Selling Price
-                    </label>
-                    <input type = 'number' id = 'sell-price'></input>
+                    <label for = 'sell_price'>Selling Price</label>
+                    <input type='number' {...register('price')}></input>
                   </li>
 
                   <li>
-                    <label for = 'stock'>
-                      On-hand Stock
-                    </label>
-                    <input type = 'number' id = 'stock'></input>
+                    <label for = 'stock'>On-hand Stock</label>
+                    <input type='number' {...register('stock')}></input>
                   </li>
+
                 </ul>
                 <ul className='popup-btns'>
                   <li>

@@ -61,7 +61,6 @@ function App() {
       </main>
 
       
-
       <Popup trigger = {buttonPopup}>
               <h5 className='header'>Add New Product</h5>
               <form>
@@ -136,4 +135,3 @@ function App() {
   );
 }
 export default App;
-
