@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model product {
@@ -14,31 +15,31 @@ model product {
   stock            Int               @default(0)
   last_updated     DateTime          @db.DateTime(0)
   desc             String?           @db.VarChar(255)
-  cat_name         String?           @db.VarChar(255) @default(dbgenerated("CONCAT(`name`, ' - ', `desc`)"))
+  cat_name         String            @db.VarChar(255) //@default(dbgenerated("CONCAT(name, ' - ', desc)"))
   brand            String?           @db.VarChar(255)
   sell_price       Int
   sales            Int               @default(0)
-  revenue          Int?              @default(dbgenerated("`sales` * `sell_price`"))
-  avg_value        Int?              @default(dbgenerated("`stock` * `sell_price`"))
-  product_category product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_type")
+  revenue          Int               @default(0) //@default(dbgenerated("sales * sell_price"))
+  avg_value        Int               @default(0) //@default(dbgenerated("stock * sell_price"))
+  product_category product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_ptype")
 
-  @@index([type], map: "fk_type_idx")
+  @@index([type], map: "fk_ptype_idx")
 }
 
 model product_category {
-  category_ID Int       @id @unique(map: "category_id_UNIQUE") @default(autoincrement())
-  name        String    @unique(map: "category_name_UNIQUE") @db.VarChar(255)
-  products    product[]
+  category_ID   Int       @id @unique(map: "category_id_UNIQUE") @default(autoincrement())
+  name          String    @db.VarChar(255) @unique(map: "name_UNIQUE")
+  products      product[]
 }
 
 model user {
   user_ID       Int           @id @default(autoincrement())
   type          Int
   pass          String        @db.VarChar(255)
-  email         String        @unique(map: "user_email_UNIQUE") @db.VarChar(255)
+  email         String        @unique(map: "email_UNIQUE") @db.VarChar(255)
   firstname     String        @db.VarChar(255)
   lastname      String        @db.VarChar(255)
-  fullname      String?       @db.VarChar(255) @default(dbgenerated("`firstname, ' ', `lastname`"))
+  fullname      String        @db.VarChar(255) //@default(dbgenerated("CONCAT(firstname, ' ', lastname)"))
   user_category user_category @relation(fields: [type], references: [utype_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_utype")
 
   @@index([type], map: "fk_utype_idx")

@@ -9,17 +9,21 @@ if (!global.prisma) {
 }
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //view engine //TODO: change to appropriate view engine
 app.engine('html', require('ejs').renderFile)
 
 //static assets
-app.set('views', 'public');
+app.set('views', 'views');
 app.use('/public', express.static((process.env.PWD || __dirname) + '/public'));
 
-//session handling module
-const {handleSession} = require('./modules/uauth/session');
-app.use(handleSession)
+//proxy to allow access to scripts to localhost:3000 (frontend react server)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
 
 //run server
 const PORT_NO = process.env.PORT || 3001
@@ -28,5 +32,5 @@ app.listen(PORT_NO, () => {
 });
 
 //routing module
-const routes = require('./route.js');
+const routes = require('./routes/mainRoute.js');
 app.use('/', routes);

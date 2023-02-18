@@ -1,0 +1,87 @@
+.popup {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.popup-inner {
+    position:relative;
+    padding:32px;
+    width:100%;
+    max-width:500px;
+    background:#FAF8F1;
+    color:black;
+    border-radius:15px;
+
+}
+.popup-inner .header {
+    font-size:34px;
+}
+.popup-inner h5  {
+    color:black;
+    font-size:24px;
+    line-height:36px;
+    font-weight:600;
+    text-decoration:none;
+    top:0px;
+}
+.popup-inner ul {
+    list-style:none;
+    padding-left:0;
+}
+.popup-inner ul li {
+    font-size:20px;
+    padding:5px;
+    position:relative;
+}
+.popup-inner ul li input{
+    position:fixed;
+    left:50vw;
+}
+
+.popup-inner .back-btn {
+    position:relative;
+    padding:10px;
+    border-radius:25px;
+    color:#FFFFFFFF;
+    background:#A67438;
+    cursor:pointer;
+    outline:inherit;
+    font-size:30px;
+    width:150px;
+}
+.popup-inner .ok-btn{
+    position:relative;
+    padding:10px;
+    border-radius:25px;
+    color:#FFFFFFFF;
+    background:#DD9D34;
+    cursor:pointer;
+    outline:inherit;
+    font-size:30px;
+    width:150px;
+}
+.popup-btns li {
+    display:inline;
+}
+.popup-inner .submit-btn{
+    width:150px;
+    padding:10px;
+    border-radius:25px;
+    background:#DD9D34;
+    color:#FFFFFFFF;
+    border:5px solid #DD9D34;
+    cursor:pointer;
+    font-size:30px;
+}
+.success{
+    text-align:center;
+}
+.success ul li{
+    margin-top:50px;
+}
