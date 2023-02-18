@@ -58,7 +58,7 @@
 
 #cancel_btn{
   position:relative;
-  top:47vh;
+  top:40vh;
   text-align:center;
   justify-content:center;
   display:flex;
@@ -68,9 +68,13 @@
   border-radius:15px;
   padding:10px 20px;
 }
+#cancel_btn:hover{
+  background:#c6bab8;
+  border:solid 5px #c6bab8;
+}
 #delete_btn{
   position:relative;
-  top:50vh;
+  top:45vh;
   text-align:center;
   justify-content:center;
   display:flex;
@@ -80,7 +84,10 @@
   border-radius:15px;
   padding:10px 20px;
 }
-
+#delete_btn:hover{
+  background:#ff4f34;
+  border:solid 5px #ff4f34;
+}
 
 
 
@@ -118,7 +125,7 @@
 #first{
   display:flex;
   position:absolute;
-  margin-right:6vw;
+  margin-right:1vw;
   font-weight:600;
   font-size:44px;
   right:75vw;
