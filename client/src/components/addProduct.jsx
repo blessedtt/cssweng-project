@@ -22,6 +22,7 @@ const AddProduct = (props) => {
             console.log(res);
             return res.json();
         })
+        //todo error catching
     }
 
 
