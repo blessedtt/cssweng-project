@@ -58,16 +58,17 @@ productRouter.post('/add', (req, res, next) => {
  * 		id - product ID to remove
  */
 productRouter.post('/remove', (req, res, next) => {
-    const id = req.body.id;
-    prisma.product.delete({
+    const id = req.body;
+    prisma.product.deleteMany({
         where: {
-            product_ID: parseInt(id)
+            product_ID: { in: id}
         }
     }).then(() => {
         console.log("Deleted entry.");
         res.status(200);
         return;
     }).catch((err) => {
+        console.log(err)
         next(DBErrorAPI.DBError(err.code));
         return;
     })

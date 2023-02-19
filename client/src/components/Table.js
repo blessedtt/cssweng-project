@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { useTable } from 'react-table'
 import { useRowSelectHooks } from 'react-table'
 import { useRowSelect } from 'react-table'
@@ -54,8 +54,7 @@ function Table(props){
                 ...columns
             ]
         })
-    }
-    )
+    })
 
     const {
         getTableProps, // destructured in <table> tag
@@ -65,6 +64,13 @@ function Table(props){
         prepareRow,
         selectedFlatRows
     } = tableInstance
+
+    
+    //get product_IDs of selected rows and pass to parent state (Delete.js)
+    useEffect(() => {
+        const productIDs = selectedFlatRows.map((row) => row.original.product_ID)
+        props.setProductIDsToDrop(productIDs);
+    }, [selectedFlatRows])
 
     return (
     <>
@@ -92,9 +98,16 @@ function Table(props){
                         return (
                             <tr {...row.getRowProps()}>
                                 {
-                                    headerGroups.headers.map( column =>(
-                                        <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                                    ))
+                                    row.cells.map( cell =>{
+                                        return <td {...cell.getCellProps()}>
+                                            
+                                            {/* <button> */}
+                                            {
+                                            cell.render('Cell')
+                                            }
+                                            {/* </button> */}
+                                            </td>
+                                    })
                                 }
                             </tr>
                         )
@@ -102,21 +115,6 @@ function Table(props){
                 }
             </tbody>
         </table>
-
-        {/* row selector */} 
-        <pre>
-            <code>
-                {JSON.stringify(
-                    {
-                        selectedFlatRows: selectedFlatRows.map((row) => row.original),
-                    },
-                    null,
-                    2
-                )
-
-                }
-            </code>
-        </pre>
         </>
     )
 }
