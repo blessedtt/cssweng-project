@@ -100,6 +100,7 @@ function Delete(){
 
       
       {/* TODO: Please put this in a seperate component file */}
+      {/* TODO: include dropdown list of categories */}
       <Popup trigger = {buttonPopup}>
               <h5 className='header'>Add New Product</h5>
               <form onSubmit={handleSubmit(onSubmit)}>

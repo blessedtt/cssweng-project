@@ -27,13 +27,13 @@ productRouter.get('/remove', (req, res) =>{
 */
 productRouter.post('/add', (req, res, next) => {
     console.log (req.body);
-    const {pname, category, desc, brand, price} = req.body;
+    const {pname, category_ID, desc, brand, price} = req.body;
 
     prisma.product.create({
         data: {
             name: pname,
             product_category: {
-                connect: {category_ID: 1} //temporary since there's no category add yet
+                connect: {category_ID: category_ID}
             },
             last_updated: new Date(),
             desc: desc,
