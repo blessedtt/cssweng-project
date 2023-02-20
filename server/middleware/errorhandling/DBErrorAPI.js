@@ -14,11 +14,11 @@ class DBErrorAPI extends ErrorAPI{
     }
 
     static DBItemNotFound(msg){
-        return new DBErrorAPI(500, msg);
+        return new DBErrorAPI(400, msg);
     }
 
     static DBConstraintError(msg){
-        return new DBErrorAPI(500, msg);
+        return new DBErrorAPI(400, msg);
     } 
 }
 

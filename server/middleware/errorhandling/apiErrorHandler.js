@@ -3,7 +3,7 @@ const DBErrorAPI = require('./DBErrorAPI');
 
 function apiErrorHandler(err, req, res, next){
     if (err instanceof ErrorAPI){
-        res.status(err.code).json(err.message);
+        res.status(err.code).json({message: err.message});
         return;
     }
 

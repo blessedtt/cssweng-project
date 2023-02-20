@@ -4,6 +4,7 @@ import Table from './Table';
 
 const FETCH_URL = 'http://localhost:3001/product/get';
 
+//hook function
 function ProductTableHook({setProductIDsToDrop}){
     const [products, setProducts] = useState([]);
     const [isFetching, setIsFetching] = useState(false);

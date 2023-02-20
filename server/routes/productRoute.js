@@ -60,9 +60,8 @@ productRouter.post('/add', (req, res, next) => {
             }
         }).then((result) => {
             //send successful add to client
-            console.dir(result, {depth: null})
-                
-            next(result);
+            console.dir(result, {depth: null});                
+            res.status(201).json(result);
             return;
         }).catch((err) => {
             //send error to client
@@ -103,7 +102,7 @@ productRouter.use('/get', (req, res, next) =>{
         }
     })
     .then((result) =>{
-        res.json(result);
+        res.status(200).json(result);
         return;
     })
     .catch((err) => {
