@@ -27,29 +27,49 @@ productRouter.get('/remove', (req, res) =>{
 */
 productRouter.post('/add', (req, res, next) => {
     console.log (req.body);
-    const {pname, category_ID, desc, brand, price} = req.body;
+    const {pname, category_ID, desc, brand, price, stock} = req.body;
 
-    prisma.product.create({
-        data: {
+    //check if product already exists
+    prisma.product.findFirstOrThrow({
+        where:{
             name: pname,
-            product_category: {
-                connect: {category_ID: category_ID}
-            },
-            last_updated: new Date(),
-            desc: desc,
             brand: brand,
-            sell_price: Number(price),
-            cat_name: pname.concat(" - ", desc),
         }
     }).then((result) => {
-        console.dir(result, {depth: null})
-        res.status(201).json("successfully added product");
-        next(result);
-        return;
-    }).catch((err) => {
-        console.log(err);
-        next(DBErrorAPI.DBError(err.code));
-        return;
+        if (result != null){
+            //send error to client
+            console.log("Product already exists.");
+            next(DBErrorAPI.DBError("P2002"));
+            return;
+        }
+
+    //sketchy solution - add product when first search fails
+    }).catch(() => {
+        prisma.product.create({
+            data: {
+                name: pname,
+                product_category: {
+                    connect: {category_ID: category_ID}
+                },
+                last_updated: new Date(),
+                desc: desc,
+                brand: brand,
+                sell_price: Number(price),
+                cat_name: pname.concat(" - ", desc),
+                stock: Number(stock),
+            }
+        }).then((result) => {
+            //send successful add to client
+            console.dir(result, {depth: null})
+                
+            next(result);
+            return;
+        }).catch((err) => {
+            //send error to client
+            console.log(err);
+            next(DBErrorAPI.DBError(err.code));
+            return;
+        })
     })
 });
 
@@ -64,10 +84,13 @@ productRouter.post('/remove', (req, res, next) => {
             product_ID: parseInt(id)
         }
     }).then(() => {
+        //send successful delete to client
         console.log("Deleted entry.");
         res.status(200);
         return;
     }).catch((err) => {
+        //send error to client
+        console.log(err)
         next(DBErrorAPI.DBError(err.code));
         return;
     })

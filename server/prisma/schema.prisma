@@ -15,7 +15,6 @@ model product {
   stock            Int               @default(0)
   last_updated     DateTime          @db.DateTime(0)
   desc             String?           @db.VarChar(255)
-  cat_name         String            @db.VarChar(255) //@default(dbgenerated("CONCAT(name, ' - ', desc)"))
   brand            String?           @db.VarChar(255)
   sell_price       Int
   sales            Int               @default(0)

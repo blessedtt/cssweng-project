@@ -6,7 +6,6 @@ class DBErrorAPI extends ErrorAPI{
     }
 
     static DBError(code){
-        console.log(code)
         switch(code){
             case "P2025": return this.DBItemNotFound("Could not find record.");
             case "P2002": return this.DBConstraintError("Duplicate record.");

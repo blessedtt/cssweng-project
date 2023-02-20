@@ -1,4 +1,5 @@
 const ErrorAPI = require('./ErrorAPI');
+const DBErrorAPI = require('./DBErrorAPI');
 
 function apiErrorHandler(err, req, res, next){
     if (err instanceof ErrorAPI){
