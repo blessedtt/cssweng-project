@@ -78,10 +78,10 @@ productRouter.post('/add', (req, res, next) => {
  * 		id - product ID to remove
  */
 productRouter.post('/remove', (req, res, next) => {
-    const id = req.body.id;
-    prisma.product.delete({
+    const id = req.body;
+    prisma.product.deleteMany({
         where: {
-            product_ID: parseInt(id)
+            product_ID: { in: id}
         }
     }).then(() => {
         //send successful delete to client
@@ -89,7 +89,6 @@ productRouter.post('/remove', (req, res, next) => {
         res.status(200);
         return;
     }).catch((err) => {
-        //send error to client
         console.log(err)
         next(DBErrorAPI.DBError(err.code));
         return;

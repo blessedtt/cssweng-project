@@ -49,3 +49,10 @@ model user_category {
   utype_title String @unique(map: "utype_title_UNIQUE") @db.VarChar(255)
   user        user[]
 }
+
+model session {
+  id        String   @id
+  sid       String   @unique
+  data      String   @db.Text
+  expiresAt DateTime
+}
