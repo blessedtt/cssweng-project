@@ -1,49 +1,29 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 
-const AddProduct = (props) => {
+const AddProduct = (
+    {
+        categories,
+        setButtonPopup,
+        setSuccessPopup,
+        setProductData
+    }
+    ) => {
     //send data to API to add product
-    //fields: pname, brand, price, stock
+    //fields: pname, brand, price, stock, category
     const { register, handleSubmit } = useForm();
 
     //submits data to API
     const onSubmit = (data) => {
-        data["category_ID"] = selectedOption["category_ID"];
-        console.log(data);
-        fetch('http://localhost:3001/product/add', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-              'Content-Type': 'application/json',
-            },
-        }).then((res) => {
-            console.log(res);
-            return res.json();
-        })
-        //todo error catching
+        data['category'] = selectedOption.category_ID;
+        console.log(data)
+        setProductData(data);
     }
-
 
     //category field of addProduct
     const [selectedOption, setSelectedOption] = useState(null);
-    const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-        fetchCategoryAPI();
-    }, []);
-
-    const fetchCategoryAPI = () => {
-        axios.get('http://localhost:3001/category/get')
-        .then(response => {
-            console.log(response.data);
-            setCategories(response.data);
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
 
     return (
         <div>
@@ -89,7 +69,7 @@ const AddProduct = (props) => {
             </ul>
             <ul className='popup-btns'>
                 <li>
-                <button className='back-btn' onClick={() => props.setButtonPopup(false)}>
+                <button className='back-btn' onClick={() => setButtonPopup(false)}>
                     Back
                 </button>
                 </li>
@@ -97,7 +77,7 @@ const AddProduct = (props) => {
                 {/* <input className='submit-btn' type = 'submit' value ='Submit' onSubmit={() => setSuccessPopup(true)}>
                     
                 </input> */}
-                <button className='submit-btn' onClick={() => props.setSuccessPopup(true)}>
+                <button className='submit-btn' onClick={() => setSuccessPopup(true)}>
                     Submit
                 </button>
                 </li>

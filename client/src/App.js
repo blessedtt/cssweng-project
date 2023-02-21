@@ -1,94 +1,102 @@
-import './App.css';
-import ProductTableHook from './components/ProductTableHook';
-import { IoAddCircleOutline, IoPencil, IoTrashSharp, IoCheckmarkCircleOutline } from 'react-icons/io5';
+import './css/App.css';
 import { IconContext } from 'react-icons';
-import Popup from './components/Popup';
-import { useState } from 'react';
+import { IoCheckmarkCircleOutline } from 'react-icons/io5';
+import { useEffect, useState } from 'react';
 
-import AddProduct from './components/addProduct';
+
+//UI components
+import Sidebar from './components/sidebar';
+
+import Popup from './components/Popup';
+import ProductTable from './components/products/ProductTable';
+import AddProduct from './components/products/addProduct';
+
+
+//api functions
+import ProductAddAPI from './api/ProductAddAPI';
+import ProductGetAPI from './api/ProductGetAPI';
+import Navbar from './components/navbar';
+import CategoryGetAPI from './api/CategoryGetAPI';
+
+
+const FETCH_URL = 'http://localhost:3001';
+
 
 function App() {
-  const [buttonPopup, setButtonPopup] = useState(false);
-  const [successPopup, setSuccessPopup] = useState(false);
-  return(
-    <div className="Container">
-     
-      <div className ="sidebar">
-        <span id ="title"><h1>inventory tracker</h1></span>
-        <span className = "sidecontent">
-          Hello!
-        </span>
-       
-      </div>
-    
-      <div className ="nav">
-       
-        <ul>
-          <li id = 'first'>
-              HOME
-          </li>
-          <li>
-            <button onClick={() => setButtonPopup(true)}>
-                    <IconContext.Provider
-                      value ={{ color: '#FFFFFFFF', size:'44px'}}
-                    >
-                    <IoAddCircleOutline />
-                  </IconContext.Provider>
-            </button>
+	//popup states
+	const [buttonPopup, setButtonPopup] = useState(false);
+	const [successPopup, setSuccessPopup] = useState(false);
 
-           </li>
-           <li>
-              <button>
-                <IconContext.Provider
-                  value ={{ color: '#FFFFFFFF', size:'44px'}}
-                >
-                  <IoPencil />
-                </IconContext.Provider>
-              </button>
-          </li>
-          <li>
-              <IconContext.Provider
-                value ={{ color: '#FFFFFFFF', size:'44px'}}
-              >
-                <IoTrashSharp />
-            </IconContext.Provider>
-          </li>
-        </ul>
-        
-      </div>
-      
-      <main className ="content">
-        
-        <ProductTableHook />
-        
-      </main>
+	//product data to show to table
+	const [products, setProducts] = useState([]);
 
-      
-      <Popup trigger = {buttonPopup}>
-              <AddProduct setButtonPopup={setButtonPopup} setSuccessPopup={setSuccessPopup}/>
-      </Popup>
-      <Popup trigger = {successPopup}>
-          <div className='success'>
-            <ul>
-              <li>
-                <IconContext.Provider
-                      value ={{ color: '#DD9D34', size:'44px'}}
-                    >
-                    <IoCheckmarkCircleOutline />
-                  </IconContext.Provider>
-              </li>
-              <li>
-                The product has been added successfully.
-              </li>
-              <li>
-                <button className='ok-btn' onClick={() => setSuccessPopup(false)}>
-                  Ok
-                </button>
-              </li>
-            </ul>
-          </div>
-      </Popup>
-    </div>
-  );
+	//category data
+	const [categories, setCategories] = useState([]);
+
+	//loading state
+	const [isFetching, setIsFetching] = useState(false);
+	const [isUpdating, setIsUpdating] = useState(false);
+
+	//new product state to be passed to add api
+	const [productData, setProductData] = useState();
+
+	//initialization
+	useEffect(() => {
+		ProductGetAPI({setProducts, setIsFetching, FETCH_URL});
+		CategoryGetAPI({setCategories, setIsFetching, FETCH_URL});
+	}, []);
+
+
+	//call api and update table when new product is added
+	useEffect(() => {
+		if (productData === undefined) return; //https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
+		ProductAddAPI({productData, setIsUpdating, FETCH_URL})
+	}, [productData]);
+
+	//update table when product table is updated (add, delete, edit)
+	useEffect(() => {
+		if (isUpdating === false) return;
+		ProductGetAPI({setProducts, setIsFetching, FETCH_URL});
+		setIsUpdating(false);
+	}, [isUpdating]);
+	
+
+	return(
+		<div className="Container">
+		<Sidebar />
+	  
+		<Navbar setButtonPopup={setButtonPopup}/>
+  
+		<main className ="content">
+		  <ProductTable products={products} isFetching={isFetching}/>
+		</main>
+  
+		<Popup trigger = {buttonPopup}>
+		  <AddProduct categories={categories} setButtonPopup={setButtonPopup} setSuccessPopup={setSuccessPopup} setProductData={setProductData} />
+		</Popup>
+  
+		<Popup trigger = {successPopup}>
+			<div className='success'>
+				<ul>
+					<li>
+						<IconContext.Provider
+							value ={{ color: '#DD9D34', size:'44px'}}
+							>
+							<IoCheckmarkCircleOutline />
+						</IconContext.Provider>
+					</li>
+					<li>
+						The product has been added successfully.
+					</li>
+					<li>
+						<button className='ok-btn' onClick={() => setSuccessPopup(false)}>
+						Ok
+						</button>
+					</li>
+				</ul>
+			</div>
+		</Popup>
+	</div>
+	);
 }
 export default App;

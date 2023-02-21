@@ -26,8 +26,8 @@ productRouter.get('/remove', (req, res) =>{
  *      price - price of product
 */
 productRouter.post('/add', (req, res, next) => {
-    console.log (req.body);
-    const {pname, category_ID, desc, brand, price, stock} = req.body;
+    const data = req.body;
+    const {pname, category, brand, price, stock} = data;
 
     //check if product already exists
     prisma.product.findFirstOrThrow({
@@ -38,24 +38,25 @@ productRouter.post('/add', (req, res, next) => {
     }).then((result) => {
         if (result != null){
             //send error to client
+            console.log(result)
             console.log("Product already exists.");
             next(DBErrorAPI.DBError("P2002"));
             return;
         }
 
     //sketchy solution - add product when first search fails
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err)
         prisma.product.create({
             data: {
                 name: pname,
                 product_category: {
-                    connect: {category_ID: category_ID}
+                    connect: {category_ID: category}
                 },
                 last_updated: new Date(),
-                desc: desc,
                 brand: brand,
                 sell_price: Number(price),
-                cat_name: pname.concat(" - ", desc),
+                cat_name: pname.concat(" - ", brand ),
                 stock: Number(stock),
             }
         }).then((result) => {

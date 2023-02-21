@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import ProductTableHook from './components/ProductTableHook';
-import Popup from './components/Popup';
-import AddProduct from './components/addProduct';
+import Popup from './client/src/components/Popup';
+import AddProduct from './client/src/components/addProduct';
 
 
 function Delete(){

@@ -1,5 +1,5 @@
 import React from 'react'
-export const Checkbox = React.forwardRef(
+const Checkbox = React.forwardRef(
     ({ indeterminate, ...rest }, ref) => {
       const defaultRef = React.useRef()
       const resolvedRef = ref || defaultRef
@@ -15,3 +15,5 @@ export const Checkbox = React.forwardRef(
       )
     }
   )
+
+export default Checkbox;
