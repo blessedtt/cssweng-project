@@ -3,7 +3,7 @@ import { IoAddCircleOutline, IoPencil, IoTrashSharp } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
 
-function Navbar({setButtonPopup, setDelete}) {
+function Navbar({setAdd, setDelete, isDelete}) {
 	return (
 		<div className ="nav">   
 			<ul>
@@ -11,7 +11,7 @@ function Navbar({setButtonPopup, setDelete}) {
 					HOME
 				</li>
 				<li>
-				<button onClick={() => setButtonPopup(true)}>
+				<button onClick={() => setAdd(true)}>
 					<IconContext.Provider
 							value ={{ color: '#FFFFFFFF', size:'44px'}}
 						>
@@ -30,7 +30,7 @@ function Navbar({setButtonPopup, setDelete}) {
 				</button>
 				</li>
 				<li>
-				<button onClick={() => setDelete(true)}>
+				<button onClick={() => setDelete(!isDelete)}>
 					<IconContext.Provider
 						value ={{ color: '#FFFFFFFF', size:'44px'}}
 						>

@@ -5,7 +5,6 @@ function ProductGetAPI({setProducts, setIsFetching, FETCH_URL}){
     setIsFetching(true);
     axios.get(FETCH_URL+"/product/get")
     .then(response => {
-        console.log(response.data);
         setProducts(response.data);
         setIsFetching(false);
     })

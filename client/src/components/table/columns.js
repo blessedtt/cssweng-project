@@ -1,5 +1,7 @@
 import { format } from 'date-fns';
 
+import ProductDetails from './productDetails';
+
 export const COLUMNS = [
     {
         Header: 'DATE UPDATED',
@@ -18,7 +20,7 @@ export const COLUMNS = [
     },
     {
         Header: 'PRODUCT',
-        accessor: 'name'
+        accessor: 'name',
     },
     {
         Header: 'ON-HAND STOCK',

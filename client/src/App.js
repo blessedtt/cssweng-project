@@ -10,7 +10,6 @@ import Navbar from './components/navbar';
 import Popup from './components/Popup';
 
 //table components
-import ProductTable from './components/products/ProductTable';
 import Table from './components/table/Table';
 import { COLUMNS } from './components/table/columns';
 
@@ -33,7 +32,7 @@ const FETCH_URL = 'http://localhost:3001';
 
 function App() {
 	//popup states
-	const [buttonPopup, setButtonPopup] = useState(false);
+	const [isAdd, setAdd] = useState(false);
 	const [successPopup, setSuccessPopup] = useState(false);
 
 	//this logic is pretty tightly coupled with the sidebar component, to fix soon
@@ -75,12 +74,6 @@ function App() {
 		setIsUpdating(false);
 	}, [isUpdating]);
 
-
-	//display products to be deleted
-	useEffect(() => {
-		console.log(productsToDelete);
-	}, [productsToDelete]);
-
 	//display delete buttons
 	useEffect(() => {
 		if (isDeleteConfirm === false) return;
@@ -91,7 +84,7 @@ function App() {
 			return;
 		}
 		//delete products
-		ProductDeleteAPI({productsToDelete, setIsUpdating, FETCH_URL});
+		ProductDeleteAPI({productIDList: productsToDelete, setIsUpdating, FETCH_URL});
 		setDeleteConfirm(false);
 	}, [isDeleteConfirm]);
 
@@ -99,17 +92,17 @@ function App() {
 	return(
 		<div className="Container">
 		<Sidebar isDelete={isDelete} setDelete={setDelete} setDeleteConfirm={setDeleteConfirm} />
-	
-		<Navbar setButtonPopup={setButtonPopup} setDelete={setDelete} />
+		<Navbar setAdd={setAdd} setDelete={setDelete} isDelete={isDelete} />
+
 		<main className ="content">
 			<Table columns={COLUMNS} data={products} isFetching={isFetching} setSelectedRowData={setProductsToDelete}  isDelete={isDelete}/>;
 		</main>
   
-		<Popup trigger = {buttonPopup}>
-		  <AddProduct categories={categories} setButtonPopup={setButtonPopup} setSuccessPopup={setSuccessPopup} setProductData={setProductData} />
+		<Popup trigger = {isAdd}>
+		  <AddProduct categories={categories} setAdd={setAdd} setSuccessPopup={setSuccessPopup} setProductData={setProductData} />
 		</Popup>
   
-		<Popup trigger = {successPopup}>
+		<Popup trigger = {successPopup} id={"Add"}>
 			<div className='success'>
 				<ul>
 					<li>

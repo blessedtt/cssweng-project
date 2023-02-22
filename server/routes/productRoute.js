@@ -56,7 +56,6 @@ productRouter.post('/add', (req, res, next) => {
                 last_updated: new Date(),
                 brand: brand,
                 sell_price: Number(price),
-                cat_name: pname.concat(" - ", brand ),
                 stock: Number(stock),
             }
         }).then((result) => {
@@ -87,7 +86,7 @@ productRouter.post('/remove', (req, res, next) => {
     }).then(() => {
         //send successful delete to client
         console.log("Deleted entry.");
-        res.status(200);
+        res.status(200).json({message: "Deleted entry."});
         return;
     }).catch((err) => {
         console.log(err)
@@ -104,6 +103,37 @@ productRouter.use('/get', (req, res, next) =>{
         }
     })
     .then((result) =>{
+        res.status(200).json(result);
+        return;
+    })
+    .catch((err) => {
+        console.log(err)
+        next(DBErrorAPI.DBError(err.code));
+        return;
+    })
+});
+
+//edit product
+productRouter.use('/update', (req, res, next) => {
+    const data = req.body;
+    const {id, pname, category, brand, price, stock} = data;
+
+    prisma.product.update({
+        where: {
+            product_ID: id,
+        },
+        data: {
+            name: pname,
+            product_category: {
+                connect: {category_ID: category}
+            },
+            last_updated: new Date(),
+            brand: brand,
+            sell_price: Number(price),
+            stock: Number(stock),
+        }
+    })
+    .then((result) => {
         res.status(200).json(result);
         return;
     })

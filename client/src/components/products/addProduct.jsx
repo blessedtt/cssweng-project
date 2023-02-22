@@ -5,7 +5,7 @@ import Select from 'react-select';
 const AddProduct = (
     {
         categories,
-        setButtonPopup,
+        setAdd,
         setSuccessPopup,
         setProductData
     }
@@ -69,7 +69,7 @@ const AddProduct = (
             </ul>
             <ul className='popup-btns'>
                 <li>
-                <button className='back-btn' onClick={() => setButtonPopup(false)}>
+                <button className='back-btn' onClick={() => setAdd(false)}>
                     Back
                 </button>
                 </li>

@@ -5,7 +5,6 @@ function CategoryGetAPI({setCategories, setIsFetching, FETCH_URL}){
     setIsFetching(true);
     axios.get(FETCH_URL+"/category/get")
     .then(response => {
-        console.log(response.data);
         setCategories(response.data);
         setIsFetching(false);
     })
