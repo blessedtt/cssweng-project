@@ -3,7 +3,7 @@ import { IoAddCircleOutline, IoPencil, IoTrashSharp, IoCheckmarkCircleOutline } 
 import { IconContext } from 'react-icons';
 
 
-function Navbar({setButtonPopup}) {
+function Navbar({setButtonPopup, setDeleteSuccessPopup}) {
 	return (
 		<div className ="nav">   
 			<ul>
@@ -30,11 +30,13 @@ function Navbar({setButtonPopup}) {
 					</button>
 				</li>
 				<li>
+				<button onClick={() => setDeleteSuccessPopup(true)}>
 					<IconContext.Provider
 					value ={{ color: '#FFFFFFFF', size:'44px'}}
 					>
 					<IoTrashSharp />
 				</IconContext.Provider>
+				</button>
 				</li>
 			</ul>
 		</div>

@@ -1,6 +1,6 @@
 import './css/App.css';
 import { IconContext } from 'react-icons';
-import { IoCheckmarkCircleOutline } from 'react-icons/io5';
+import { IoCheckmarkCircleOutline, IoTrashBinSharp } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
 
@@ -26,6 +26,7 @@ function App() {
 	//popup states
 	const [buttonPopup, setButtonPopup] = useState(false);
 	const [successPopup, setSuccessPopup] = useState(false);
+	const [deleteSuccessPopup, setDeleteSuccessPopup] = useState(false);
 
 	//product data to show to table
 	const [products, setProducts] = useState([]);
@@ -65,7 +66,7 @@ function App() {
 		<div className="Container">
 		<Sidebar />
 	  
-		<Navbar setButtonPopup={setButtonPopup}/>
+		<Navbar setButtonPopup={setButtonPopup} setDeleteSuccessPopup={setDeleteSuccessPopup}/>
   
 		<main className ="content">
 		  <ProductTable products={products} isFetching={isFetching}/>
@@ -91,6 +92,29 @@ function App() {
 					<li>
 						<button className='ok-btn' onClick={() => setSuccessPopup(false)}>
 						Ok
+						</button>
+					</li>
+				</ul>
+			</div>
+		</Popup>
+
+
+		<Popup trigger = {deleteSuccessPopup}>
+			<div className='delete-success'>
+				<ul>
+					<li>
+					<IconContext.Provider
+							value ={{ color: '#DD9D34', size:'44px'}}
+							>
+							<IoTrashBinSharp />
+						</IconContext.Provider>
+					</li>
+					<li>
+						The product has been deleted successfully.
+					</li>
+					<li>
+						<button className='ok-btn' onClick={() => setDeleteSuccessPopup(false)}>
+							Ok
 						</button>
 					</li>
 				</ul>
