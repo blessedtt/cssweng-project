@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-//API call to add product
-function ProductAddAPI({productData, setIsUpdating, FETCH_URL}){
-    axios.post(FETCH_URL+'/product/add', JSON.stringify(productData), {
+//api call to delete product/s
+const ProductDeleteAPI = ({productIDList, setIsUpdating, FETCH_URL}) => {
+    console.log(productIDList)
+    axios.post(FETCH_URL+'/product/remove', productIDList, {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
@@ -17,4 +18,4 @@ function ProductAddAPI({productData, setIsUpdating, FETCH_URL}){
     })
 }
 
-export default ProductAddAPI;
+export default ProductDeleteAPI;

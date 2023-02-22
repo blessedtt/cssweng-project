@@ -78,6 +78,7 @@ productRouter.post('/add', (req, res, next) => {
  * 		id - product ID to remove
  */
 productRouter.post('/remove', (req, res, next) => {
+    console.log(req.body);
     const id = req.body;
     prisma.product.deleteMany({
         where: {

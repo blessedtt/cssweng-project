@@ -1,9 +1,9 @@
 import React from 'react';
-import { IoAddCircleOutline, IoPencil, IoTrashSharp, IoCheckmarkCircleOutline } from 'react-icons/io5';
+import { IoAddCircleOutline, IoPencil, IoTrashSharp } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
 
-function Navbar({setButtonPopup}) {
+function Navbar({setButtonPopup, setDelete}) {
 	return (
 		<div className ="nav">   
 			<ul>
@@ -12,29 +12,31 @@ function Navbar({setButtonPopup}) {
 				</li>
 				<li>
 				<button onClick={() => setButtonPopup(true)}>
-						<IconContext.Provider
+					<IconContext.Provider
 							value ={{ color: '#FFFFFFFF', size:'44px'}}
 						>
 						<IoAddCircleOutline />
-						</IconContext.Provider>
+					</IconContext.Provider>
 				</button>
 	
 				</li>
 				<li>
-					<button>
+				<button>
 					<IconContext.Provider
 						value ={{ color: '#FFFFFFFF', size:'44px'}}
-					>
+						>
 						<IoPencil />
 					</IconContext.Provider>
-					</button>
+				</button>
 				</li>
 				<li>
+				<button onClick={() => setDelete(true)}>
 					<IconContext.Provider
-					value ={{ color: '#FFFFFFFF', size:'44px'}}
-					>
-					<IoTrashSharp />
-				</IconContext.Provider>
+						value ={{ color: '#FFFFFFFF', size:'44px'}}
+						>
+						<IoTrashSharp />
+					</IconContext.Provider>
+				</button>
 				</li>
 			</ul>
 		</div>
