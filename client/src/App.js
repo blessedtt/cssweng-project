@@ -11,7 +11,6 @@ import Popup from './components/Popup';
 
 //table components
 import Table from './components/table/Table';
-import { COLUMNS } from './components/table/columns';
 
 //function components
 import AddProduct from './components/products/addProduct';
@@ -95,7 +94,7 @@ function App() {
 		<Navbar setAdd={setAdd} setDelete={setDelete} isDelete={isDelete} />
 
 		<main className ="content">
-			<Table columns={COLUMNS} data={products} isFetching={isFetching} setSelectedRowData={setProductsToDelete}  isDelete={isDelete}/>;
+			<Table data={products} isFetching={isFetching} setSelectedRowData={setProductsToDelete}  isDelete={isDelete}/>;
 		</main>
   
 		<Popup trigger = {isAdd}>
