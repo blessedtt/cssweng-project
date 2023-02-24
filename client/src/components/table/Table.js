@@ -3,18 +3,25 @@ import { useTable, useSortBy, useRowSelect } from 'react-table'
 import '../../css/table_style.css'
 
 import Popup from '../Popup';
+import useProductColumns from './useProductColumns';
 
 import selectProductDetail from './selectProductDetail';
 
-function Table({columns, data, isFetching, setSelectedRowData, isDelete}){
+function Table({data, isFetching, setSelectedRowData, isDelete}){
     
     //product details popup states
     const [showDetails, setShowDetails] = useState(false)
-    const [lastSelected, setLastSelected] = useState({})
-    const [detailType, setDetailType] = useState(1)
+	const [selectedDetails, setSelectedDetails] = useState({})
+	const [showType, setShowType] = useState(0)
+
+	const columns = useProductColumns({setSelectedDetails, setShowType});
 
     // used alongside useTable (react table)
-    const tableInstance = useTable({ columns, data },
+    const tableInstance = useTable(
+		{ 
+		columns,
+		data,
+		},
         useSortBy,
         useRowSelect,
         //checkbox hook
@@ -28,30 +35,41 @@ function Table({columns, data, isFetching, setSelectedRowData, isDelete}){
         rows,               //rows
         prepareRow,         //preparing rows
         selectedFlatRows,   //selected rows
+		toggleHideColumn,   //hide columns
     } = tableInstance
 
     //set selected row data from external component
     useEffect(() => {
             setSelectedRowData(selectedFlatRows.map(row => row.original.product_ID))
-    }, [selectedFlatRows])
+    }, [selectedFlatRows]);
 
-    if (isFetching) return <div><h1>Loading...</h1></div>
+	//hide selection column when not in delete mode
+	useEffect(() => {
+			toggleHideColumn('selection', !isDelete);
+	}, [isDelete]);
 
-    return (
+	//check if product details popup should be shown
+	useEffect(() => {
+		if(selectedDetails.product_ID){
+			setShowDetails(true);
+		}
+	}, [selectedDetails])
+
+	return isFetching ? 
+		<div><h1>Loading...</h1></div> 
+	: 
+	(
     <>
-        {/*
-            product details popup 
-            I'm not sure how to display it right below the row
-        */}
-        <Popup trigger = {showDetails} setTrigger = {setShowDetails}>
-            <button onClick={() => setShowDetails(false)}>Close</button>
-
-            <button onClick={() => setDetailType(1)} disabled={detailType===1}>Product Details</button>
-            <button onClick={() => setDetailType(2)} disabled={detailType===2}>Product Metrics</button>
-
-            {selectProductDetail(detailType, lastSelected)}
-        </Popup>
-
+		{/* product details popup */}
+		<Popup trigger={showDetails} setTrigger={setShowDetails}>
+			{selectProductDetail(showType, selectedDetails)}
+			<button onClick={() => {
+				setShowDetails(false)
+				setSelectedDetails({})
+				setShowType(0)
+			}
+			}>close</button>
+		</Popup>
 
         {/*table header data */}
         <table {...getTableProps()}>
@@ -59,21 +77,13 @@ function Table({columns, data, isFetching, setSelectedRowData, isDelete}){
                 {
                     headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps}>
-
-                            {
-                            //conditional render of checkbox for delete
-                            isDelete ? (
-                                <th>
-                                    <div>Select:</div>
-                                </th>) : (null)
-                            }
-
                             {
                                 headerGroup.headers.map( column =>(
+									//sort options
                                     <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                                         {column.render('Header')}
                                         <span>
-                                        {column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ''}
+                                        {column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ' - '}
                                         </span>
                                     </th>
                                 ))
@@ -89,22 +99,7 @@ function Table({columns, data, isFetching, setSelectedRowData, isDelete}){
                     rows.map(row => {
                         prepareRow(row)
                         return (
-                            <tr {...row.getRowProps()} 
-                                onClick={() => {
-                                    setLastSelected(row.original);
-                                    if (!isDelete) setShowDetails(true);
-                                }}
-                            >
-
-                                {
-                                //conditional render of checkbox for delete
-                                isDelete ? (
-                                <td>
-                                    <input type="checkbox" {...row.getToggleRowSelectedProps()} />
-                                </td>
-                                ) : (null)
-                                }
-
+							<tr>
                                 {
                                     row.cells.map( cell =>{
                                         return <td {...cell.getCellProps()}>
