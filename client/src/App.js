@@ -90,7 +90,10 @@ function App() {
 						The product has been added successfully.
 					</li>
 					<li>
-						<button className='ok-btn' onClick={() => setSuccessPopup(false)}>
+						<button className='ok-btn' onClick={() => {
+							setSuccessPopup(false);
+							window.location.reload();
+							}}>
 						Ok
 						</button>
 					</li>
