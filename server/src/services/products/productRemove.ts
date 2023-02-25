@@ -9,10 +9,13 @@ import prisma from "../../repositories/prismaClient";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { id } = req.params;
-		const product = await prisma.product.delete({
+		const { idList } = req.body;
+		console.log(req.body);
+		const product = await prisma.product.deleteMany({
 			where: {
-				product_ID: Number(id),
+				product_ID: {
+					in: idList,
+				}
 			},
 		});
 		res.json(product);
