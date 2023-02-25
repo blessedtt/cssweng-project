@@ -2,21 +2,19 @@ import axios from 'axios';
 
 
 //API call to add product
-function ProductAddAPI({productData, setIsUpdating, FETCH_URL}){
-    axios.post(FETCH_URL+'/product/add', JSON.stringify(productData), {
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((result) => {
-        console.dir(result, {depth: null});
-        setIsUpdating(true);
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-
+async function ProductAddAPI({productData, FETCH_URL}){
+    try{
+		const result = await axios.post(FETCH_URL+'/product/add', JSON.stringify(productData), {
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+	}
+	catch(err){
+		console.log(err)
+		throw new Error(err);
+	}
 }
 
 export default ProductAddAPI;

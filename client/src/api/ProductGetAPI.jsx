@@ -1,18 +1,14 @@
 import axios from 'axios';
 
 ///fetches data from backend API
-function ProductGetAPI({setProducts, setIsFetching, FETCH_URL}){
-    setIsFetching(true);
-    axios.get(FETCH_URL+"/product/get")
-    .then(response => {
-        console.log(response.data);
-        setProducts(response.data);
-        setIsFetching(false);
-    })
-    .catch(error => {
-        console.log(error);
-        setIsFetching(false);
-    });
+async function ProductGetAPI({FETCH_URL}){
+    try{
+		const result = await axios.get(FETCH_URL+"/product/get")
+		return result.data;
+	}
+	catch(err){
+		throw new Error(err);
+	}
 }
 
 export default ProductGetAPI;

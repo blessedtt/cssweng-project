@@ -1,32 +1,47 @@
 import './css/App.css';
-import { IconContext } from 'react-icons';
-import { IoCheckmarkCircleOutline, IoTrashBinSharp } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
 
 //UI components
-import Sidebar from './components/sidebar';
-
+import Sidebar from './components/sidebar/sidebar';
+import Navbar from './components/navbar';
 import Popup from './components/Popup';
-import ProductTable from './components/products/ProductTable';
-import AddProduct from './components/products/addProduct';
 
+//popup components
+import DeletePopup from './components/popups/deletePopup';
+import PopupMessage from './components/popups/popupMessage';
+
+//table components
+import Table from './components/table/Table';
+import { COLUMNS } from './components/table/columns';
+
+//function components
+import AddProductPopup from './components/popups/addProductPopup';
 
 //api functions
 import ProductAddAPI from './api/ProductAddAPI';
 import ProductGetAPI from './api/ProductGetAPI';
-import Navbar from './components/navbar';
+import ProductDeleteAPI from './api/ProductDeleteAPI';
 import CategoryGetAPI from './api/CategoryGetAPI';
 
-
+//url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
 
 
 function App() {
 	//popup states
-	const [buttonPopup, setButtonPopup] = useState(false);
-	const [successPopup, setSuccessPopup] = useState(false);
-	const [deleteSuccessPopup, setDeleteSuccessPopup] = useState(false);
+	const [isAdd, setAdd] = useState(false);
+	const [deletePopup, setDeletePopup] = useState(false);
+
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [statusPopup, setStatusPopup] = useState(false);
+	const [message, setMessage] = useState('Loading...');
+
+	//this logic is pretty tightly coupled with the sidebar component, to fix soon
+	//delete states
+	const [isDelete, setDelete] = useState(false);
+	const [isDeleteConfirm, setDeleteConfirm] = useState(false);
+	const [productsToDelete, setProductsToDelete] = useState([]);
 
 	//product data to show to table
 	const [products, setProducts] = useState([]);
@@ -39,91 +54,127 @@ function App() {
 	const [isUpdating, setIsUpdating] = useState(false);
 
 	//new product state to be passed to add api
-	const [productData, setProductData] = useState();
+	const [newProductData, setNewProductData] = useState();
+
+	/*************************************
+	 *          Popup functions          *
+	 *************************************/
+	
+	const updateDisplay = (message) => {
+		setIsUpdating(true);
+		setMessage(message);
+		setIsSuccess(true);
+		setStatusPopup(true);
+	}
+
+	const errorPopup = (error) => {
+		setMessage(error);
+		setIsSuccess(false);
+		setStatusPopup(true);
+	}
+
+	const closePopup = () => {
+		setStatusPopup(false);
+		setMessage('Loading...');
+		setIsSuccess(false);
+	}
+
+	/*************************************
+	 * 		    API Call functions       *
+	 *************************************/
+	const addProduct = async () => {
+		try{
+			await ProductAddAPI({productData: newProductData, FETCH_URL})
+			updateDisplay('Product added successfully!');
+		}
+		catch(err){
+			errorPopup(String(err))
+		}
+	}
+
+	const deleteProduct = async () => {
+		try{
+			await ProductDeleteAPI({productIDList: productsToDelete, FETCH_URL});
+			updateDisplay('Product deleted successfully!');
+		}
+		catch(err){
+			errorPopup(String(err))
+		}
+	}
+
+	const fetchData = async () => {
+		setIsFetching(true);
+		try{	
+			const resProducts = await ProductGetAPI({FETCH_URL});
+			const resCategories = await CategoryGetAPI({FETCH_URL});
+
+			setProducts(resProducts);
+			setCategories(resCategories);
+			
+		}catch(err){
+			setMessage('Error fetching data: '+err);
+		}
+		setIsFetching(false);
+	}
+
+	/*************************************
+	 * 		    React Hooks              *
+	 *************************************/
 
 	//initialization
 	useEffect(() => {
-		ProductGetAPI({setProducts, setIsFetching, FETCH_URL});
-		CategoryGetAPI({setCategories, setIsFetching, FETCH_URL});
+		fetchData();
 	}, []);
-
 
 	//call api and update table when new product is added
 	useEffect(() => {
-		if (productData === undefined) return; //https://stackoverflow.com/questions/53179075/with-useeffect-how-can-i-skip-applying-an-effect-upon-the-initial-render
-		ProductAddAPI({productData, setIsUpdating, FETCH_URL})
-	}, [productData]);
+		if (newProductData === undefined) return;
+		addProduct();
+	}, [newProductData]);
 
 	//update table when product table is updated (add, delete, edit)
 	useEffect(() => {
 		if (isUpdating === false) return;
-		ProductGetAPI({setProducts, setIsFetching, FETCH_URL});
+		fetchData();
 		setIsUpdating(false);
 	}, [isUpdating]);
-	
 
+	//display delete buttons
+	useEffect(() => {
+		if (isDeleteConfirm === false) return;
+		//delete products
+		deleteProduct();
+
+		//reset delete state
+		setDelete(false);
+		setDeleteConfirm(false);
+	}, [isDeleteConfirm]);
+
+
+	/*************************************
+	 * 		     Render                  *
+	 *************************************/
 	return(
 		<div className="Container">
-		<Sidebar />
-	  
-		<Navbar setButtonPopup={setButtonPopup} setDeleteSuccessPopup={setDeleteSuccessPopup}/>
-  
-		<main className ="content">
-		  <ProductTable products={products} isFetching={isFetching}/>
-		</main>
-  
-		<Popup trigger = {buttonPopup}>
-		  <AddProduct categories={categories} setButtonPopup={setButtonPopup} setSuccessPopup={setSuccessPopup} setProductData={setProductData} />
-		</Popup>
-  
-		<Popup trigger = {successPopup}>
-			<div className='success'>
-				<ul>
-					<li>
-						<IconContext.Provider
-							value ={{ color: '#DD9D34', size:'44px'}}
-							>
-							<IoCheckmarkCircleOutline />
-						</IconContext.Provider>
-					</li>
-					<li>
-						The product has been added successfully.
-					</li>
-					<li>
-						<button className='ok-btn' onClick={() => {
-							setSuccessPopup(false);
-							window.location.reload();
-							}}>
-						Ok
-						</button>
-					</li>
-				</ul>
-			</div>
-		</Popup>
+			<Sidebar isDelete={isDelete} setDelete={setDelete} setDeletePopup={setDeletePopup} />
+			<Navbar setAdd={setAdd} setDelete={setDelete} isDelete={isDelete} />
 
+			<main className ="content">
+				<Table columns={COLUMNS} data={products} isFetching={isFetching} setSelectedRowData={setProductsToDelete}  isDelete={isDelete}/>
+			</main>
+	
+			<Popup trigger = {isAdd} id="add">
+				<AddProductPopup categories={categories} setAdd={setAdd} setProductData={setNewProductData} />
+			</Popup>
+	
+			<Popup trigger = {statusPopup} id="Message">
+				<PopupMessage isSuccess={isSuccess} message={message} setClose={closePopup} />
+			</Popup>
 
-		<Popup trigger = {deleteSuccessPopup}>
-			<div className='delete-success'>
-				<ul>
-					<li>
-					<IconContext.Provider
-							value ={{ color: '#DD9D34', size:'44px'}}
-							>
-							<IoTrashBinSharp />
-						</IconContext.Provider>
-					</li>
-					<li>
-						The product has been deleted successfully.
-					</li>
-					<li>
-						<button className='ok-btn' onClick={() => setDeleteSuccessPopup(false)}>
-							Ok
-						</button>
-					</li>
-				</ul>
-			</div>
-		</Popup>
-	</div>
+			<Popup trigger = {deletePopup} id="Delete">
+				<DeletePopup setDelete={setDeleteConfirm} setDeletePopup={setDeletePopup} />
+			</Popup>
+		</div>
 	);
 }
 export default App;

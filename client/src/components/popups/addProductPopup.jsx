@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 
-const AddProduct = (
+const AddProductPopup = (
     {
         categories,
-        setButtonPopup,
-        setSuccessPopup,
+        setAdd,
         setProductData
     }
     ) => {
@@ -19,7 +18,7 @@ const AddProduct = (
         data['category'] = selectedOption.category_ID;
         console.log(data)
         setProductData(data);
-    }
+	}
 
     //category field of addProduct
     const [selectedOption, setSelectedOption] = useState(null);
@@ -69,7 +68,7 @@ const AddProduct = (
             </ul>
             <ul className='popup-btns'>
                 <li>
-                <button className='back-btn' onClick={() => setButtonPopup(false)}>
+                <button className='back-btn' onClick={() => setAdd(false)}>
                     Back
                 </button>
                 </li>
@@ -92,7 +91,7 @@ const AddProduct = (
                     let sell_price1 = document.forms["prodForm"]["sell_price"].value;
                     let stock1 = document.forms["prodForm"]["stock"].value;
                     if (product1 !=""){
-                         setSuccessPopup(true)
+                         setAdd(true);
                     }
                     
                 }}>
@@ -107,4 +106,4 @@ const AddProduct = (
     )
 }
 
-export default AddProduct;
+export default AddProductPopup;
