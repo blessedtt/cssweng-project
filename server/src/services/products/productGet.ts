@@ -10,7 +10,12 @@ import { Request, Response, NextFunction } from "express";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const products = await prisma.product.findMany();
+		const products = await prisma.product.findMany(
+			{
+				include: {
+					product_category: true,
+			}
+		});
 		res.json(products);
 	} catch (error) {
 		next(error);
