@@ -85,3 +85,10 @@
 .success ul li{
     margin-top:50px;
 }
+
+.delete-success{
+    text-align:center;
+}
+.delete-success ul li{
+    margin-top:30px;
+}

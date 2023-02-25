@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 
-const AddProduct = (
+const AddProductPopup = (
     {
         categories,
         setAdd,
-        setSuccessPopup,
         setProductData
     }
     ) => {
@@ -19,7 +18,7 @@ const AddProduct = (
         data['category'] = selectedOption.category_ID;
         console.log(data)
         setProductData(data);
-    }
+	}
 
     //category field of addProduct
     const [selectedOption, setSelectedOption] = useState(null);
@@ -28,11 +27,11 @@ const AddProduct = (
     return (
         <div>
             <h5 className='header'>Add New Product</h5>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form name ="prodForm" onSubmit={handleSubmit(onSubmit)}>
             <ul>
                 <li>
                 <label htmlFor ='product'> Product </label>
-                <input type='text' {...register('name')}></input>
+                <input name ='product' type='text' {...register('pname')} required></input>
                 </li>
 
                 <li>
@@ -52,18 +51,18 @@ const AddProduct = (
                 </li>
 
                 <li>
-                <label htmlFor = 'brand'>Brand</label>
-                <input type='text' {...register('brand')}></input>
+                <label htmlFor = 'brand' >Brand</label>
+                <input name ='brand' type='text' {...register('brand')}required></input>
                 </li>
 
                 <li>
-                <label htmlFor = 'sell_price'>Selling Price</label>
-                <input type='number' {...register('price')}></input>
+                <label htmlFor = 'sell_price' >Selling Price</label>
+                <input name ='sell_price' type='number' {...register('price')}required></input>
                 </li>
 
                 <li>
                 <label htmlFor = 'stock'>On-hand Stock</label>
-                <input type='number' {...register('stock')}></input>
+                <input name ='stock' type='number' {...register('stock')}required></input>
                 </li>
 
             </ul>
@@ -77,9 +76,29 @@ const AddProduct = (
                 {/* <input className='submit-btn' type = 'submit' value ='Submit' onSubmit={() => setSuccessPopup(true)}>
                     
                 </input> */}
-                <button className='submit-btn' onClick={() => setSuccessPopup(true)}>
-                    Submit
-                </button>
+                {/* Add if */}
+                {/* <button className='submit-btn' onClick={() => {
+                    // if ()
+                    setSuccessPopup(true);
+                    }}>  */}
+                <input className='submit-btn' type = 'submit' value = 'Submit' onClick={() =>{
+                    // // let x = 1;
+                    // if (x==1){
+                    //     setSuccessPopup(false);
+                    // }
+                    let product1 = document.forms["prodForm"]["products"].value;
+                    let brand1 = document.forms["prodForm"]["brand"].value;
+                    let sell_price1 = document.forms["prodForm"]["sell_price"].value;
+                    let stock1 = document.forms["prodForm"]["stock"].value;
+                    if (product1 !=""){
+                         setAdd(true);
+                    }
+                    
+                }}>
+
+                </input>
+                    
+                {/* </button> */}
                 </li>
             </ul>
             </form>
@@ -87,4 +106,4 @@ const AddProduct = (
     )
 }
 
-export default AddProduct;
+export default AddProductPopup;
