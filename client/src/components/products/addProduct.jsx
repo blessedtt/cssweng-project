@@ -32,7 +32,7 @@ const AddProduct = (
             <ul>
                 <li>
                 <label htmlFor ='product'> Product </label>
-                <input type='text' {...register('pname')}></input>
+                <input type='text' {...register('name')}></input>
                 </li>
 
                 <li>

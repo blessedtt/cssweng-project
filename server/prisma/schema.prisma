@@ -9,12 +9,12 @@ datasource db {
 }
 
 model product {
-  product_ID       Int               @id @default(autoincrement())
+  product_ID       Int               @id @default(autoincrement()) @unique(map: "product_id_UNIQUE")
   name             String            @db.VarChar(255)
+  brand            String            @db.VarChar(255)
   type             Int?
   stock            Int               @default(0)
   last_updated     DateTime          @db.DateTime(0)
-  brand            String?           @db.VarChar(255)
   sell_price       Int
   sales            Int               @default(0)
   revenue          Int               @default(0) //@default(dbgenerated("sales * sell_price"))
@@ -22,6 +22,7 @@ model product {
   product_category product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_ptype")
 
   @@index([type], map: "fk_ptype_idx")
+  @@unique([name, brand], map: "name_brand_UNIQUE")
 }
 
 model product_category {
