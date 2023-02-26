@@ -168,7 +168,7 @@
   padding:5px;
   grid-area: content; 
   /* background-color:#FAF8F1; */
-  background:#FFFFFFFF     ;
+  background:#FAF8F1     ;
   overflow-x:scroll;
   overflow-y:scroll;
   
@@ -179,35 +179,72 @@
   justify-content: center;
   display:inline-block;
   min-width:100px;
+  text-align:left;
 }
 
 .category-btn{
-  background:#FFFFFFFF;
+  background:#FAF8F1;
   color:#DDBC86;
-  border:5px solid #FFFFFFFF;
+  border:5px solid #FAF8F1;
   border-radius:25px;
 }
-.category-text{
+
+.category-btn ul{
+  display:none;
+  position:absolute;
+  list-style:none;
+  padding-left:0;
+  margin-top:-0.5vh;
   font-size:15px;
-  text-align:center;
-  padding:12px 16px;
+}
+.category-btn ul li{
+  margin-top:1vh;
+  background:#DDBC86; 
+  border:2px solid #DDBC86;
+  border-radius:25px;
+  padding:5px;
+  min-width:125px;
+  color:#FAF8F1;
+  font-weight:600;
+  cursor:pointer;
+}
+.category-btn ul li:hover{
+  background:#DD9D34;
+  border:2px solid #DD9D34;
 }
 
-.category-drop :hover .category-down{
+.category-text{
+  font-size:15px;
+  padding:12px 16px;
+  font-weight:600;
+}
+
+
+.category-btn:hover .arrow{
+  margin-bottom:2px;
+  border: solid #DDBC86;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.category-drop :hover ul{
   display:block;
 }
 
 .category-down{
   display: none;
   position: absolute;
-  background-color: #FFFFFFFF;
+  background-color: #FAF8F1;
   min-width:100px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   border-radius:25px;
   margin-top:1vh;
 }
-.arrow-down{
+.arrow{
   margin-left:5px;
   margin-bottom:5px;
   border: solid #DDBC86;
@@ -216,4 +253,14 @@
   padding: 3px;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+.arrow-up{
+  margin-left:5px;
+  margin-bottom:2px;
+  border: solid #DDBC86;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
 }
