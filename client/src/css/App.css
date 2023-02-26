@@ -212,7 +212,10 @@
   background:#DD9D34;
   border:2px solid #DD9D34;
 }
-
+.category-btn ul li:active{
+  background:#A67438;
+  border:2px solid #ca8e44;
+}
 .category-text{
   font-size:15px;
   padding:12px 16px;
