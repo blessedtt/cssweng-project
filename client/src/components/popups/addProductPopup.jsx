@@ -6,7 +6,8 @@ const AddProductPopup = (
     {
         categories,
         setAdd,
-        setProductData
+        setProductData,
+		submitAdd
     }
     ) => {
     //send data to API to add product
@@ -17,7 +18,8 @@ const AddProductPopup = (
     const onSubmit = (data) => {
         data['category'] = selectedOption.category_ID;
         console.log(data)
-        setProductData(data);
+        setProductData(data)
+		submitAdd(true)
 	}
 
     //category field of addProduct

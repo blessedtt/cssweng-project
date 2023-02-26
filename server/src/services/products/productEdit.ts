@@ -9,8 +9,13 @@ import prisma from "../../repositories/prismaClient";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { name, price, stock, sales, category, brand } = req.body;
+		//get the product id from the request parameters
+		const { name, sell_price, stock, sales, type, brand, order_amt } = req.body;
 		const { id } = req.params;
+
+		console.log(req.body);
+		console.log(req.params);
+
 		//update the product
 		const product = await prisma.product.update({
 			where: {
@@ -19,14 +24,11 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 			data: {
 				name,
 				brand,
-				sell_price: Number(price),
+				sell_price: Number(sell_price),
 				stock: Number(stock),
 				sales: Number(sales),
-				product_category: {
-					connect: {
-						category_ID: category,
-					}
-				},
+				order_amt: Number(order_amt),
+				type: type,
 				last_updated: new Date(),
 			},
 		});

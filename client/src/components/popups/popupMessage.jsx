@@ -2,7 +2,7 @@ import { IconContext } from 'react-icons';
 import { IoCheckmarkCircleOutline, IoBan } from 'react-icons/io5';
 
 
-export default function PopupMessage ({isSuccess, message, setClose}) {
+export default function PopupMessage ({isSuccess, message, setClose, isLoading}) {
 	return (
 		<div className='success'>
 			<ul>
@@ -20,9 +20,12 @@ export default function PopupMessage ({isSuccess, message, setClose}) {
 					{message}
 				</li>
 				<li>
-					<button className='ok-btn' onClick={() => setClose()}>
-					Ok
-					</button>
+					{isLoading ? <></> : (
+						<button className='ok-btn' onClick={() => setClose()}>
+							Ok
+						</button>
+					)
+					}
 				</li>
 			</ul>
 		</div>

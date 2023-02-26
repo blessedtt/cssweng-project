@@ -8,16 +8,17 @@ import Navbar from './components/navbar';
 import Popup from './components/Popup';
 
 //popup components
-import DeletePopup from './components/popups/deletePopup';
+import DeletePopup from './components/popups/deleteProductPopup';
 import PopupMessage from './components/popups/popupMessage';
 import ProductDetailPopup from './components/popups/productDetailPopup';
-import ProductEditPopup from './components/popups/productEditPopup';
+
 
 //table components
 import Table from './components/table/Table';
 
 //function components
 import AddProductPopup from './components/popups/addProductPopup';
+import EditProductPopup from './components/popups/editProductPopup';
 
 //api functions
 import ProductAddAPI from './api/ProductAddAPI';
@@ -33,9 +34,12 @@ const FETCH_URL = 'http://localhost:3001';
 function App() {
 	//detail popup states
 	const [detailPopup, setDetailPopup] = useState(false);
-	const [editPopup, setEditPopup] = useState(false);
 	const [detailType, setDetailType] = useState(0);
-	const [selectedDetails, setSelectedDetails] = useState({});
+	const [selectedProduct, setSelectedProduct] = useState({});
+
+	//edit product
+	const [editPopup, setEditPopup] = useState(false);
+	const [EditConfirm, setEditConfirm] = useState(false);
 
 	//general popup message states
 	const [statusPopup, setStatusPopup] = useState(false);
@@ -54,12 +58,16 @@ function App() {
 	//category data
 	const [categories, setCategories] = useState([]);
 
-	//loading state
-	const [isFetching, setIsFetching] = useState(false);
-	const [isUpdating, setIsUpdating] = useState(false);
+	//loading states
+	const [isFetching, setIsFetching] = useState(false);	//tells table to display loading
+	const [isUpdating, setIsUpdating] = useState(false);	//tells app to fetch upon success
+	const [isLoading, setIsLoading] = useState(true);		//tells app when operation is being performed
 
 	//new product state to be passed to add api
 	const [addPopup, setAddPopup] = useState(false);
+	const [addConfirm, setAddConfirm] = useState(false);
+
+	//general product data to be added/edited
 	const [productData, setProductData] = useState({});
 
 	/*************************************
@@ -68,6 +76,7 @@ function App() {
 	
 	const updateDisplay = (message) => {
 		setIsUpdating(true);
+		setIsLoading(false);
 		setMessage(message);
 		setIsSuccess(true);
 		setStatusPopup(true);
@@ -75,12 +84,14 @@ function App() {
 
 	const errorPopup = (error) => {
 		setMessage(error);
+		setIsLoading(false);
 		setIsSuccess(false);
 		setStatusPopup(true);
 	}
 
 	const closePopup = () => {
 		setStatusPopup(false);
+		setIsLoading(false);
 		setMessage('Loading...');
 		setIsSuccess(false);
 	}
@@ -90,10 +101,12 @@ function App() {
 	 *************************************/
 
 	const addProduct = async () => {
+		setIsLoading(true);
 		try{
 			await ProductAddAPI({productData, FETCH_URL})
 			updateDisplay('Product added successfully.');
 			setProductData({});
+			setAddConfirm(false);
 		}
 		catch(err){
 			errorPopup(String(err))
@@ -101,6 +114,7 @@ function App() {
 	}
 
 	const deleteProduct = async () => {
+		setIsLoading(true);
 		try{
 			await ProductDeleteAPI({productIDList: productsToDelete, FETCH_URL});
 			updateDisplay('Product deleted successfully.');
@@ -125,7 +139,8 @@ function App() {
 		setIsFetching(false);
 	}
 
-	const editData = async () => {
+	const editProduct = async () => {
+		setIsLoading(true);
 		try{
 			await ProductEditAPI({productData, FETCH_URL})
 			updateDisplay('Product edited successfully.');
@@ -145,12 +160,6 @@ function App() {
 		fetchData();
 	}, []);
 
-	//call api and update table when new product is added
-	useEffect(() => {
-		if (Object.keys(productData).length === 0) return;
-		addProduct();
-	}, [productData]);
-
 	//update table when product table is updated (add, delete, edit)
 	useEffect(() => {
 		if (isUpdating === false) return;
@@ -158,12 +167,34 @@ function App() {
 		setIsUpdating(false);
 	}, [isUpdating]);
 
-	//display delete buttons
+	//add call
+	useEffect(() => {
+		if (addConfirm === false) return;
+		//add products
+		addProduct();
+		setStatusPopup(true);
+
+		setAddPopup(false);
+		setAddConfirm(false);
+	}, [addConfirm]);
+
+	//edit call
+	useEffect(() => {
+		if (EditConfirm === false) return;
+		//edit products
+		editProduct();
+		setStatusPopup(true);
+
+		setEditPopup(false);
+		setEditConfirm(false);
+	}, [EditConfirm]);
+
+	//delete call
 	useEffect(() => {
 		if (isDeleteConfirm === false) return;
 		//delete products
 		deleteProduct();
-
+		setStatusPopup(true);
 		//reset delete state
 		setDelete(false);
 		setDeleteConfirm(false);
@@ -171,21 +202,23 @@ function App() {
 
 	//show detail popup
 	useEffect(() => {
-		if (Object.keys(selectedDetails).length === 0) return;
+		if (Object.keys(selectedProduct).length === 0) return;
 		setDetailPopup(true);
-	}, [selectedDetails]);
+	}, [selectedProduct]);
 
-	//reset selected details when detail popup is closed
+	//clear selected product data unless edit popup is open
 	useEffect(() => {
-		if (detailPopup === false)
-			setSelectedDetails({});
-	}, [detailPopup]);
+		if (editPopup === true) return;
+		if (detailPopup === true) return;
+		setSelectedProduct({});
+	}, [editPopup, detailPopup]);
 
 	/*************************************
 	 * 		    	 Render              *
 	 *************************************/
 	return(
 		<div className="Container">
+
 			<Sidebar 
 				isDelete={isDelete} 
 				setDelete={setDelete} 
@@ -204,7 +237,7 @@ function App() {
 					isFetching={isFetching} 
 					setSelectedRowData={setProductsToDelete}  
 					isDelete={isDelete}
-					setCurrentSelectedProduct={setSelectedDetails}
+					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
 				/>
 			</main>
@@ -214,6 +247,7 @@ function App() {
 					categories={categories} 
 					setAdd={setAddPopup} 
 					setProductData={setProductData}
+					submitAdd={setAddConfirm}
 				/>
 			</Popup>
 	
@@ -222,6 +256,7 @@ function App() {
 					isSuccess={isSuccess} 
 					message={message} 
 					setClose={closePopup} 
+					isLoading={isLoading}
 				/>
 			</Popup>
 
@@ -236,8 +271,17 @@ function App() {
 				<ProductDetailPopup 
 					setDetailPopup={setDetailPopup} 
 					setEditPopup={setEditPopup} 
-					selectedDetails={selectedDetails} 
+					selectedDetails={selectedProduct} 
 					showType={detailType} 
+				/>
+			</Popup>
+
+			<Popup trigger = {editPopup} id="Edit">
+				<EditProductPopup 
+					setEdit={setEditPopup}
+					currentData={selectedProduct}
+					setProductData={setProductData}
+					submitEdit={setEditConfirm}
 				/>
 			</Popup>
 
