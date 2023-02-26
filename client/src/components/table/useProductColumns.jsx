@@ -4,10 +4,11 @@ import { format } from 'date-fns';
 
 //generates special column cells for the product table
 
-//some hard-coded and very coupled sections:
+//some very coupled sections:
 //1. Product and sales columns - has special functions that are related to parent state
 //   	- setSelectedDetails - sets the product details to be shown in the popup
 //		- setShowType - sets the type of popup to be shown
+//		- updateProduct - updates the product in the database
 
 //2. Stock and Sales columns - has special functions that are related to parent state
 //		- increaseStock - increases the stock of the product
@@ -52,8 +53,8 @@ export default function useProductColumns(props) {
 					<p>{cellProps.value}</p>
 					{/*Button to activate product details */}
 					<button onClick={() => {
-						props.setSelectedDetails(cellProps.row.original);
-						props.setShowType(1);
+							props.setSelectedDetails(cellProps.row.original);
+							props.setShowType(1);
 						}}>
 						details
 					</button>

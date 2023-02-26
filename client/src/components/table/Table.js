@@ -5,14 +5,17 @@ import '../../css/table_style.css'
 import Popup from '../Popup';
 import useProductColumns from './useProductColumns';
 
-import selectProductDetail from './selectProductDetail';
-
-function Table({data, isFetching, setSelectedRowData, isDelete}){
+function Table({
+	data, 
+	isFetching, 
+	setSelectedRowData,
+	setCurrentSelectedProduct,
+	setShowType,
+	isDelete
+	}){
     
     //product details popup states
-    const [showDetails, setShowDetails] = useState(false)
 	const [selectedDetails, setSelectedDetails] = useState({})
-	const [showType, setShowType] = useState(0)
 
 	const columns = useProductColumns({setSelectedDetails, setShowType});
 
@@ -38,39 +41,27 @@ function Table({data, isFetching, setSelectedRowData, isDelete}){
 		toggleHideColumn,   //hide columns
     } = tableInstance
 
-    //set selected row data from external component
+    //send selected row data ids to parent component
     useEffect(() => {
             setSelectedRowData(selectedFlatRows.map(row => row.original.product_ID))
     }, [selectedFlatRows]);
+
+	useEffect(() => {
+		if (Object.keys(selectedDetails).length === 0) return;
+		setCurrentSelectedProduct(selectedDetails);
+		setSelectedDetails({});
+	}, [selectedDetails]);
 
 	//hide selection column when not in delete mode
 	useEffect(() => {
 			toggleHideColumn('selection', !isDelete);
 	}, [isDelete]);
 
-	//check if product details popup should be shown
-	useEffect(() => {
-		if(selectedDetails.product_ID){
-			setShowDetails(true);
-		}
-	}, [selectedDetails])
-
 	return isFetching ? 
 		<div><h1>Loading...</h1></div> 
 	: 
 	(
     <>
-		{/* product details popup */}
-		<Popup trigger={showDetails} setTrigger={setShowDetails}>
-			{selectProductDetail(showType, selectedDetails)}
-			<button onClick={() => {
-				setShowDetails(false)
-				setSelectedDetails({})
-				setShowType(0)
-			}
-			}>close</button>
-		</Popup>
-
         {/*table header data */}
         <table {...getTableProps()}>
             <thead>

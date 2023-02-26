@@ -19,6 +19,7 @@ model product {
   sales            Int               @default(0)
   revenue          Int               @default(0) //@default(dbgenerated("sales * sell_price"))
   avg_value        Int               @default(0) //@default(dbgenerated("stock * sell_price"))
+  pre_order_amt	   Int           	 @default(0) 
   product_category product_category? @relation(fields: [type], references: [category_ID], onUpdate: NoAction, map: "fk_ptype")
 
   @@index([type], map: "fk_ptype_idx")
@@ -48,11 +49,4 @@ model user_category {
   utype_ID    Int    @id @default(autoincrement())
   utype_title String @unique(map: "utype_title_UNIQUE") @db.VarChar(255)
   user        user[]
-}
-
-model session {
-  id        String   @id
-  sid       String   @unique
-  data      String   @db.Text
-  expiresAt DateTime
 }
