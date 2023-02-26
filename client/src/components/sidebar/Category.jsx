@@ -9,9 +9,9 @@ function Category() {
                 </span>
                     <ul>
                         
-                        <li>PAINT</li>
-                        <li>CONSTRUCTION</li>
-                        <li>STEEL</li>
+                        <li><button>PAINT</button></li> 
+                        <li><button>CONSTRUCTION</button></li>
+                        <li><button>STEEL</button></li>
                     </ul>
                     {/* <div className='category-down'>
                         Testing
