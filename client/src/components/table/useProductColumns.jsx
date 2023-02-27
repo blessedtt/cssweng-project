@@ -42,15 +42,11 @@ export default function useProductColumns(props) {
 				accessor: 'product_ID'
 			},
 			{
-				Header: 'BRAND',
-				accessor: 'brand'
-			},
-			{
 				Header: 'PRODUCT',
 				accessor: 'name',
 				Cell: (cellProps) => (
 				<>
-					<p>{cellProps.value}</p>
+					<p>{cellProps.row.original["name"]+ " - " + cellProps.row.original["brand"]}</p>
 					{/*Button to activate product details */}
 					<button onClick={() => {
 							props.setSelectedDetails(cellProps.row.original);
@@ -67,8 +63,21 @@ export default function useProductColumns(props) {
 				Cell: (props) => (
 					<>
 						<p>{props.value}</p>
-						<button onClick={() => props.increaseStock()}>^</button>
-						<button onClick={() => props.decreaseStock()}>v</button>
+						<form onSubmit={() => props.updateProduct()}>
+							<button onClick={() => props.increaseStock()}>^</button>
+							<input type="number" min="0" max="100" value={0} />
+							<button onClick={() => props.decreaseStock()}>v</button>
+						</form>
+					</>
+				)
+			},
+			{
+				Header: 'STATUS',
+				accessor: 'status',
+				Cell: (cellProps) => (
+					
+					<>
+						<p>{cellProps.row.original["order_amt"] ? "ORDERED" : (cellProps.row.original["stock"] !== 0 ? "IN STOCK" : "OUT OF STOCK" )}</p>
 					</>
 				)
 			},
@@ -77,8 +86,6 @@ export default function useProductColumns(props) {
 				accessor: 'sales',
 				Cell: (cellProps) => (
 					<>
-						<button onClick={() =>  props.increaseSales()}>^</button>
-						<button onClick={() =>  props.decreaseSales()}>v</button>
 						<p>{cellProps.value}</p>
 						<button
 							onClick={() => {
@@ -88,6 +95,12 @@ export default function useProductColumns(props) {
 						>
 							details
 						</button>
+
+						<form onSubmit={() => props.updateProduct()}>
+							<button onClick={() => props.increaseSales()}>^</button>
+							<input type="number" min="0" max="100" value={0} />
+							<button onClick={() => props.decreaseSales()}>v</button>
+						</form>
 					</>
 				)
 			},
