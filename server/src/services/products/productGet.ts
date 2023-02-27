@@ -4,9 +4,10 @@
  */
 
 //explicit Prisma dependency
-import prisma from "../../repositories/prismaClient";
-
 import { Request, Response, NextFunction } from "express";
+
+import prisma from "../../repositories/prismaClient";
+import DatabaseError from "../error/databaseError";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
@@ -17,7 +18,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 			}
 		});
 		res.json(products);
-	} catch (error) {
-		next(error);
+	} catch (error: any) {
+		next(DatabaseError.DBError(error.code));
 	}
 }

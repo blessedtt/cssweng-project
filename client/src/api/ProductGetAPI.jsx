@@ -7,7 +7,7 @@ async function ProductGetAPI({FETCH_URL}){
 		return result.data;
 	}
 	catch(err){
-		throw new Error(err);
+		throw new Error(err.response.data);
 	}
 }
 

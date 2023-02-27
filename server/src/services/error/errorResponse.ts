@@ -8,8 +8,5 @@ export default function ErrorHandler(err: any, req: Request, res: Response, next
 	//log the error
 	console.log(err);
 	//send the error response
-	res.status(500).json({
-		status: 'error',
-		message: err.message,
-	});
+	res.status(err.id).json(err.message);
 }

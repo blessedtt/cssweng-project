@@ -109,6 +109,7 @@ function App() {
 			setAddConfirm(false);
 		}
 		catch(err){
+			console.log(err);
 			errorPopup(String(err))
 		}
 	}
@@ -134,7 +135,7 @@ function App() {
 			setCategories(resCategories);
 			
 		}catch(err){
-			setMessage('Error fetching data: '+err);
+			setMessage(String(err));
 		}
 		setIsFetching(false);
 	}
@@ -147,7 +148,7 @@ function App() {
 			setProductData({});	
 		}
 		catch(err){
-			errorPopup('Error editing data: '+err);
+			errorPopup(String(err));
 		}
 	}
 

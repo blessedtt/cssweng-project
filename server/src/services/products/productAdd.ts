@@ -5,6 +5,8 @@
 
 import { Request, Response, NextFunction } from "express";
 
+import DatabaseError from "../error/databaseError";
+
 import prisma from "../../repositories/prismaClient";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
@@ -26,7 +28,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 			},
 		});
 		res.json(product);
-	} catch (error) {
-		next(error);
+	} catch (error : any) {
+		next(DatabaseError.DBError(error.code));
 	}
 }

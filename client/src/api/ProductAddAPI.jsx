@@ -12,8 +12,8 @@ async function ProductAddAPI({productData, FETCH_URL}){
 		})
 	}
 	catch(err){
-		console.log(err)
-		throw new Error(err);
+		console.log(err);
+		throw new Error(err.response.data);
 	}
 }
 
