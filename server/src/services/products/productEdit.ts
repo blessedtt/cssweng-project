@@ -31,6 +31,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 				sales: Number(sales),
 				order_amt: Number(order_amt),
 				type: type,
+				avg_value: Number(sell_price) * Number(stock),
+				revenue: Number(sell_price) * Number(sales),
 				last_updated: new Date(),
 			},
 		});

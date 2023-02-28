@@ -11,13 +11,21 @@ function Table({
 	setSelectedRowData,
 	setCurrentSelectedProduct,
 	setShowType,
-	isDelete
+	isDelete,
+	setUpdateStock,
+	setUpdateSales,
 	}){
     
     //product details popup states
 	const [selectedDetails, setSelectedDetails] = useState({})
 
-	const columns = useProductColumns({setSelectedDetails, setShowType});
+	const columns = useProductColumns(
+		{
+			setSelectedDetails, 
+			setShowType,
+			updateStock: setUpdateStock, 
+			updateSales: setUpdateSales,
+		});
 
     // used alongside useTable (react table)
     const tableInstance = useTable(

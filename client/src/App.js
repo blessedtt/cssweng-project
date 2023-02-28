@@ -70,6 +70,12 @@ function App() {
 	//general product data to be added/edited
 	const [productData, setProductData] = useState({});
 
+	//update sales and stock
+	const [salesUpdate, setSalesUpdate] = useState({});
+	const [stockUpdate, setStockUpdate] = useState({});
+
+
+
 	/*************************************
 	 *          Popup functions          *
 	 *************************************/
@@ -140,10 +146,10 @@ function App() {
 		setIsFetching(false);
 	}
 
-	const editProduct = async () => {
+	const editProduct = async (data) => {
 		setIsLoading(true);
 		try{
-			await ProductEditAPI({productData, FETCH_URL})
+			await ProductEditAPI({productData: data, FETCH_URL})
 			updateDisplay('Product edited successfully.');
 			setProductData({});	
 		}
@@ -183,7 +189,7 @@ function App() {
 	useEffect(() => {
 		if (EditConfirm === false) return;
 		//edit products
-		editProduct();
+		editProduct(productData);
 		setStatusPopup(true);
 
 		setEditPopup(false);
@@ -214,6 +220,45 @@ function App() {
 		setSelectedProduct({});
 	}, [editPopup, detailPopup]);
 
+	//update sales
+	useEffect(() => {
+		if (Object.keys(salesUpdate).length === 0) return;
+
+		if (salesUpdate["sales"] < 0){
+			errorPopup("Sales cannot go below 0.")
+			setSalesUpdate({});
+			return;
+		}
+		else{
+			//edit the product sent with the sales update
+			editProduct(salesUpdate);
+			setStatusPopup(true);
+		}
+
+		setSalesUpdate({});
+	}, [salesUpdate]);
+
+	//update stock
+	useEffect(() => {
+		if (Object.keys(stockUpdate).length === 0) return;
+		console.log(stockUpdate)
+		if (stockUpdate["stock"] < 0){
+			errorPopup("Stock cannot go below 0.")
+			setStockUpdate({});
+			return;
+		}
+		else{
+			//edit the product sent with the stock update
+			editProduct(stockUpdate);
+			setStatusPopup(true);
+		}
+		
+		setStockUpdate({});
+	}, [stockUpdate]);
+
+
+	
+
 	/*************************************
 	 * 		    	 Render              *
 	 *************************************/
@@ -240,6 +285,8 @@ function App() {
 					isDelete={isDelete}
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
+					setUpdateStock={setStockUpdate}
+					setUpdateSales={setSalesUpdate}
 				/>
 			</main>
 	

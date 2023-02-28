@@ -1,5 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { format } from 'date-fns';
+import SalesEdit from './salesEdit';
+import StockEdit from './stockEdit';
 
 
 //generates special column cells for the product table
@@ -18,6 +20,11 @@ import { format } from 'date-fns';
 
 
 export default function useProductColumns(props) {
+	const [inputStock, setInputStock] = useState(0);
+
+	useEffect(() => {
+		console.log(inputStock)
+	}, [inputStock])
 
 	const columns = useMemo(
 		() => [
@@ -60,14 +67,10 @@ export default function useProductColumns(props) {
 			{
 				Header: 'ON-HAND STOCK',
 				accessor: 'stock',
-				Cell: (props) => (
+				Cell: (cellProps) => (
 					<>
-						<p>{props.value}</p>
-						<form onSubmit={() => props.updateProduct()}>
-							<button onClick={() => props.increaseStock()}>^</button>
-							<input type="number" min="0" max="100" value={0} />
-							<button onClick={() => props.decreaseStock()}>v</button>
-						</form>
+						<p>{cellProps.value}</p>
+						<StockEdit props={props} cellProps={cellProps} />
 					</>
 				)
 			},
@@ -96,11 +99,7 @@ export default function useProductColumns(props) {
 							details
 						</button>
 
-						<form onSubmit={() => props.updateProduct()}>
-							<button onClick={() => props.increaseSales()}>^</button>
-							<input type="number" min="0" max="100" value={0} />
-							<button onClick={() => props.decreaseSales()}>v</button>
-						</form>
+						<SalesEdit props={props} cellProps={cellProps}/>
 					</>
 				)
 			},

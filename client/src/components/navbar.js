@@ -25,15 +25,6 @@ function Navbar({
 	
 				</li>
 				<li>
-					<button>
-					<IconContext.Provider
-						value ={{ color: '#FFFFFFFF', size:'44px'}}
-					>
-						<IoPencil />
-					</IconContext.Provider>
-					</button>
-				</li>
-				<li>
 				<button onClick={() => setDelete(!isDelete)}>
 					<IconContext.Provider
 					value ={{ color: '#FFFFFFFF', size:'44px'}}

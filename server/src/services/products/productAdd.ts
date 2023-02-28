@@ -23,6 +23,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 						category_ID: category,
 					}
 				},
+				avg_value: Number(price) * Number(stock),
 				last_updated: new Date(),
 
 			},
