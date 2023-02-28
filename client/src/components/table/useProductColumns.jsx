@@ -38,7 +38,7 @@ export default function useProductColumns(props) {
 				),
 			},
 			{
-				Header: 'DATE UPDATED',
+				Header: 'LAST UPDATED',
 				accessor: 'last_updated',
 				Cell: ({value}) => {
 					return format(new Date(value), "MM/dd/yyyy 'at' h:mm:ss a", 'en-PH')

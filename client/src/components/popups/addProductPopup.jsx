@@ -36,6 +36,16 @@ const AddProductPopup = (
                 <input name ='product' type='text' {...register('name')} required></input>
                 </li>
 
+				<li>
+                <label htmlFor = 'brand' >Brand</label>
+                <input name ='brand' type='text' {...register('brand')}required></input>
+                </li>
+
+				<li>
+					<label htmlFor='description'>Description</label>
+					<textarea name='description' type='text' minLength={0} maxLength={150} {...register('description')} ></textarea>
+				</li>
+
                 <li>
                 <label htmlFor = 'category'>Category</label>
                 <>
@@ -52,19 +62,14 @@ const AddProductPopup = (
                 </>
                 </li>
 
-                <li>
-                <label htmlFor = 'brand' >Brand</label>
-                <input name ='brand' type='text' {...register('brand')}required></input>
+				<li>
+                <label htmlFor = 'stock'>On-hand Stock</label>
+                <input name ='stock' type='number' {...register('stock')}required></input>
                 </li>
 
                 <li>
                 <label htmlFor = 'sell_price' >Selling Price</label>
                 <input name ='sell_price' type='number' {...register('price')}required></input>
-                </li>
-
-                <li>
-                <label htmlFor = 'stock'>On-hand Stock</label>
-                <input name ='stock' type='number' {...register('stock')}required></input>
                 </li>
 
             </ul>
