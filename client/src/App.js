@@ -10,14 +10,12 @@ import Popup from './components/Popup';
 //popup components
 import DeletePopup from './components/popups/deleteProductPopup';
 import PopupMessage from './components/popups/popupMessage';
-import ProductDetailPopup from './components/popups/product details/productDetailPopup';
 
 
 //table components
 import Table from './components/table/Table';
 
 //function components
-import EditProductPopup from './components/popups/editProductPopup';
 
 //state containers
 import AddState from './containers/addState';
@@ -35,42 +33,32 @@ const FETCH_URL = 'http://localhost:3001';
 
 
 function App() {
-	//detail popup states
-	const [detailPopup, setDetailPopup] = useState(false);
+
+	const [statusPopup, setStatusPopup] = useState(false);
+	const [deletePopup, setDeletePopup] = useState(false);
+	const [addPopup, setAddPopup] = useState(false);
+
+	//selected product from table column
 	const [detailType, setDetailType] = useState(0);
 	const [selectedProduct, setSelectedProduct] = useState({});
 
-	//edit product
-	const [editPopup, setEditPopup] = useState(false);
-	const [EditConfirm, setEditConfirm] = useState(false);
-
 	//general popup message states
-	const [statusPopup, setStatusPopup] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [message, setMessage] = useState('Loading...');
 
 	//delete states
-	const [deletePopup, setDeletePopup] = useState(false);
 	const [isDelete, setDelete] = useState(false);
 	const [isDeleteConfirm, setDeleteConfirm] = useState(false);
 	const [productsToDelete, setProductsToDelete] = useState([]);
 
-	//product data
+	//fetched data to store
 	const [products, setProducts] = useState([]);
-
-	//category data
 	const [categories, setCategories] = useState([]);
 
 	//loading states
 	const [isFetching, setIsFetching] = useState(false);	//tells table to display loading
 	const [isUpdating, setIsUpdating] = useState(false);	//tells app to fetch upon success
 	const [isLoading, setIsLoading] = useState(true);		//tells app when operation is being performed
-
-	//new product state to be passed to add api
-	const [addPopup, setAddPopup] = useState(false);
-
-	//general product data to be added/edited
-	const [productData, setProductData] = useState({});
 
 	//update sales and stock
 	const [salesUpdate, setSalesUpdate] = useState({});
@@ -108,13 +96,13 @@ function App() {
 	 * 		    API Call functions       *
 	 *************************************/
 
+	//adds a product using data (used in add popup)
 	const addProduct = async (data) => {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
 			await ProductAddAPI(data, FETCH_URL)
 			updateDisplay('Product added successfully.');
-			setProductData({});
 		}
 		catch(err){
 			console.log(err);
@@ -122,6 +110,7 @@ function App() {
 		}
 	}
 
+	//delets a list of products using productIDList (used in delete popup)
 	const deleteProduct = async () => {
 		setIsLoading(true);
 		try{
@@ -133,6 +122,7 @@ function App() {
 		}
 	}
 
+	//fetches data from api
 	const fetchData = async () => {
 		setIsFetching(true);
 		try{	
@@ -148,19 +138,20 @@ function App() {
 		setIsFetching(false);
 	}
 
+	//edits a product using data (used in edit popup)
 	const editProduct = async (data) => {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
 			await ProductEditAPI({productData: data, FETCH_URL})
 			updateDisplay('Product edited successfully.');
-			setProductData({});	
 		}
 		catch(err){
 			errorPopup(String(err));
 		}
 	}
 
+	//clears data in selected product and detail type
 	const clearSelect = () => {
 		setSelectedProduct({});
 		setDetailType(0);
@@ -258,6 +249,7 @@ function App() {
 					isDelete={isDelete}
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
+
 					setUpdateStock={setStockUpdate}
 					setUpdateSales={setSalesUpdate}
 				/>
