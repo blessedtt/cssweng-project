@@ -11,13 +11,14 @@ import prisma from "../../repositories/prismaClient";
 
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { name, price, stock, category, brand} = req.body;
+		const { name, price, stock, description, category, brand} = req.body;
 		const product = await prisma.product.create({
 			data: {
 				name,
 				sell_price: Number(price),
 				stock : Number(stock),
 				brand,
+				description,
 				product_category: {
 					connect: {
 						category_ID: category,

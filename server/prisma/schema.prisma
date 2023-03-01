@@ -12,6 +12,7 @@ model product {
   product_ID       Int               @id @default(autoincrement()) @unique(map: "product_id_UNIQUE")
   name             String            @db.VarChar(255)
   brand            String            @db.VarChar(255)
+  description	   String?			 @db.VarChar(255)
   type             Int?
   stock            Int               @default(0) @db.UnsignedInt
   last_updated     DateTime          @db.DateTime(0)
