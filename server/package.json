@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Backend functionality of inventory system",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
