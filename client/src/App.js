@@ -21,6 +21,7 @@ import EditProductPopup from './components/popups/editProductPopup';
 
 //state containers
 import AddState from './containers/addState';
+import DetailEditState from './containers/detailEditState';
 
 //api functions
 import ProductAddAPI from './api/ProductAddAPI';
@@ -67,7 +68,6 @@ function App() {
 
 	//new product state to be passed to add api
 	const [addPopup, setAddPopup] = useState(false);
-	const [addConfirm, setAddConfirm] = useState(false);
 
 	//general product data to be added/edited
 	const [productData, setProductData] = useState({});
@@ -108,11 +108,11 @@ function App() {
 	 * 		    API Call functions       *
 	 *************************************/
 
-	const addProduct = async (productData) => {
+	const addProduct = async (data) => {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await ProductAddAPI({productData, FETCH_URL})
+			await ProductAddAPI(data, FETCH_URL)
 			updateDisplay('Product added successfully.');
 			setProductData({});
 		}
@@ -151,6 +151,7 @@ function App() {
 	const editProduct = async (data) => {
 		setIsLoading(true);
 		try{
+			setStatusPopup(true);
 			await ProductEditAPI({productData: data, FETCH_URL})
 			updateDisplay('Product edited successfully.');
 			setProductData({});	
@@ -158,6 +159,11 @@ function App() {
 		catch(err){
 			errorPopup(String(err));
 		}
+	}
+
+	const clearSelect = () => {
+		setSelectedProduct({});
+		setDetailType(0);
 	}
 
 	/*************************************
@@ -176,17 +182,6 @@ function App() {
 		setIsUpdating(false);
 	}, [isUpdating]);
 
-	//edit call
-	useEffect(() => {
-		if (EditConfirm === false) return;
-		//edit products
-		editProduct(productData);
-		setStatusPopup(true);
-
-		setEditPopup(false);
-		setEditConfirm(false);
-	}, [EditConfirm]);
-
 	//delete call
 	useEffect(() => {
 		if (isDeleteConfirm === false) return;
@@ -197,19 +192,6 @@ function App() {
 		setDelete(false);
 		setDeleteConfirm(false);
 	}, [isDeleteConfirm]);
-
-	//show detail popup
-	useEffect(() => {
-		if (Object.keys(selectedProduct).length === 0) return;
-		setDetailPopup(true);
-	}, [selectedProduct]);
-
-	//clear selected product data unless edit popup is open
-	useEffect(() => {
-		if (editPopup === true) return;
-		if (detailPopup === true) return;
-		setSelectedProduct({});
-	}, [editPopup, detailPopup]);
 
 	//update sales
 	useEffect(() => {
@@ -304,23 +286,12 @@ function App() {
 				/>
 			</Popup>
 
-			<Popup trigger = {detailPopup} id="Detail">
-				<ProductDetailPopup 
-					setDetailPopup={setDetailPopup} 
-					setEditPopup={setEditPopup} 
-					selectedDetails={selectedProduct} 
-					showType={detailType} 
-				/>
-			</Popup>
-
-			<Popup trigger = {editPopup} id="Edit">
-				<EditProductPopup 
-					setEdit={setEditPopup}
-					currentData={selectedProduct}
-					setProductData={setProductData}
-					submitEdit={setEditConfirm}
-				/>
-			</Popup>
+			<DetailEditState 
+				editProduct={editProduct}
+				selectedProduct={selectedProduct}
+				detailType={detailType}
+				clearSelect={clearSelect}
+			/>
 
 		</div>
 	);
