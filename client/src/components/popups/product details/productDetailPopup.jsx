@@ -1,7 +1,9 @@
 import React from "react";
 
-import selectProductDetail from "./product details/selectProductDetail";
+import selectProductDetail from "./selectProductDetail";
 
+//this function calls selectProductDetail to show which type to show (details or metrics)
+//also keeps track of popup states
 export default function ProductDetailPopup({ setDetailPopup, setEditPopup, selectedDetails, showType }) {
   return (
 	<div>

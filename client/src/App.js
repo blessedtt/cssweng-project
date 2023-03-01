@@ -10,15 +10,17 @@ import Popup from './components/Popup';
 //popup components
 import DeletePopup from './components/popups/deleteProductPopup';
 import PopupMessage from './components/popups/popupMessage';
-import ProductDetailPopup from './components/popups/productDetailPopup';
+import ProductDetailPopup from './components/popups/product details/productDetailPopup';
 
 
 //table components
 import Table from './components/table/Table';
 
 //function components
-import AddProductPopup from './components/popups/addProductPopup';
 import EditProductPopup from './components/popups/editProductPopup';
+
+//state containers
+import AddState from './containers/addState';
 
 //api functions
 import ProductAddAPI from './api/ProductAddAPI';
@@ -106,13 +108,13 @@ function App() {
 	 * 		    API Call functions       *
 	 *************************************/
 
-	const addProduct = async () => {
+	const addProduct = async (productData) => {
 		setIsLoading(true);
 		try{
+			setStatusPopup(true);
 			await ProductAddAPI({productData, FETCH_URL})
 			updateDisplay('Product added successfully.');
 			setProductData({});
-			setAddConfirm(false);
 		}
 		catch(err){
 			console.log(err);
@@ -173,17 +175,6 @@ function App() {
 		fetchData();
 		setIsUpdating(false);
 	}, [isUpdating]);
-
-	//add call
-	useEffect(() => {
-		if (addConfirm === false) return;
-		//add products
-		addProduct();
-		setStatusPopup(true);
-
-		setAddPopup(false);
-		setAddConfirm(false);
-	}, [addConfirm]);
 
 	//edit call
 	useEffect(() => {
@@ -290,14 +281,12 @@ function App() {
 				/>
 			</main>
 	
-			<Popup trigger = {addPopup} id="add">
-				<AddProductPopup 
-					categories={categories} 
-					setAdd={setAddPopup} 
-					setProductData={setProductData}
-					submitAdd={setAddConfirm}
-				/>
-			</Popup>
+			<AddState 
+				addPopup={addPopup} 
+				setAddPopup={setAddPopup}
+				addProduct={addProduct} 
+				categories={categories} 
+			/>
 	
 			<Popup trigger = {statusPopup} id="Message">
 				<PopupMessage 

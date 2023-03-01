@@ -58,6 +58,7 @@ export default function useProductColumns(props) {
 					<button onClick={() => {
 							props.setSelectedDetails(cellProps.row.original);
 							props.setShowType(1);
+							props.setDetailPopup(true);
 						}}>
 						details
 					</button>
@@ -94,6 +95,7 @@ export default function useProductColumns(props) {
 							onClick={() => {
 								props.setSelectedDetails(cellProps.row.original);
 								props.setShowType(2);
+								props.setDetailPopup(true);
 							}}
 						>
 							details
