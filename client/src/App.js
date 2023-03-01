@@ -22,7 +22,10 @@ import AddProductPopup from './components/popups/addProductPopup';
 import ProductAddAPI from './api/ProductAddAPI';
 import ProductGetAPI from './api/ProductGetAPI';
 import ProductDeleteAPI from './api/ProductDeleteAPI';
+import CategoryAddAPI  from './api/CategoryAddAPI';
 import CategoryGetAPI from './api/CategoryGetAPI';
+import CategoryEditAPI from './api/CategoryEditAPI';
+import CategoryDeleteAPI from './api/CategoryDeleteAPI';
 
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
@@ -91,11 +94,34 @@ function App() {
 			errorPopup(String(err))
 		}
 	}
+	const addCategory = async (data) => {
+		setIsLoading(true);
+		try{
+			setStatusPopup(true);
+			await CategoryAddAPI(data, FETCH_URL)
+			updateDisplay('Category added successfully.');
+		}
+		catch(err){
+			console.log(err);
+			errorPopup(String(err))
+		}
+	}
 
 	const deleteProduct = async () => {
 		try{
 			await ProductDeleteAPI({productIDList: productsToDelete, FETCH_URL});
 			updateDisplay('Product deleted successfully!');
+		}
+		catch(err){
+			errorPopup(String(err))
+		}
+	}
+
+	const deleteCategory = async () => {
+		setIsLoading(true);
+		try{
+			await CategoryDeleteAPI({categoryIDList: categoriesToDelete, FETCH_URL});
+			updateDisplay('Category deleted successfully.');
 		}
 		catch(err){
 			errorPopup(String(err))
@@ -115,6 +141,25 @@ function App() {
 			setMessage('Error fetching data: '+err);
 		}
 		setIsFetching(false);
+	}
+
+	//edits a product using data (used in edit popup)
+	const editProduct = async (data) => {
+		setIsLoading(true);
+		try{
+			setStatusPopup(true);
+			await ProductEditAPI({productData: data, FETCH_URL})
+			updateDisplay('Product edited successfully.');
+		}
+		catch(err){
+			errorPopup(String(err));
+		}
+	}
+
+	//clears data in selected product and detail type
+	const clearSelect = () => {
+		setSelectedProduct({});
+		setDetailType(0);
 	}
 
 	/*************************************
