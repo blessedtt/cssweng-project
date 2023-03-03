@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+const preventNegativeInput = (event) => {
+	if (event.key === "-" || event.key === "+") {
+		event.preventDefault();
+	}
+} 
 
 export default function StockEdit({props, cellProps}){
 	const [inputData, setInputData] = useState(0);
@@ -25,6 +30,7 @@ export default function StockEdit({props, cellProps}){
 			type="number" 
 			min="0" max="100" 
 			defaultValue={0} 
+			onKeyDown={(e) => { preventNegativeInput(e) }}
 			onChange={(e) => { setInputData(e.target.value) }}
 		/>
 

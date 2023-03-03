@@ -2,6 +2,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select from 'react-select';
 
+const preventNegPosInput = (event) => {
+	if (event.key === "-" || event.key === "+") {
+		event.preventDefault();
+	}
+} 
+
 const AddProductPopup = (
     {
         categories,
@@ -38,7 +44,7 @@ const AddProductPopup = (
 
 				<li>
                 <label htmlFor = 'brand' >Brand</label>
-                <input name ='brand' type='text' {...register('brand')}required></input>
+                <input name ='brand' type='text' {...register('brand')} required></input>
                 </li>
 
 				<li>
@@ -64,12 +70,12 @@ const AddProductPopup = (
 
 				<li>
                 <label htmlFor = 'stock'>On-hand Stock</label>
-                <input name ='stock' type='number' {...register('stock')}required></input>
+                <input name ='stock' type='number' min={0} {...register('stock')} required></input>
                 </li>
 
                 <li>
                 <label htmlFor = 'sell_price' >Selling Price</label>
-                <input name ='sell_price' type='number' {...register('price')}required></input>
+                <input name ='sell_price' type='number' min={0} {...register('price')} required></input>
                 </li>
 
             </ul>

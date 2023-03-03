@@ -176,6 +176,7 @@ function App() {
 			errorPopup(String(err));
 		}
 	}
+
 	const editCategory = async (data) => {
 		setIsLoading(true);
 		try{

@@ -36,22 +36,22 @@ export default function EditProductPopup({
 
 				<li>
 				<label htmlFor = 'sell_price' >Selling Price</label>
-				<input name ='sell_price' type='number' {...register('price')}required defaultValue={currentData.sell_price}></input>
+				<input name ='sell_price' type='number' min={0} {...register('price')}required defaultValue={currentData.sell_price}></input>
 				</li>
 
 				<li>
 				<label htmlFor = 'stock' >Stock</label>
-				<input name ='stock' type='number' {...register('stock')}required defaultValue={currentData.stock}></input>
+				<input name ='stock' type='number' min={0} {...register('stock')}required defaultValue={currentData.stock}></input>
 				</li>
 
 				<li>
 				<label htmlFor = 'sales'>Amount Sold: </label>
-				<input name ='sales' type='number' {...register('sales')}required defaultValue={currentData.sales}></input>
+				<input name ='sales' type='number' min={0} {...register('sales')}required defaultValue={currentData.sales}></input>
 				</li>
 
 				<li>
 				<label htmlFor = 'order'>Amount Currently Ordered: </label>
-				<input name ='order' type='number' {...register('order_amt')}required defaultValue={currentData.order_amt}></input>
+				<input name ='order' type='number' min={0} {...register('order_amt')}required defaultValue={currentData.order_amt}></input>
 				</li>
 			</ul>
 			<button type='submit'>Submit</button>
