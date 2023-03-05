@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import '../../css/App.css'
 const preventNegativeInput = (event) => {
 	if (event.key === "-" || event.key === "+") {
 		event.preventDefault();
@@ -24,7 +24,7 @@ export default function StockEdit({props, cellProps}){
 				props.updateStock(rowData);
 			}
 		}}
-		>^</button>
+		>+</button>
 
 		<input 
 			type="number" 
@@ -43,7 +43,7 @@ export default function StockEdit({props, cellProps}){
 				props.updateStock(rowData);
 			}
 		}}
-		>v</button>
+		>-</button>
 	</div>
 	)
 

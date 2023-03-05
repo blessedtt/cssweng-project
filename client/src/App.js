@@ -53,6 +53,7 @@ function App() {
 	const [isDelete, setDelete] = useState(false);
 	const [isDeleteConfirm, setDeleteConfirm] = useState(false);
 	const [productsToDelete, setProductsToDelete] = useState([]);
+	const [categoriesToDelete, setCategoriesToDelete] = useState([]);
 
 	//fetched data to store
 	const [products, setProducts] = useState([]);

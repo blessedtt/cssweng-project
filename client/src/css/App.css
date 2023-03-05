@@ -173,6 +173,29 @@
   overflow-y:scroll;
   
 }
+
+.stock-edit button{
+  background:none;
+  color:#A67438;
+  margin:5px;
+  border-radius:50%;
+  border:#A67438 solid 2px;
+  padding:10px;
+  cursor:pointer;
+  font-weight:300;
+  font-size:15px;
+}
+.sales-edit button{
+  background:none;
+  color:#A67438;
+  margin:5px;
+  border-radius:50%;
+  border:#A67438 solid 2px;
+  padding:10px;
+  cursor:pointer;
+  font-weight:300;
+  font-size:15px;
+}
 /* .inner{
   position:relative;
   top:-5px;
