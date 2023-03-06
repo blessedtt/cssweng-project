@@ -1,5 +1,6 @@
 import React from 'react';
 import DeleteButton from './DeleteButton';
+import Category from './Category';
 
 export default function Sidebar({isDelete, setDelete, setDeletePopup}) {
     return (
@@ -9,7 +10,9 @@ export default function Sidebar({isDelete, setDelete, setDeletePopup}) {
                 <div id="hello">
                     Hello, name!
                 </div>
+                <Category />
                 {isDelete ? <DeleteButton setDelete={setDelete} setDeletePopup={setDeletePopup} /> : null}
+               
             </div>
         </div>
     );
