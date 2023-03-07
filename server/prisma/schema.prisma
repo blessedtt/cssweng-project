@@ -38,9 +38,7 @@ model user {
   type          Int
   pass          String        @db.VarChar(255)
   email         String        @unique(map: "email_UNIQUE") @db.VarChar(255)
-  firstname     String        @db.VarChar(255)
-  lastname      String        @db.VarChar(255)
-  fullname      String        @db.VarChar(255) //@default(dbgenerated("CONCAT(firstname, ' ', lastname)"))
+  username      String        @db.VarChar(255) //@default(dbgenerated("CONCAT(firstname, ' ', lastname)"))
   user_category user_category @relation(fields: [type], references: [utype_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_utype")
 
   @@index([type], map: "fk_utype_idx")

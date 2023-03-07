@@ -1,0 +1,20 @@
+<!--create an input form to generate a new user into the database-->
+
+<html>
+	<head>
+		<title>Add User</title>
+	</head>
+	<body>
+		<h1>Add User</h1>
+		<form action="/add" method="POST">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username">
+			<label for="password">Password</label>
+			<input type="text" name="password" id="password">
+			<label for="email">Email</label>
+			<input type="text" name="email" id="email">
+			<br />
+			<input type="submit" value="Submit">
+		</form>
+	</body>
+</html>
