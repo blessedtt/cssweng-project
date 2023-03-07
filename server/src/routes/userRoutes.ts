@@ -6,9 +6,11 @@
 import express, { Express } from 'express';
 
 import userAddEmployee from '../services/user/userAddEmployee';
-import userGet from '../services/user/userGet';
+import userGet from '../services/user/userGetEmployees';
 import userRemove from '../services/user/userRemove';
-import usertypeAdd from '../services/user/types/usertypeAdd';
+
+import userCheckAuth from '../services/user/auth/userCheckAuth';
+import userNoAuth from '../services/user/auth/userNoAuth';
 
 import UserTypeRouter from './usertypeRoutes';
 

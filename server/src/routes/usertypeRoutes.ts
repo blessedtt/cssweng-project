@@ -5,8 +5,8 @@
 
 import express, { Express } from 'express';
 
-import usertypeAdd from '../services/user/types/usertypeAdd';
-import usertypeGet from '../services/user/types/usertypeGet';
+import usertypeAdd from '../services/user/usertype/usertypeAdd';
+import usertypeGet from '../services/user/usertype/usertypeGet';
 
 
 const UserTypeRouter = express.Router();

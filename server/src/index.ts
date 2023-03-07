@@ -3,13 +3,14 @@
  * @description This file is the entry point of the application
  */
 import express, {Express, Request, Response} from 'express';
-import dotenv from 'dotenv';
+import passport from 'passport';
 
 //custom imports
 import { loadMiddlewares } from './settings';
 import { LoadRoutes } from './routes/mainRoute';
+import initializePassport from './passport-config';
 
-dotenv.config();
+initializePassport(passport);
 
 const PORT = process.env.PORT || 3001;
 
