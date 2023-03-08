@@ -7,7 +7,8 @@ On the client terminal:
 > run `npm start`
 
 On the server terminal:
-> run `npx prisma generate` first, and then `npm run build`
+> run `npx prisma generate` first, and then `npm run devStart`
+> if you want to run without nodemon, build the ts files into js with `npm run build` and then `npm start`
 
 Once installed, use `npm start` on the client terminal, and `npm run start` on the server terminal.
 
