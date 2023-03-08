@@ -7,7 +7,7 @@ On the client terminal:
 > run `npm start`
 
 On the server terminal:
-> run `npx prisma generate` first, and then `npm run start`
+> run `npx prisma generate` first, and then `npm run build`
 
 Once installed, use `npm start` on the client terminal, and `npm run start` on the server terminal.
 
