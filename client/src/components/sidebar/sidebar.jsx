@@ -1,8 +1,8 @@
 import React from 'react';
 import DeleteButton from './DeleteButton';
-import Category from './Category';
+import CategoryFilter from './CategoryFilter';
 
-export default function Sidebar({isDelete, setDelete, setDeletePopup}) {
+export default function Sidebar({categories, setFilterCategory, isDelete, setDelete, setDeletePopup}) {
     return (
         <div className="sidebar">
             <h1 id="title">inventory tracker</h1>
@@ -10,7 +10,7 @@ export default function Sidebar({isDelete, setDelete, setDeletePopup}) {
                 <div id="hello">
                     Hello, name!
                 </div>
-                <Category />
+                <CategoryFilter categories={categories} setFilter={setFilterCategory}/>
                 {isDelete ? <DeleteButton setDelete={setDelete} setDeletePopup={setDeletePopup} /> : null}
                
             </div>
