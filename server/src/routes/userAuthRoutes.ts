@@ -7,8 +7,15 @@ import express from 'express';
 import passport from 'passport';
 import userCheckAuth from '../services/user/auth/userCheckAuth';
 import userNoAuth from '../services/user/auth/userNoAuth';
-
+import userGetUnique from '../services/user/api/userGetUnique';
 const UserAuthRouter = express.Router();
+
+UserAuthRouter.get('/', userCheckAuth, async (req, res, next) => {
+	const user = await req.user;
+	console.log(user)
+	//@ts-ignore
+	res.render('index', {name: user.username});
+});
 
 UserAuthRouter.get('/login', userNoAuth, (req, res, next) => {
 	res.render('login');

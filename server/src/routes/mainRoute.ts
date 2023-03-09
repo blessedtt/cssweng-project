@@ -10,11 +10,12 @@ import UserRouter from './userRoutes';
 import UserAuthRouter from './userAuthRoutes';
 
 import ErrorHandler from '../services/error/errorResponse';
+import userCheckAuth from '../services/user/auth/userCheckAuth';
 
 export const LoadRoutes = (app: Router) => {
-	app.use('/product', ProductRouter);
-	app.use('/category', CategoryRouter);
-	app.use('/user', UserRouter);
+	app.use('/product', userCheckAuth, ProductRouter);
+	app.use('/category', userCheckAuth, CategoryRouter);
+	app.use('/user', userCheckAuth, UserRouter);
 	app.use('/', UserAuthRouter);
 
 	app.use(ErrorHandler);
