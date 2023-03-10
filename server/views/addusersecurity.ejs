@@ -1,0 +1,17 @@
+ <!-- add an extra step to login via security question -->
+<html>
+	<head>
+		<title>Verification</title>
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+
+	<body>
+		<h1>Verification</h1>
+		<form action="/addsecurityquestion" method="POST">
+			<label for="securityQuestion">Security Question</label>
+			<input type="text" name="securityQuestion" id="securityQuestion" required>
+			<input type="submit" value="Submit">
+		</form>
+	</body>
+
+</html>

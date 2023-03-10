@@ -1,0 +1,15 @@
+<!-- extra security layer for logging in as an admin -->
+
+<html>
+	<head>
+		<title>Verification</title>
+		<link rel="stylesheet" href="/css/style.css">
+	</head>
+	<body>
+		<h1>Verification</h1>
+		<form action="/verify" method="POST">
+			<label for="securityQuestion"><%=question%></label>
+			<input type="text" name="answer" id="answer" required>
+			<input type="submit" value="Submit">
+		</form>
+</html>
