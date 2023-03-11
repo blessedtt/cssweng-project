@@ -22,14 +22,14 @@ import AddState from './containers/addState';
 import DetailEditState from './containers/detailEditState';
 
 //api functions
-import ProductAddAPI from './api/ProductAddAPI';
-import ProductGetAPI from './api/ProductGetAPI';
-import ProductEditAPI from './api/ProductEditAPI';
-import ProductDeleteAPI from './api/ProductDeleteAPI';
-import CategoryAddAPI  from './api/CategoryAddAPI';
-import CategoryGetAPI from './api/CategoryGetAPI';
-import CategoryEditAPI from './api/CategoryEditAPI';
-import CategoryDeleteAPI from './api/CategoryDeleteAPI';
+import ProductAddAPI from './api/product/ProductAddAPI';
+import ProductGetAPI from './api/product/ProductGetAPI';
+import ProductEditAPI from './api/product/ProductEditAPI';
+import ProductDeleteAPI from './api/product/ProductDeleteAPI';
+import CategoryAddAPI  from './api/pcategory/CategoryAddAPI';
+import CategoryGetAPI from './api/pcategory/CategoryGetAPI';
+import CategoryEditAPI from './api/pcategory/CategoryEditAPI';
+import CategoryDeleteAPI from './api/pcategory/CategoryDeleteAPI';
 
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
@@ -68,8 +68,7 @@ function App() {
 	const [salesUpdate, setSalesUpdate] = useState({});
 	const [stockUpdate, setStockUpdate] = useState({});
 
-
-
+	const [useGlobalFilter, setGlobalFilter] = useState({});
 	/*************************************
 	 *          Popup functions          *
 	 *************************************/
@@ -258,7 +257,6 @@ function App() {
 		setStockUpdate({});
 	}, [stockUpdate]);
 
-
 	
 
 	/*************************************
@@ -287,7 +285,6 @@ function App() {
 					isDelete={isDelete}
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
-
 					setUpdateStock={setStockUpdate}
 					setUpdateSales={setSalesUpdate}
 				/>
