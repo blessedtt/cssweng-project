@@ -23,3 +23,18 @@ ul{
 ul li{
     padding:5px;
 }
+
+.login-enter{
+    /* default button styling */
+    background:#DD9D34;
+    border-radius:15px;
+    font-size:30px;
+    color:#FAF8F1;
+    padding:10px;
+    cursor:pointer;
+    outline:none;
+    /* positioning styling */
+    width:150px;
+    margin-top:5vh;
+    box-shadow:none;
+}
