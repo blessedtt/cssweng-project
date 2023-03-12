@@ -2,7 +2,7 @@ import './css/Login.css'
 import {IoPersonSharp} from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
-function LoginAdmin(){
+function LoginEmp(){
     return(
         <div className='login-container'>
             <div className='login-elements'>
@@ -15,7 +15,7 @@ function LoginAdmin(){
 				        </IconContext.Provider>
                     </li>
                     <li id='login-text'>
-                        Admin Login
+                        Employee Login
                     </li>
                     <form>
                         <li>
@@ -38,4 +38,4 @@ function LoginAdmin(){
     )
 }
 
-export default LoginAdmin
+export default LoginEmp
