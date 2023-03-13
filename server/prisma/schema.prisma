@@ -42,8 +42,6 @@ model user {
 
   user_category user_category @relation(fields: [type], references: [utype_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_utype")
 
-  user_question_answer user_question_answer[]
-
   @@index([type], map: "fk_utype_idx")
 }
 
@@ -52,23 +50,4 @@ model user_category {
   utype_title String @unique(map: "utype_title_UNIQUE") @db.VarChar(255)
   
   user        user[]
-}
-
-model security_question {
-  question_ID   Int    @id @default(autoincrement())
-  question      String @unique(map: "question_UNIQUE") @db.VarChar(255)
-
-  user_question_answer user_question_answer[]
-}
-
-model user_question_answer {
-  user_ID       	Int	   	@id
-  question_ID   	Int
-  answer       	 	String 				@db.VarChar(255)
-
-  user          	user   				@relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
-  security_question security_question 	@relation(fields: [question_ID], references: [question_ID], onDelete: Cascade, onUpdate: NoAction, map: "fk_question")
-
-  @@index([user_ID], map: "fk_user_idx")
-  @@index([question_ID], map: "fk_question_idx")
 }
