@@ -10,7 +10,7 @@ import LoginEmp from './LoginEmp';
 const root1 = ReactDOM.createRoot(document.getElementById('root1'));
 root1.render(
     <StrictMode>
-        <LoginEmp />
+        <App />
     </StrictMode>
 
 );

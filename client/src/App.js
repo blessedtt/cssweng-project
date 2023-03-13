@@ -37,6 +37,8 @@ const FETCH_URL = 'http://localhost:3001';
 
 function App() {
 
+	const [searchPopup, setSearch] = useState(false);
+
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
 	const [addPopup, setAddPopup] = useState(false);
@@ -275,6 +277,7 @@ function App() {
 				setAdd={setAddPopup} 
 				setDelete={setDelete} 
 				isDelete={isDelete} 
+				setSearch={setSearch}
 			/>
 
 			<main className ="content">

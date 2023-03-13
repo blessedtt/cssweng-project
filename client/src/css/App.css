@@ -131,9 +131,10 @@
 
 } */
 .nav ul{
+  position:fixed;
   list-style:none;
   padding-left:0;
-  margin-left:75vw;
+  margin-left:70vw;
 }
 .nav ul li{
   display:inline;
@@ -147,10 +148,13 @@
   cursor:pointer;
   outline:inherit;
 }
+.search-bar{
+  visibility:hidden;
+}
 #first{
   display:flex;
   position:absolute;
-  margin-right:6vw;
+  margin-right:5vw;
   font-weight:600;
   font-size:44px;
   right:75vw;
