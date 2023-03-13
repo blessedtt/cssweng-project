@@ -13,7 +13,7 @@ import PopupMessage from './components/popups/popupMessage';
 
 
 //table components
-import Table from './components/table/Table';
+import ProductTable from './components/table/Product Table/productTable';
 
 //function components
 
@@ -297,14 +297,13 @@ function App() {
 			/>
 
 			<main className ="content">
-				<Table 
+				<ProductTable 
 					data={displayedProducts} 
 					isFetching={isFetching} 
-					setSelectedRowData={setProductsToDelete}  
 					isDelete={isDelete}
+					setSelectedRowData={setProductsToDelete}  
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
-
 					setUpdateStock={setStockUpdate}
 					setUpdateSales={setSalesUpdate}
 				/>
