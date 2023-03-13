@@ -9,9 +9,6 @@ import userAddEmployee from '../services/user/userAddEmployee';
 import userGet from '../services/user/userGetEmployees';
 import userRemove from '../services/user/userRemove';
 
-import userCheckAuth from '../services/user/auth/userCheckAuth';
-import userNoAuth from '../services/user/auth/userNoAuth';
-
 import UserTypeRouter from './usertypeRoutes';
 
 const UserRouter = express.Router();

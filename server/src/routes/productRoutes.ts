@@ -10,12 +10,14 @@ import productGet from '../services/products/productGet';
 import productEdit from '../services/products/productEdit';
 import productDelete from '../services/products/productRemove';
 
+import userCheckAdmin from '../services/user/auth/userCheckAdmin';
+
 
 const ProductRouter: Router = express.Router();
 
-ProductRouter.post('/add', productAdd);
+ProductRouter.post('/add', userCheckAdmin, productAdd);
 ProductRouter.get('/get', productGet);
 ProductRouter.put('/:id', productEdit);
-ProductRouter.delete('/remove', productDelete);
+ProductRouter.delete('/remove', userCheckAdmin, productDelete);
 
 export default ProductRouter;
