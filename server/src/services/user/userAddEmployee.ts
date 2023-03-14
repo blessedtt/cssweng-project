@@ -12,7 +12,7 @@ import  userAdd  from "./api/userAdd";
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		//combine req.body with usertype string into one object
-		const data = { ...req.body, utype_title: "Admin"}
+		const data = { ...req.body, utype_title: "Employee"}
 
 		const user = await userAdd(data);
 		res.status(200).json(user);
