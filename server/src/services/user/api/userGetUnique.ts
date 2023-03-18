@@ -3,7 +3,7 @@ import prisma from "../../../repositories/prismaClient";
 
 export default async function userGetUnique(data: any){
 	try{
-		const user = await prisma.user.findUniqueOrThrow({
+		const user = await prisma.user.findUnique({
 			where: {
 				email: data.email
 			}
@@ -12,7 +12,6 @@ export default async function userGetUnique(data: any){
 		return user
 	}
 	catch(err){
-		console.log(err);
 		throw err;
 	}
 	

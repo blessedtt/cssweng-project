@@ -11,7 +11,6 @@ export default async function usertypeGetUnique(data: any){
 		return usertype;
 	}
 	catch(err){
-		console.log(err);
 		throw err;
 	}
 }

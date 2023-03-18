@@ -1,0 +1,26 @@
+	console.log("Logging in User: ");
+	console.log(req.user);
+	//@ts-ignore
+	const token = createToken({user_ID: req.user.user_ID, type: req.user.type});
+	//@ts-ignore
+	const refreshToken = createRefreshToken({user_ID: req.user.user_ID});
+	
+	try{
+		//create refresh token and store in database
+		const cRefreshToken = await prisma.refresh_token.create({
+			data: {
+				token: refreshToken,
+				//@ts-ignore
+				user_ID: req.user.user_ID,
+				date_created: new Date()
+			}
+		})
+		//set cookie on client
+		console.log("Refresh Token: " + refreshToken);
+		//@ts-ignore
+		res.cookie('refreshToken', refreshToken, COOKIE_OPTIONS);
+		res.send({success: true, token});
+
+	} catch (err){
+		res.status(400).json({message: "Error creating refresh token; you can only be logged in to one device at a time."});
+	}

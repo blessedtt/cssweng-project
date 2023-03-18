@@ -1,6 +1,7 @@
 import bcryptjs from "bcryptjs";
 
 import userGetUnique from "../../api/userGetUnique";
+import DatabaseError from "../../../error/databaseError";
 
 export const authenticateUser = async (email: string, password: string, done: any) => {
 	try{
@@ -16,8 +17,10 @@ export const authenticateUser = async (email: string, password: string, done: an
 		}
 
 	}
-	catch(error){
-		console.log(error);
-		return done(error, false, {message: 'An error occurred while logging in'});
+	catch(error: any){
+		console.log('User authentication error: ');
+
+		const dbErr = error.code ? new DatabaseError(error.code, "User not found") : error as Error;
+		return done(dbErr, false, {message: 'An error occurred while logging in'});
 	}
 }
