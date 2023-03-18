@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap'); 
+/* fonts used in this webapp */
+body{
+    background:#FAF8F1;
+}
+
+.login-container{
+    background:#FAF8F1;
+    text-align:center;
+    justify-content:center;
+    margin-top:25vh;
+}
+#login-text{
+    font-weight: 600;
+    font-size: 70px;
+    line-height: 85px;
+}
+
+ul{
+    list-style:none;
+}
+ul li{
+    padding:5px;
+}
+
+.login-enter{
+    /* default button styling */
+    background:#DD9D34;
+    border-radius:15px;
+    font-size:30px;
+    color:#FAF8F1;
+    padding:10px;
+    cursor:pointer;
+    outline:none;
+    /* positioning styling */
+    width:150px;
+    margin-top:5vh;
+    box-shadow:none;
+}

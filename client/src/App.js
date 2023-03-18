@@ -68,8 +68,7 @@ function App() {
 	const [salesUpdate, setSalesUpdate] = useState({});
 	const [stockUpdate, setStockUpdate] = useState({});
 
-
-
+	const [useGlobalFilter, setGlobalFilter] = useState({});
 	/*************************************
 	 *          Popup functions          *
 	 *************************************/
@@ -258,7 +257,6 @@ function App() {
 		setStockUpdate({});
 	}, [stockUpdate]);
 
-
 	
 
 	/*************************************
@@ -287,7 +285,6 @@ function App() {
 					isDelete={isDelete}
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
-
 					setUpdateStock={setStockUpdate}
 					setUpdateSales={setSalesUpdate}
 				/>
