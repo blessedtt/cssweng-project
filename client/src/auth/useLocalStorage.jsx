@@ -3,12 +3,15 @@
  */
 import { useState } from "react";
 
-export const useLocalStorage = (keyName, defaultValue) => {
-  
+export const useLocalStorage = (keyName, defaultValue, auth) => {
+
 	const [storedValue, setStoredValue] = useState(() => {
 		try {
 			const value = window.localStorage.getItem(keyName);
-			if (value) {
+			
+			if (value && Date(value.expiry) < Date.now()) {
+				//set that as session
+				console.log("Session exists");
 				return JSON.parse(value);
 			} else {
 				window.localStorage.setItem(keyName, JSON.stringify(defaultValue));

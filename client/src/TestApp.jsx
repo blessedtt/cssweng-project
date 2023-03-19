@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useAuth } from './auth/authContext';
 
+import { useCheckAuth } from './auth/useCheckAuth'; 
+
 import axios from 'axios';
 
 import { ProtectedLayout } from './auth/ProtectedLayout';

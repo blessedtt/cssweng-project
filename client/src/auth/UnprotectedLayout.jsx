@@ -7,6 +7,7 @@ export const UnprotectedLayout = () => {
 	const {user} = useAuth();
 	const outlet = useOutlet();
 
+	console.log(user)
 	if (!user){
 
 		return 	<div>{outlet}</div>
