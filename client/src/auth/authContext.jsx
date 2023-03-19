@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 import { useCheckAuth } from "./useCheckAuth";
 
+import { loginUserAPI } from "../api/auth/loginUserAPI";
+import { logoutUserAPI } from "../api/auth/logoutUserAPI";
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -13,15 +16,22 @@ export const AuthProvider = ({ children }) => {
 
 	// call this function when you want to authenticate the user
 	const login = async (data) => {
-		console.log(data)
-		setUser(data);
-		navigate("/index", {replace: true });
+		try{
+			const result = await loginUserAPI(data);
+			setUser(result);
+			console.log(result);
+		} catch(err){
+			throw err;
+		}
+
 	};
 
 	// call this function to sign out logged in user
 	const logout = () => {
-		setUser(null);
-		navigate("/login", { replace: true });
+		logoutUserAPI().then((result) => {
+			setUser(null);
+			navigate("/auth/login");
+		})
 	};
 
 	const authStatus = useMemo(
@@ -36,6 +46,11 @@ export const AuthProvider = ({ children }) => {
 			if (user === null && auth !== null){
 				setUser(auth);
 			}
+
+			else if (user !== null && auth === null){
+				setUser(null);
+			}
+			
 		}
 	}, [loading]);
 

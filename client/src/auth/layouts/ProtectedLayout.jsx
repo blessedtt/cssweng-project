@@ -1,6 +1,5 @@
 import { Navigate, useOutlet } from 'react-router-dom';
-import { useAuth } from './authContext';
-
+import { useAuth } from '../authContext';
 
 //redirects user to index if not logged in
 export const ProtectedLayout = () => {
@@ -8,15 +7,16 @@ export const ProtectedLayout = () => {
 	const outlet = useOutlet();
 
 	//check if user is actually authenticated
-	if (!user){
-		return <Navigate to="/login" />
+	if (user === null){
+		return <Navigate to="/auth/login" />
 	}
 
 	//check if user session has expired
 	if (Date(user.expiry) >= Date.now()){
 		logout();
+		return <Navigate to="/auth/login" />
 	}
-
+	
 	return (
 		<div>
 			{outlet}

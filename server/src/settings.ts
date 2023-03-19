@@ -15,8 +15,14 @@ if (process.env.NODE_ENV !== 'production') {
 	dotenv.config();
 }
 
+const corsOptions = {
+	origin: process.env.CORS_ORIGIN ?? 'http://localhost:3000',
+	credentials: true,
+	optionsSuccessStatus: 200,
+}
+
 export const loadMiddlewares = (app: Express) => {
-	app.use(cors());
+	app.use(cors(corsOptions));
 	app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
 	app.use(methodOverride('_method'));

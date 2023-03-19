@@ -7,6 +7,7 @@ async function ProductDeleteAPI({productIDList, FETCH_URL}) {
 	try{
 		const result = await axios.delete(FETCH_URL+'/product/remove', {
 			mode: 'cors',
+			withCredentials: true,
 			headers: {
 				'Content-Type': 'application/json'
 			},

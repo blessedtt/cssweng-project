@@ -16,8 +16,6 @@ export const TestApp = () => {
 
 	const {user, login, logout} = useAuth();
 
-
-
 	//useform
 	const { register, handleSubmit, errors } = useForm();
 

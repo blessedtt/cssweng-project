@@ -7,6 +7,7 @@ async function ProductEditAPI({productData, FETCH_URL}){
 		const result = await axios.put(url, JSON.stringify(productData), 
 			{
 				mode: 'cors',
+				withCredentials: true,
 				headers: {
 					'Content-Type': 'application/json'
 				}

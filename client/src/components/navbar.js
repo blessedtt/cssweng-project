@@ -7,6 +7,7 @@ function Navbar({
 	setAdd, 
 	setDelete,
 	isDelete,
+	isAuth
 }) {
 	return (
 		<div className ="nav">   
@@ -14,25 +15,29 @@ function Navbar({
 				<li id = 'first'>
 					HOME
 				</li>
-				<li>
-				<button onClick={() => setAdd(true)}>
+				{isAuth ? 
+				<>
+					<li>
+					<button onClick={() => setAdd(true)}>
+							<IconContext.Provider
+								value ={{ color: '#FFFFFFFF', size:'44px'}}
+							>
+							<IoAddCircleOutline />
+							</IconContext.Provider>
+					</button>
+		
+					</li>
+					<li>
+					<button onClick={() => setDelete(!isDelete)}>
 						<IconContext.Provider
-							value ={{ color: '#FFFFFFFF', size:'44px'}}
+						value ={{ color: '#FFFFFFFF', size:'44px'}}
 						>
-						<IoAddCircleOutline />
-						</IconContext.Provider>
-				</button>
-	
-				</li>
-				<li>
-				<button onClick={() => setDelete(!isDelete)}>
-					<IconContext.Provider
-					value ={{ color: '#FFFFFFFF', size:'44px'}}
-					>
-					<IoTrashSharp />
-				</IconContext.Provider>
-				</button>
-				</li>
+						<IoTrashSharp />
+					</IconContext.Provider>
+					</button>
+					</li>
+				</>
+				: <></>}
 			</ul>
 		</div>
 	)

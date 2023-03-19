@@ -34,7 +34,7 @@ UserAuthRouter.get('/login', userNoAuth, (req, res, next) => {
 // Login Handle
 UserAuthRouter.post('/login', userNoAuth, passport.authenticate('login'), (req, res) => {
 	//@ts-ignore
-	res.status(200).json({message: "Successfully Logged in.", userdata: {name: req.user.name, email: req.user.email, type: req.user.type, expiry: req.session.cookie.expires}});
+	res.status(200).json({message: "Successfully Logged in.", userdata: {name: req.user.name, email: req.user.email, type: req.user.user_category.utype_title, expiry: req.session.cookie.expires}});
 });
 
 

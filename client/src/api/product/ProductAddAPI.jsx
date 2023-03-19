@@ -6,6 +6,7 @@ async function ProductAddAPI(productData, FETCH_URL){
     try{
 		const result = await axios.post(FETCH_URL+'/product/add', JSON.stringify(productData), {
 			mode: 'cors',
+			withCredentials: true,
 			headers: {
 				'Content-Type': 'application/json'
 			}

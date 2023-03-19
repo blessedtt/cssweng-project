@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 
 //UI components
-import sidebarAccountManagement from './components/sidebar/sidebarAccountManagement';
-import NavbarAccountManagement from './components/navbarAccountManagement';
+import sidebarAccount from './components/account management/sidebarAccountManagement';
+import NavbarAccountManagement from './components/account management/NavbarAccountManagement';
 import Popup from './components/Popup';
 
 //popup components
@@ -13,7 +13,7 @@ import PopupMessage from './components/popups/popupMessage';
 
 
 //table components
-import Table from './components/table/TableAccountManagement';
+import UserTable from './components/users/UserTable';
 
 //function components
 
@@ -25,12 +25,13 @@ import DetailEditState from './containers/detailEditState';
 import UserAddAPI from './api/user/UserAddAPI';       //change to user
 import UserGetAPI from './api/user/UserGetAPI';        //change to user
 import UserDeleteAPI from './api/user/UserDeleteAPI';  //change to user
+import SidebarAccount from './components/account management/sidebarAccountManagement';
 
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
 
 
-function App() {
+function AccountPage() {
 
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
@@ -119,7 +120,7 @@ function App() {
 		setIsFetching(true);
 		try{	
 			const resUsers = await UserGetAPI({FETCH_URL});
-
+			console.log(resUsers);
 			setUsers(resUsers);
 			
 		}catch(err){
@@ -162,7 +163,7 @@ function App() {
 	return(
 		<div className="Container">
 
-			<sidebarAccountManagement
+			<SidebarAccount
 				isDelete={isDelete} 
 				setDelete={setDelete} 
 				setDeletePopup={setDeletePopup} 
@@ -175,14 +176,7 @@ function App() {
 			/>
 
 			<main className ="content">
-				<Table 
-					data={users} 
-					isFetching={isFetching} 
-					setSelectedRowData={setUsersToDelete}  
-					isDelete={isDelete}
-					setCurrentSelectedUser={setSelectedUser}
-					setShowType={setDetailType}
-				/>
+
 			</main>
 	
 			<AddState 
@@ -199,7 +193,7 @@ function App() {
 					isLoading={isLoading}
 				/>
 			</Popup>
-
+			
 			<Popup trigger = {deletePopup} id="Delete">
 				<DeletePopup 
 					setDelete={setDeleteConfirm} 
@@ -210,4 +204,4 @@ function App() {
 		</div>
 	);
 }
-export default App;
+export default AccountPage;

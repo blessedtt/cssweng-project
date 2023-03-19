@@ -6,6 +6,7 @@ async function CategoryDeleteAPI({categoryIDList, FETCH_URL}){
     try{
         const result = await axios.delete(FETCH_URL+'category/remove', {
             mode: 'cors',
+			withCredentials: true,
             headers:{
                 'Content-Type': 'application/json'
             },

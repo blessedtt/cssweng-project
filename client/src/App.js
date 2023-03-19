@@ -17,6 +17,7 @@ import Table from './components/table/Table';
 
 //function components
 
+
 //state containers
 import AddState from './containers/addState';
 import DetailEditState from './containers/detailEditState';
@@ -35,7 +36,7 @@ import CategoryDeleteAPI from './api/pcategory/CategoryDeleteAPI';
 const FETCH_URL = 'http://localhost:3001';
 
 
-function App() {
+function App({user, logout}) {
 
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
@@ -68,7 +69,8 @@ function App() {
 	const [salesUpdate, setSalesUpdate] = useState({});
 	const [stockUpdate, setStockUpdate] = useState({});
 
-	const [useGlobalFilter, setGlobalFilter] = useState({});
+	const [isAuth, setIsAuth] = useState(false);
+
 	/*************************************
 	 *          Popup functions          *
 	 *************************************/
@@ -201,6 +203,9 @@ function App() {
 	//initialization
 	useEffect(() => {
 		fetchData();
+		console.log(user)
+		if (user.type === "Admin")
+			setIsAuth(true);
 	}, []);
 
 	//update table when product table is updated (add, delete, edit)
@@ -269,12 +274,14 @@ function App() {
 				isDelete={isDelete} 
 				setDelete={setDelete} 
 				setDeletePopup={setDeletePopup} 
+				logout={logout}
 			/>
 
 			<Navbar 
 				setAdd={setAddPopup} 
 				setDelete={setDelete} 
 				isDelete={isDelete} 
+				isAuth={isAuth}
 			/>
 
 			<main className ="content">

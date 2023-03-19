@@ -6,6 +6,7 @@ async function CategoryEditAPI({categoryData, FETCH_URL}){
         const result = await axios.put(url, JSON.stringify(categoryData),
         {
             mode: 'cors',
+			withCredentials: true,
             headers: {
                 'Content-Type': 'application/json'
             }
