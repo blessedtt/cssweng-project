@@ -4,15 +4,19 @@ import { useAuth } from './authContext';
 
 //redirects user to index if not logged in
 export const ProtectedLayout = () => {
-	const {user} = useAuth();
+	const {user, logout} = useAuth();
 	const outlet = useOutlet();
 
-	console.log(user)
+	//check if user is actually authenticated
 	if (!user){
-
 		return <Navigate to="/login" />
 	}
-	
+
+	//check if user session has expired
+	if (Date(user.expiry) >= Date.now()){
+		logout();
+	}
+
 	return (
 		<div>
 			{outlet}

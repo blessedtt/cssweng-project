@@ -10,7 +10,6 @@ export const useCheckAuth = () => {
 		setLoading(true);
 		axios.get('/checkAuth')
 		.then((result) => {
-			console.log(result.data.userdata)
 			setAuthdata(result.data.userdata);
 			setLoading(false);
 		})

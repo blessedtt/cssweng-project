@@ -8,10 +8,8 @@ export const useLocalStorage = (keyName, defaultValue, auth) => {
 	const [storedValue, setStoredValue] = useState(() => {
 		try {
 			const value = window.localStorage.getItem(keyName);
-			
-			if (value && Date(value.expiry) < Date.now()) {
-				//set that as session
-				console.log("Session exists");
+
+			if (value) {
 				return JSON.parse(value);
 			} else {
 				window.localStorage.setItem(keyName, JSON.stringify(defaultValue));
@@ -21,7 +19,7 @@ export const useLocalStorage = (keyName, defaultValue, auth) => {
 			return defaultValue;
 		}
 	});
-	
+
 	const setValue = (newValue) => {
 		try {
 			window.localStorage.setItem(keyName, JSON.stringify(newValue));

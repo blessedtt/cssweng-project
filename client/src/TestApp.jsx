@@ -14,7 +14,9 @@ export const TestApp = () => {
 
 	const navigate = useNavigate();
 
-	const authContext = useAuth();
+	const {user, login, logout} = useAuth();
+
+
 
 	//useform
 	const { register, handleSubmit, errors } = useForm();
@@ -37,7 +39,7 @@ export const TestApp = () => {
 		.then( (result) => {
 			console.log('done');
 			console.log(result.data.userdata);
-			authContext.login(result.data.userdata);
+			login(result.data.userdata);
 			navigate('/index');
 		})
 		.catch(err => {
@@ -51,13 +53,14 @@ export const TestApp = () => {
 		.then((result) => {
 			console.log(result);
 		})
+		console.log(user)
 	}
 
 	const test_logout = () => {
 		axios.delete("/logout")
 		.then((result) => {
 			console.log(result)
-			authContext.logout();
+			logout();
 			navigate('/login');
 		})
 	}
@@ -88,7 +91,7 @@ export const TestApp = () => {
 				} />
 			</Route>
 			<Route element={<ProtectedLayout />} >
-				<Route path='/index' element={<><h1>Hello!!!!!</h1>
+				<Route path='/index' element={<><h1>Hello, {user ? user.name : "User"}!</h1>
 											<button onClick={testGet}> Test Get </button>
 											<button onClick={test_logout}> Logout </button>
 										</>} />
