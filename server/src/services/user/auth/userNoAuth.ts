@@ -12,5 +12,5 @@ export default (req: Request, res: Response, next: NextFunction) => {
 		return next();
 	}
 
-	res.redirect('/');
+	next(new Error('User is already authenticated'));
 }

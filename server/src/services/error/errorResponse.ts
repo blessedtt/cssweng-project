@@ -4,9 +4,9 @@
  */
 import { Request, Response, NextFunction } from 'express';
 
-export default function ErrorHandler(err: any, req: Request, res: Response, next: NextFunction) {
+export default function ErrorHandler(err: Error, req: Request, res: Response, next: NextFunction) {
 	//log the error
 	console.log(err);
 	//send the error response
-	res.status(err.id).json(err.message);
+	res.status(400).json(err.message);
 }

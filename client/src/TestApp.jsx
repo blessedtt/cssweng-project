@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useAuth } from './auth/authContext';
 
 import axios from 'axios';
+
+import { ProtectedLayout } from './auth/ProtectedLayout';
+import { UnprotectedLayout } from './auth/UnprotectedLayout';
 
 export const TestApp = () => {
 
 	const navigate = useNavigate();
+
+	const authContext = useAuth();
 
 	//useform
 	const { register, handleSubmit, errors } = useForm();
@@ -27,10 +33,10 @@ export const TestApp = () => {
 			}
 		)
 		.then( (result) => {
-
 			console.log('done');
-			console.log(result);
-			navigate('/');
+			console.log(result.data.userdata);
+			authContext.login(result.data.userdata);
+			navigate('/index');
 		})
 		.catch(err => {
 			console.log(err);
@@ -45,34 +51,46 @@ export const TestApp = () => {
 		})
 	}
 
+	const test_logout = () => {
+		axios.delete("/logout")
+		.then((result) => {
+			console.log(result)
+			authContext.logout();
+			navigate('/login');
+		})
+	}
+
 	return (
 		<Routes>
-			<Route path='/login' element={
-				<div>
-					<form onSubmit={handleSubmit(onSubmit)}>
-						<input
-							type="text"
-							name="email"
-							placeholder="Email"
-							{...register('email', { required: "Email is required" })}
-						/>
+			<Route element={<UnprotectedLayout />}>
+				<Route path='/login' element={
+						<div>
+							<form onSubmit={handleSubmit(onSubmit)}>
+								<input
+									type="text"
+									name="email"
+									placeholder="Email"
+									{...register('email', { required: "Email is required" })}
+								/>
 
-						{/*password to login */}
-						<input
-							type="password"
-							name="password"
-							placeholder="Password"
-							{...register('password', { required: "Password is required" })}
-						/>
-						
-						{/*submit button */}
-						<button type="submit">Submit</button>
-					</form>
-				</div>
-			} />
-
-			<Route path='/' element={<><h1>Hello</h1>
-										<button onClick={testGet} /></>} />
+								<input
+									type="password"
+									name="password"
+									placeholder="Password"
+									{...register('password', { required: "Password is required" })}
+								/>
+								
+								<button type="submit">Submit</button>
+							</form>
+						</div>
+				} />
+			</Route>
+			<Route element={<ProtectedLayout />} >
+				<Route path='/index' element={<><h1>Hello!!!!!</h1>
+											<button onClick={testGet}> Test Get </button>
+											<button onClick={test_logout}> Logout </button>
+										</>} />
+			</Route>
 		</Routes>
 	)
 }

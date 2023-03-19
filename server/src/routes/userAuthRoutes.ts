@@ -39,9 +39,9 @@ UserAuthRouter.post('/login', userNoAuth, passport.authenticate('login'), (req, 
 UserAuthRouter.delete('/logout', userCheckAuth, (req, res, next) => {
 	req.logOut((err) => {
 		if (err) return next(err);
-		res.redirect('/');
+		res.status(200).json({message: "Successfully Logged out."});
+		console.log("done");
 	});
-	req.flash('success_msg', 'You are logged out');
 });
 
 
