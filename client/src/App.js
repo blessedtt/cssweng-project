@@ -13,7 +13,7 @@ import PopupMessage from './components/popups/popupMessage';
 
 
 //table components
-import Table from './components/table/Table';
+import ProductTable from './components/table/Product Table/productTable';
 
 //function components
 
@@ -70,6 +70,11 @@ function App({user, logout}) {
 	const [stockUpdate, setStockUpdate] = useState({});
 
 	const [isAuth, setIsAuth] = useState(false);
+	//filter category state
+	const [filterCategory, setFilterCategory] = useState([]);
+
+	const [displayedProducts, setDisplayedProducts] = useState([]);
+
 
 	/*************************************
 	 *          Popup functions          *
@@ -261,8 +266,20 @@ function App({user, logout}) {
 		
 		setStockUpdate({});
 	}, [stockUpdate]);
-
 	
+	//filter out products that are not in the selected category
+	useEffect(() => {
+		if (Object.keys(filterCategory).length === 0 || filterCategory.category_ID === 0) {
+			setDisplayedProducts(products);
+			return;
+		};
+		
+		const filteredProducts = products.filter(product => product.type === filterCategory.category_ID);
+		setIsFetching(true);
+			setDisplayedProducts(filteredProducts);
+		setIsFetching(false);
+	}, [filterCategory, products]);
+
 
 	/*************************************
 	 * 		    	 Render              *
@@ -271,6 +288,8 @@ function App({user, logout}) {
 		<div className="Container">
 
 			<Sidebar 
+				categories={categories}
+				setFilterCategory={setFilterCategory}
 				isDelete={isDelete} 
 				setDelete={setDelete} 
 				setDeletePopup={setDeletePopup} 
@@ -285,11 +304,11 @@ function App({user, logout}) {
 			/>
 
 			<main className ="content">
-				<Table 
-					data={products} 
+				<ProductTable 
+					data={displayedProducts} 
 					isFetching={isFetching} 
-					setSelectedRowData={setProductsToDelete}  
 					isDelete={isDelete}
+					setSelectedRowData={setProductsToDelete}  
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}
 					setUpdateStock={setStockUpdate}

@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import SalesEdit from './salesEdit';
-import StockEdit from './stockEdit';
+import SalesEdit from './cell components/salesEdit';
+import StockEdit from './cell components/stockEdit';
 
 
 //generates special column cells for the product table
@@ -30,7 +30,7 @@ export default function useProductColumns(props) {
 		() => [
 			{
 				Header: 'SELECT: ',
-				accessor: 'selection',
+				accessor: 'delete',
 				Cell: ({row}) => (
 					<>
 						<input type="checkbox" {...row.getToggleRowSelectedProps()} />

@@ -1,12 +1,14 @@
 import React from 'react';
 import DeleteButton from './DeleteButton';
-import Category from './Category';
+import CategoryFilter from './CategoryFilter';
 
 export default function Sidebar({
-	isDelete, 
-	setDelete, 
-	setDeletePopup,
-	logout
+		categories, 
+		setFilterCategory, 
+		isDelete, 
+		setDelete, 
+		setDeletePopup,
+		logout
 	}) {
     return (
         <div className="sidebar">
@@ -15,12 +17,13 @@ export default function Sidebar({
                 <div id="hello">
                     Hello, name!
                 </div>
-                <Category />
 
-				<button id="logout" onClick={logout}>Logout</button>
 
+                <CategoryFilter categories={categories} setFilter={setFilterCategory}/>
                 {isDelete ? <DeleteButton setDelete={setDelete} setDeletePopup={setDeletePopup} /> : null}
                
+				<button id="logout" onClick={logout}>Logout</button>
+				
             </div>
         </div>
     );
