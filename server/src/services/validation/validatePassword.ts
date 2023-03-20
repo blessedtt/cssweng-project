@@ -11,8 +11,11 @@ export default function validatePassword(password: string){
     if (password.length < 6 || password.length > 16) {
         errors.push("The password must be between 6 and 16 characters"); 
     }
-    if (password.search(/[A-Z]/i) < 0) {
+    if (password.search(/[A-Z]/) < 0) {
         errors.push("The password must contain at least one capital letter");
+	}
+	if (password.search(/[a-z]/) < 0) {
+		errors.push("The password must contain at least one small letter");
     }
     if (password.search(/[0-9]/) < 0) {
         errors.push("The password must contain at least one digit"); 
