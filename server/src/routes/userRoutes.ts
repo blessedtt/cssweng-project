@@ -24,7 +24,7 @@ UserRouter.get('/', (req, res) => {
 });
 
 UserRouter.get('/get', userGet);
-UserRouter.post('/add', validateEmailMiddle, validatePasswordMiddle, userAddAdmin);
+UserRouter.post('/add', validateEmailMiddle, validatePasswordMiddle, userAddEmployee);
 UserRouter.delete('/:email', userRemove);
 
 export default UserRouter;

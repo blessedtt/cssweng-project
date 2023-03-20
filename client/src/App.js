@@ -10,16 +10,15 @@ import Popup from './components/Popup';
 //popup components
 import DeletePopup from './components/popups/deleteProductPopup';
 import PopupMessage from './components/popups/popupMessage';
+import AddProductPopup from './components/popups/addProductPopup';
 
 
 //table components
 import ProductTable from './components/table/Product Table/productTable';
 
-//function components
-
 
 //state containers
-import AddState from './containers/addState';
+import AddProductState from './containers/addProductState';
 import DetailEditState from './containers/detailEditState';
 
 //api functions
@@ -32,11 +31,15 @@ import CategoryGetAPI from './api/pcategory/CategoryGetAPI';
 import CategoryEditAPI from './api/pcategory/CategoryEditAPI';
 import CategoryDeleteAPI from './api/pcategory/CategoryDeleteAPI';
 
+import { useAuth } from './auth/authContext';
+
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
 
 
-function App({user, logout}) {
+function App() {
+
+	const {user, logout} = useAuth();
 
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
@@ -208,7 +211,6 @@ function App({user, logout}) {
 	//initialization
 	useEffect(() => {
 		fetchData();
-		console.log(user)
 		if (user.type === "Admin")
 			setIsAuth(true);
 	}, []);
@@ -294,6 +296,7 @@ function App({user, logout}) {
 				setDelete={setDelete} 
 				setDeletePopup={setDeletePopup} 
 				logout={logout}
+				isAuth={isAuth}
 			/>
 
 			<Navbar 
@@ -316,12 +319,13 @@ function App({user, logout}) {
 				/>
 			</main>
 	
-			<AddState 
+			<AddProductState 
 				addPopup={addPopup} 
 				setAddPopup={setAddPopup}
 				addProduct={addProduct} 
 				categories={categories} 
 			/>
+
 	
 			<Popup trigger = {statusPopup} id="Message">
 				<PopupMessage 

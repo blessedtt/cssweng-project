@@ -12,6 +12,7 @@ import prisma from "../../repositories/prismaClient";
 export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { email } = req.params;
+		console.log(req.params)
 		const user = await prisma.user.delete({
 			where: {
 				email,

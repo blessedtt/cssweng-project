@@ -1,6 +1,6 @@
 import './css/App.css';
 import { useEffect, useState } from 'react';
-
+import { useAuth } from './auth/authContext';
 
 //UI components
 import sidebarAccount from './components/account management/sidebarAccountManagement';
@@ -18,8 +18,7 @@ import UserTable from './components/users/UserTable';
 //function components
 
 //state containers
-import AddState from './containers/addState';
-import DetailEditState from './containers/detailEditState';
+import AddUserState from './components/users/containers/addUserState';
 
 //api functions
 import UserAddAPI from './api/user/UserAddAPI';       //change to user
@@ -33,12 +32,12 @@ const FETCH_URL = 'http://localhost:3001';
 
 function AccountPage() {
 
+	const {user} = useAuth();
+
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
 	const [addPopup, setAddPopup] = useState(false);
 
-	//selected product from table column
-	const [detailType, setDetailType] = useState(0);
 	const [selectedUser, setSelectedUser] = useState({});
 
 	//general popup message states
@@ -48,7 +47,7 @@ function AccountPage() {
 	//delete states
 	const [isDelete, setDelete] = useState(false);
 	const [isDeleteConfirm, setDeleteConfirm] = useState(false);
-	const [usersToDelete, setUsersToDelete] = useState([]);
+	const [userDeleteEmail, setUserDeleteEmail] = useState('');
 
 	//fetched data to store
 	const [users, setUsers] = useState([]);
@@ -58,7 +57,6 @@ function AccountPage() {
 	const [isUpdating, setIsUpdating] = useState(false);	//tells app to fetch upon success
 	const [isLoading, setIsLoading] = useState(true);		//tells app when operation is being performed
 
-	const [useGlobalFilter, setGlobalFilter] = useState({});
 	/*************************************
 	 *          Popup functions          *
 	 *************************************/
@@ -107,8 +105,8 @@ function AccountPage() {
 	const deleteUser = async () => {
 		setIsLoading(true);
 		try{
-			await UserDeleteAPI({userIDList: usersToDelete, FETCH_URL});
-			updateDisplay('Product deleted successfully.');
+			await UserDeleteAPI({userID: userDeleteEmail, FETCH_URL});
+			updateDisplay('User deleted successfully.');
 		}
 		catch(err){
 			errorPopup(String(err))
@@ -120,7 +118,6 @@ function AccountPage() {
 		setIsFetching(true);
 		try{	
 			const resUsers = await UserGetAPI({FETCH_URL});
-			console.log(resUsers);
 			setUsers(resUsers);
 			
 		}catch(err){
@@ -155,7 +152,22 @@ function AccountPage() {
 		setDelete(false);
 		setDeleteConfirm(false);
 	}, [isDeleteConfirm]);
+	
 
+	useEffect(() => {
+		if (userDeleteEmail === '') return;
+			console.log(userDeleteEmail);
+			setDeletePopup(true);
+	}, [userDeleteEmail])
+
+	useEffect(() => {
+		if (!isDeleteConfirm){
+			setUserDeleteEmail('');
+			return;
+		}
+		
+		deleteUser();
+	}, [isDeleteConfirm])
 	
 	/*************************************
 	 * 		    	 Render              *
@@ -163,26 +175,29 @@ function AccountPage() {
 	return(
 		<div className="Container">
 
-			<SidebarAccount
-				isDelete={isDelete} 
-				setDelete={setDelete} 
-				setDeletePopup={setDeletePopup} 
+			<SidebarAccount 
+				user={user}
 			/>
 
 			<NavbarAccountManagement 
 				setAdd={setAddPopup} 
 				setDelete={setDelete} 
-				isDelete={isDelete} 
+				isDelete={isDelete}
 			/>
 
 			<main className ="content">
-
+				<UserTable
+					users={users}
+					isFetching={isFetching}
+					isDelete={isDelete}
+					setDeleteID={setUserDeleteEmail}
+				/>
 			</main>
 	
-			<AddState 
+			<AddUserState 
 				addPopup={addPopup} 
 				setAddPopup={setAddPopup}
-				addProduct={addUser} 
+				addUser={addUser} 
 			/>
 	
 			<Popup trigger = {statusPopup} id="Message">

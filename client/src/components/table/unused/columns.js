@@ -1,7 +1,5 @@
 import { format } from 'date-fns';
 
-import ProductDetails from './productDetails';
-
 export const COLUMNS = [
     {
         Header: 'DATE UPDATED',

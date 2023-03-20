@@ -86,32 +86,8 @@ const AddProductPopup = (
                 </button>
                 </li>
                 <li>
-                {/* <input className='submit-btn' type = 'submit' value ='Submit' onSubmit={() => setSuccessPopup(true)}>
+                <input className='submit-btn' type = 'submit' value = 'Submit' onClick={() =>{setAdd(true)} } />
                     
-                </input> */}
-                {/* Add if */}
-                {/* <button className='submit-btn' onClick={() => {
-                    // if ()
-                    setSuccessPopup(true);
-                    }}>  */}
-                <input className='submit-btn' type = 'submit' value = 'Submit' onClick={() =>{
-                    // // let x = 1;
-                    // if (x==1){
-                    //     setSuccessPopup(false);
-                    // }
-                    let product1 = document.forms["prodForm"]["products"].value;
-                    let brand1 = document.forms["prodForm"]["brand"].value;
-                    let sell_price1 = document.forms["prodForm"]["sell_price"].value;
-                    let stock1 = document.forms["prodForm"]["stock"].value;
-                    if (product1 !=""){
-                         setAdd(true);
-                    }
-                    
-                }}>
-
-                </input>
-                    
-                {/* </button> */}
                 </li>
             </ul>
             </form>

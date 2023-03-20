@@ -6,6 +6,7 @@ async function UserAddAPI(userData, FETCH_URL){
     try{
 		const result = await axios.post(FETCH_URL+'/user/add', JSON.stringify(userData), {
 			mode: 'cors',
+			withCredentials: true,
 			headers: {
 				'Content-Type': 'application/json'
 			}

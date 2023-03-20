@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useAuth } from './auth/authContext';
+import { useAuth } from './authContext';
 
-import { useCheckAuth } from './auth/useCheckAuth'; 
+import { useCheckAuth } from './useCheckAuth'; 
 
 import axios from 'axios';
 

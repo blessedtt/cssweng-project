@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Popup from '../components/Popup';
 import AddProductPopup from '../components/popups/addProductPopup';
 
-export default function AddState({addPopup, setAddPopup, addProduct, categories}){
+export default function AddProductState({addPopup, setAddPopup, addProduct, categories}){
 
 	//new product state to be passed to add api
 	const [addConfirm, setAddConfirm] = useState(false);
