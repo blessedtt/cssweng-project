@@ -10,7 +10,6 @@ import { LoginForm } from './auth/LoginForm';
 import { AdminProtectedLayout } from './auth/layouts/AdminProtectedLayout';
 
 import App from './App';
-import AccountPage from './AccountPage';
 
 export const AppRouter = () => {
 	const navigate = useNavigate();
@@ -32,9 +31,6 @@ export const AppRouter = () => {
 				
 				<Route path='/home' element={<App user={user} logout={logout} />} />
 				
-				<Route path='/admin' element={<AdminProtectedLayout user={user} />}>
-					<Route path='/admin/home' element={<AccountPage />} />
-				</Route>
 
 			</Route>
 

@@ -22,6 +22,7 @@ import StockEdit from './cell components/stockEdit';
 export default function useProductColumns(props) {
 	const [inputStock, setInputStock] = useState(0);
 
+
 	useEffect(() => {
 		console.log(inputStock)
 	}, [inputStock])
@@ -98,8 +99,9 @@ export default function useProductColumns(props) {
 						>
 							details
 						</button>
-
+						
 						<SalesEdit props={props} cellProps={cellProps}/>
+						
 					</>
 				)
 			},

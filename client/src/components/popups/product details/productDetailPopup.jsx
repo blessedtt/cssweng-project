@@ -2,10 +2,14 @@ import React from "react";
 
 import selectProductDetail from "./selectProductDetail";
 
+import { useAuth } from "../../../auth/authContext"
+
 //this function calls selectProductDetail to show which type to show (details or metrics)
 //also keeps track of popup states
 export default function ProductDetailPopup({ setDetailPopup, setEditPopup, selectedDetails, showType }) {
-  return (
+	
+	const {user} = useAuth();
+	return (
 	<div>
 		{selectProductDetail(showType, selectedDetails)}
 			<button
@@ -15,6 +19,7 @@ export default function ProductDetailPopup({ setDetailPopup, setEditPopup, selec
 			>close
 			</button>
 
+			{user.type === "Admin" ? 
 			<button
 				onClick={() => {
 					setDetailPopup(false);
@@ -22,6 +27,7 @@ export default function ProductDetailPopup({ setDetailPopup, setEditPopup, selec
 				}}
 			>edit
 			</button>
+			: null}
 	</div>
   );
 };
