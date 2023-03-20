@@ -6,7 +6,7 @@ export default async function userAdd(data: any){
 		const hashedPassword = await bcryptjs.hash(data.password, 10);
 		const user = await prisma.user.create({
 			data: {
-				name: data.username,
+				name: data.name,
 				email: data.email,
 				pass: hashedPassword,
 				date_created: new Date(),

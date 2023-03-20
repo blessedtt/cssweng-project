@@ -12,7 +12,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 		if (isValid)
 			next();
 	} catch (error: any) {
-		console.log(error);
-		res.status(400).json({ message: error.message });
+		next(error)
 	}
 };

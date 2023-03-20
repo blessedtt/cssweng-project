@@ -296,6 +296,7 @@ function App() {
 				setDelete={setDelete} 
 				setDeletePopup={setDeletePopup} 
 				logout={logout}
+				name={user.name}
 				isAuth={isAuth}
 			/>
 

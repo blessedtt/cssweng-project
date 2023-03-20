@@ -23,7 +23,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 			}
 		});
 
-		console.log(users);
 		res.json(users);
 	} catch (error : any) {
 		console.log(error)

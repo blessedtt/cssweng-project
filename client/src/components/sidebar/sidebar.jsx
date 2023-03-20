@@ -9,6 +9,7 @@ export default function Sidebar({
 		isDelete, 
 		setDelete, 
 		setDeletePopup,
+		name,
 		logout,
 		isAuth
 	}) {
@@ -20,7 +21,7 @@ export default function Sidebar({
             <h1 id="title">inventory tracker</h1>
             <div className="sidecontent">
                 <div id="hello">
-                    Hello, name!
+                    Hello, {name}!
                 </div>
 
                 <CategoryFilter categories={categories} setFilter={setFilterCategory}/>
