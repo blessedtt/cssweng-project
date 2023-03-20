@@ -9,6 +9,6 @@ export const verifyAuth = async (req: Request, res: Response) => {
 		res.status(200).json({message: "User is already logged in", userdata: {name: user.name, email: user.email, type: user.user_category.utype_title, expiry: req.session.cookie.expires}})
 	}
 	else{
-		res.status(401).send({message: 'You are not logged in'});
+		res.status(403).send({message: 'You are not logged in'});
 	}
 }

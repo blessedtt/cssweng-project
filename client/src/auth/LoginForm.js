@@ -15,7 +15,6 @@ export const LoginForm = ({login}) => {
 	const log_in = async (data) => {
 		try{
 			login(data);
-			navigate('/home' , {replace: true});
 
 		} catch(err){
 			console.log(err);
