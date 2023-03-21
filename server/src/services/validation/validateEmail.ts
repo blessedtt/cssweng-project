@@ -8,6 +8,8 @@ export default async function validateEmail(email: string){
 	try{
 		const { valid, reason, validators } = await validate({
 			email,
+			validateMx: false,
+			validateDisposable: true,
 			validateSMTP: false,
 		});
 

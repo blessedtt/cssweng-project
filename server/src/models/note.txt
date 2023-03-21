@@ -1,6 +1,5 @@
 There's no explicit types here since Prisma generates their own types.
 
-I'm not sure how to generalize their types into an abstract type here so,
-If we're using tight coupling with Prisma, then this shouldn't be a problem.
+You can refer to their models in the schema.prisma file
 Access to their generated types can be done with 
 `import { Type } from '@prisma/client'`

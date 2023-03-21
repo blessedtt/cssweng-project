@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useAuth } from './auth/authContext';
 
 //UI components
-import sidebarAccount from './components/account management/sidebarAccountManagement';
-import NavbarAccountManagement from './components/account management/NavbarAccountManagement';
+import sidebarAccount from './components/users/account management/sidebarAccountManagement';
+import NavbarAccountManagement from './components/users/account management/NavbarAccountManagement';
 import Popup from './components/Popup';
 
 //popup components
@@ -24,7 +24,7 @@ import AddUserState from './components/users/containers/addUserState';
 import UserAddAPI from './api/user/UserAddAPI';       //change to user
 import UserGetAPI from './api/user/UserGetAPI';        //change to user
 import UserDeleteAPI from './api/user/UserDeleteAPI';  //change to user
-import SidebarAccount from './components/account management/sidebarAccountManagement';
+import SidebarAccount from './components/users/account management/sidebarAccountManagement';
 
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
@@ -37,8 +37,6 @@ function AccountPage() {
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
 	const [addPopup, setAddPopup] = useState(false);
-
-	const [selectedUser, setSelectedUser] = useState({});
 
 	//general popup message states
 	const [isSuccess, setIsSuccess] = useState(false);
