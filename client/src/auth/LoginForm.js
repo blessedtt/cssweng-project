@@ -1,4 +1,7 @@
 import '../css/Login.css'
+
+import { useState } from 'react';
+
 import { IoPersonSharp } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
@@ -12,11 +15,17 @@ export const LoginForm = ({login}) => {
 
 	const { register, handleSubmit, errors } = useForm();
 
+	const [errorMessage, setErrorMessage] = useState("");
+
 	const log_in = async (data) => {
 		try{
-			login(data);
+			setErrorMessage("Logging in...");
+			await login(data);
+			setErrorMessage("Success! Redirecting...");
 
 		} catch(err){
+			if (err.response.status === 401)
+				setErrorMessage("Invalid email or Password")
 			console.log(err);
 		};
 	}
@@ -56,6 +65,8 @@ export const LoginForm = ({login}) => {
 									{...register('password', { required: "Password is required" })}
 								/>
 						</li>
+						{/*error message*/}
+						<li className='error-message'>{errorMessage}</li>
 						<li>
 							<input type='submit' value='Log-in'  className='login-enter' />
 						</li>
