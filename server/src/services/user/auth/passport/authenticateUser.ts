@@ -5,7 +5,7 @@ import DatabaseError from "../../../error/databaseError";
 
 export const authenticateUser = async (email: string, password: string, done: any) => {
 	try{
-		const user = await userGetUnique({email});
+		const user = await userGetUnique({email: email.toLowerCase()});
 		if(user == null){
 			return done(null, false, {message: 'No user with that email'});
 		}
