@@ -9,11 +9,8 @@ import userAddEmployee from '../services/user/userAddEmployee';
 import userGet from '../services/user/userGetEmployees';
 import userRemove from '../services/user/userRemove';
 
-import validateEmailMiddle from '../services/middleware validation/validateEmailMiddle';
-import validatePasswordMiddle from '../services/middleware validation/validatePasswordMiddle';
-
 import UserTypeRouter from './usertypeRoutes';
-import userAddAdmin from '../services/user/userAddAdmin';
+import validateUserdata from '../services/middleware validation/validateUserdata';
 
 const UserRouter = express.Router();
 
@@ -24,7 +21,7 @@ UserRouter.get('/', (req, res) => {
 });
 
 UserRouter.get('/get', userGet);
-UserRouter.post('/add', validateEmailMiddle, validatePasswordMiddle, userAddEmployee);
+UserRouter.post('/add', validateUserdata, userAddEmployee);
 UserRouter.delete('/:email', userRemove);
 
 export default UserRouter;

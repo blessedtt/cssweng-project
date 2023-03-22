@@ -13,6 +13,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		//combine req.body with usertype string into one object
 		const data = { ...req.body, utype_title: "Admin"}
+		data.email = data.email.toLowerCase();
 
 		const user = await userAdd(data);
 		res.status(200).json(user);

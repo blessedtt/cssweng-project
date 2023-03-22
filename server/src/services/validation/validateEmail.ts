@@ -13,13 +13,10 @@ export default async function validateEmail(email: string){
 			validateSMTP: false,
 		});
 
-
-
-		console.log(valid);
-		return valid;
+		if (!valid) throw new Error("Invalid email. Please enter a valid email address.");
+		return true;
 	}
 	catch(err){
-		console.log(err);
 		throw err;
 	}
 
