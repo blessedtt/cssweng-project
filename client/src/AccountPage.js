@@ -142,13 +142,17 @@ function AccountPage() {
 
 	//delete call
 	useEffect(() => {
-		if (isDeleteConfirm === false) return;
-		//delete products
+		if (!isDeleteConfirm){
+			setUserDeleteEmail('');
+			return;
+		}
+		//delete user
 		deleteUser();
 		setStatusPopup(true);
 		//reset delete state
 		setDelete(false);
 		setDeleteConfirm(false);
+		setUserDeleteEmail('');
 	}, [isDeleteConfirm]);
 	
 
@@ -158,14 +162,14 @@ function AccountPage() {
 			setDeletePopup(true);
 	}, [userDeleteEmail])
 
+
 	useEffect(() => {
-		if (!isDeleteConfirm){
+		if (!deletePopup){
 			setUserDeleteEmail('');
 			return;
 		}
-		
-		deleteUser();
-	}, [isDeleteConfirm])
+
+	}, [deletePopup])
 	
 	/*************************************
 	 * 		    	 Render              *
