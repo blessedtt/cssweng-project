@@ -11,6 +11,7 @@ import userRemove from '../services/user/userRemove';
 
 import UserTypeRouter from './usertypeRoutes';
 import validateUserdata from '../services/middleware validation/validateUserdata';
+import verifyAdmin from '../services/user/auth/verifyAdmin';
 
 const UserRouter = express.Router();
 
@@ -22,6 +23,7 @@ UserRouter.get('/', (req, res) => {
 
 UserRouter.get('/get', userGet);
 UserRouter.post('/add', validateUserdata, userAddEmployee);
+UserRouter.post('/check', verifyAdmin);
 UserRouter.delete('/:email', userRemove);
 
 export default UserRouter;
