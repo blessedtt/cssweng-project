@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Select from 'react-select';
 
+
 // fix alignment later on
 function CategoryFilter({categories, setFilter}) {
 	const [selectedCategory, setCategory] = useState({});
@@ -31,6 +32,17 @@ function CategoryFilter({categories, setFilter}) {
 					getOptionLabel={(option) => option.name}
 					getOptionValue={(option) => option.category_ID}
 					onChange={setCategory}
+					
+					theme={(theme) => ({
+						...theme,
+						borderRadius: 30,
+						colors:{
+							...theme.colors,
+							primary25:'#DDBC86',
+							primary:'#A67438',
+						}
+					}
+					)}
 				/>
         </div>
     );
