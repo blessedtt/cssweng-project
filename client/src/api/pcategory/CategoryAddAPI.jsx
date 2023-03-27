@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-async function CategoryAddAPI(categoryData, FETCH_URL){
+async function CategoryAddAPI(categoryData){
     try{
-        const result = await axios.post(FETCH_URL+'/category/add', JSON.stringify(categoryData),{
+        const result = await axios.post('/category/add', JSON.stringify(categoryData),{
             mode: 'cors',
 			withCredentials: true,
             headers: {

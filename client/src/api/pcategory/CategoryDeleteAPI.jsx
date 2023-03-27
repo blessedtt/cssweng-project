@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-async function CategoryDeleteAPI({categoryIDList, FETCH_URL}){
+async function CategoryDeleteAPI({categoryIDList}){
     if (categoryIDList.length === 0) throw new Error('No categories selected');
 
     try{
-        const result = await axios.delete(FETCH_URL+'category/remove', {
+        const result = await axios.delete('category/remove', {
             mode: 'cors',
 			withCredentials: true,
             headers:{

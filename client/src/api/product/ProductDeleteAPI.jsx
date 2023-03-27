@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 //api call to delete product/s
-async function ProductDeleteAPI({productIDList, FETCH_URL}) {
+async function ProductDeleteAPI({productIDList}) {
     if (productIDList.length === 0) throw new Error('No products selected');
 	
 	try{
-		const result = await axios.delete(FETCH_URL+'/product/remove', {
+		const result = await axios.delete('/product/remove', {
 			mode: 'cors',
 			withCredentials: true,
 			headers: {

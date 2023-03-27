@@ -10,7 +10,6 @@ import Popup from './components/Popup';
 //popup components
 import DeletePopup from './components/popups/deleteProductPopup';
 import PopupMessage from './components/popups/popupMessage';
-import AddProductPopup from './components/popups/addProductPopup';
 
 
 //table components
@@ -26,16 +25,13 @@ import ProductAddAPI from './api/product/ProductAddAPI';
 import ProductGetAPI from './api/product/ProductGetAPI';
 import ProductEditAPI from './api/product/ProductEditAPI';
 import ProductDeleteAPI from './api/product/ProductDeleteAPI';
+
 import CategoryAddAPI  from './api/pcategory/CategoryAddAPI';
 import CategoryGetAPI from './api/pcategory/CategoryGetAPI';
 import CategoryEditAPI from './api/pcategory/CategoryEditAPI';
 import CategoryDeleteAPI from './api/pcategory/CategoryDeleteAPI';
 
 import { useAuth } from './auth/authContext';
-
-//url to fetch data from
-const FETCH_URL = 'http://localhost:3001';
-
 
 function App() {
 
@@ -114,7 +110,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await ProductAddAPI(data, FETCH_URL)
+			await ProductAddAPI(data)
 			updateDisplay('Product added successfully.');
 		}
 		catch(err){
@@ -126,7 +122,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await CategoryAddAPI(data, FETCH_URL)
+			await CategoryAddAPI(data)
 			updateDisplay('Category added successfully.');
 		}
 		catch(err){
@@ -139,7 +135,7 @@ function App() {
 	const deleteProduct = async () => {
 		setIsLoading(true);
 		try{
-			await ProductDeleteAPI({productIDList: productsToDelete, FETCH_URL});
+			await ProductDeleteAPI({productIDList: productsToDelete});
 			updateDisplay('Product deleted successfully.');
 		}
 		catch(err){
@@ -150,7 +146,7 @@ function App() {
 	const deleteCategory = async () => {
 		setIsLoading(true);
 		try{
-			await CategoryDeleteAPI({categoryIDList: categoriesToDelete, FETCH_URL});
+			await CategoryDeleteAPI({categoryIDList: categoriesToDelete});
 			updateDisplay('Category deleted successfully.');
 		}
 		catch(err){
@@ -162,8 +158,8 @@ function App() {
 	const fetchData = async () => {
 		setIsFetching(true);
 		try{	
-			const resProducts = await ProductGetAPI({FETCH_URL});
-			const resCategories = await CategoryGetAPI({FETCH_URL});
+			const resProducts = await ProductGetAPI();
+			const resCategories = await CategoryGetAPI();
 
 			setProducts(resProducts);
 			setCategories(resCategories);
@@ -179,7 +175,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await ProductEditAPI({productData: data, FETCH_URL})
+			await ProductEditAPI({productData: data})
 			updateDisplay('Product edited successfully.');
 		}
 		catch(err){
@@ -191,7 +187,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await CategoryEditAPI({categoryData: data, FETCH_URL})
+			await CategoryEditAPI({categoryData: data})
 			updateDisplay('Category edited successfully.');
 		}
 		catch(err){

@@ -1,6 +1,9 @@
 //send a message to admin based on their input password
 //used to verify user actions
 
+//returns 200 if success
+//returns 401 if incorrect password
+
 import { Request, Response } from "express";
 
 import userGetUnique from "../api/userGetUnique";
