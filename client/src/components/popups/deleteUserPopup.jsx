@@ -1,8 +1,11 @@
 import { IconContext } from 'react-icons';
 import { IoTrashBinSharp } from 'react-icons/io5';
-
+import Popup from '../Popup'
+import { useState } from 'react';
+import ConfirmUserPopup from './confirmUserPopup';
 
 export default function DeleteUserPopup({setDelete, setDeleteUserPopup}) {
+	const [confirmPopup, setConfirmPopup] = useState(false);
 	return (
 		<div className='delete-success'>
 			<ul>
@@ -23,12 +26,18 @@ export default function DeleteUserPopup({setDelete, setDeleteUserPopup}) {
 					</button>
 					<button className='ok-btn' onClick={() => {
 						setDeleteUserPopup(false)
-						setDelete(true)
+						setConfirmPopup(false);
 					}}>
 						Yes
 					</button>
 				</li>
 			</ul>
+			<Popup trigger = {setConfirmPopup}>
+				<ConfirmUserPopup
+					setConfirm={setConfirmPopup}
+				/>
+			</Popup>
+			
 		</div>
 	);
 }

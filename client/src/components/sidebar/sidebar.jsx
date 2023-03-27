@@ -10,6 +10,7 @@ export default function Sidebar({
 		setDelete, 
 		setDeletePopup,
 		name,
+        password,
 		logout,
 		isAuth
 	}) {
@@ -22,6 +23,7 @@ export default function Sidebar({
             <div className="sidecontent">
                 <div id="hello">
                     Hello, {name}!
+                    {password}
                 </div>
 
                 <CategoryFilter categories={categories} setFilter={setFilterCategory}/>

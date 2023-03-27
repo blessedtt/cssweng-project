@@ -8,7 +8,7 @@ import NavbarAccountManagement from './components/users/account management/Navba
 import Popup from './components/Popup';
 
 //popup components
-import DeletePopup from './components/popups/deleteProductPopup';     //change to deleteUserPopup - will be done by Sophia
+import DeletePopup from './components/popups/deleteUserPopup';     //change to deleteUserPopup - will be done by Sophia
 import PopupMessage from './components/popups/popupMessage';
 
 
