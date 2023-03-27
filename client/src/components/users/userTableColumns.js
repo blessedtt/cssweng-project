@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
 import { format } from 'date-fns';
+import { IoAddCircleOutline, IoPencil, IoTrashSharp, IoCheckmarkCircleOutline } from 'react-icons/io5';
+import { IconContext } from 'react-icons';
+
 
 export default function useUserColumns(props){
 	const columns = useMemo(() => [
@@ -9,12 +12,17 @@ export default function useUserColumns(props){
 		Cell: (cellProps => (
 			<>
 				{/* create delete button that returns the data of the row to props.setDeleteID */}
-				<button onClick={() => {
-					props.setDeleteID(cellProps.row.original.email);
-				}}>
-					delete
-				</button>
-
+				<li>
+					<button onClick={() => {
+						props.setDeleteID(cellProps.row.original.email);
+					}}>
+					<IconContext.Provider
+					value ={{ color: '#FFFFFFFF', size:'25px'}}
+					>
+					<IoTrashSharp />
+					</IconContext.Provider>
+					</button>	
+				</li>
 			</>
 		))
 	},

@@ -85,6 +85,7 @@ li:not(:last-child) {
     cursor:pointer;
     font-size:30px;
 }
+
 .popup-btns li {
     display:inline;
 }

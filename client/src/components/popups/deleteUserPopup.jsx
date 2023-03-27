@@ -24,6 +24,7 @@ export default function DeleteUserPopup({setDelete, setDeleteUserPopup}) {
 					}}>
 						No
 					</button>
+					
 					<button className='ok-btn' onClick={() => {
 						setDeleteUserPopup(false)
 						setConfirmPopup(false);

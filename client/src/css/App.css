@@ -160,6 +160,8 @@
   color:#A67438;
   margin:5px;
   border-radius:50%;
+  height: 30px;
+  width: 30px;
   border:#A67438 solid 2px;
   padding:10px;
   cursor:pointer;
@@ -170,7 +172,9 @@
   background:none;
   color:#A67438;
   margin:5px;
-  border-radius:50%;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
   border:#A67438 solid 2px;
   padding:10px;
   cursor:pointer;

@@ -30,32 +30,43 @@ export default function EditProductPopup({
 
 	return (
 		<div>
-			<h5 className='header'>Edit Product</h5>
+			<h5 className='header'>Update Product</h5>
 			<form name ="prodForm" onSubmit={handleSubmit(onSubmit)}>
 			<ul>
+
+				<li>
+				<label htmlFor = 'order'>Amount Pre-Ordered</label>
+				<input name ='order' type='number' min={0} {...register('order_amt')}required defaultValue={currentData.order_amt}></input>
+				</li>
+
+				<li>
+				<label htmlFor = 'stock' >On-hand Stock</label>
+				<input name ='stock' type='number' min={0} {...register('stock')}required defaultValue={currentData.stock}></input>
+				</li>
+
+				<li>
+				<label htmlFor = 'sales'>Amount Sold</label>
+				<input name ='sales' type='number' min={0} {...register('sales')}required defaultValue={currentData.sales}></input>
+				</li>
 
 				<li>
 				<label htmlFor = 'sell_price' >Selling Price</label>
 				<input name ='sell_price' type='number' min={0} {...register('price')}required defaultValue={currentData.sell_price}></input>
 				</li>
 
-				<li>
-				<label htmlFor = 'stock' >Stock</label>
-				<input name ='stock' type='number' min={0} {...register('stock')}required defaultValue={currentData.stock}></input>
-				</li>
-
-				<li>
-				<label htmlFor = 'sales'>Amount Sold: </label>
-				<input name ='sales' type='number' min={0} {...register('sales')}required defaultValue={currentData.sales}></input>
-				</li>
-
-				<li>
-				<label htmlFor = 'order'>Amount Currently Ordered: </label>
-				<input name ='order' type='number' min={0} {...register('order_amt')}required defaultValue={currentData.order_amt}></input>
-				</li>
 			</ul>
-			<button type='submit'>Submit</button>
-			<button onClick={() => {setEdit(false)}}>Cancel</button>
+		
+            <ul className='popup-btns'>
+                <li>
+                <button className='back-btn' onClick={() => setEdit(false)}>
+                    Back
+                </button>
+                </li>
+                <li>
+                <input className='submit-btn' type = 'submit' value = 'Submit' onClick={() =>{setEdit(true)} } />
+                    
+                </li>
+            </ul>
 			</form>
 		</div>
 	);
