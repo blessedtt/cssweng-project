@@ -117,3 +117,10 @@ li:not(:last-child) {
 .delete-success ul li{
     margin-top:30px;
 }
+
+.product span{
+    border-radius:40px;
+    margin-left: 300px;
+    background:gray;
+    justify-content: left;
+}

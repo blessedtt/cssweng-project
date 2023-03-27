@@ -2,13 +2,13 @@ import React from 'react';
 
 export default function ProductDetails({product}){
     return (
-        <div>
+        <div className='product'>
             <h1>Product Details</h1>
-            <br />
-            <h4>Name: {product.name}</h4>
-            <h4>Brand: {product.brand}</h4>
-			<h4>Description: {product.description}</h4>
-            <h4>Category: {product.product_category.name}</h4>
+            <br/>
+            <h4>Name:<span>{product.name}</span></h4> 
+            <h4>Brand: <span>{product.brand} </span></h4>
+			<h4>Description: <span>{product.description}</span></h4>
+            <h4>Category: <span>{product.product_category.name}</span></h4>
         </div>
     )
 }
