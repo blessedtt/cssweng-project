@@ -32,9 +32,9 @@ ul li{
     color:#FAF8F1;
     padding:10px;
     cursor:pointer;
-    outline:none;
+    border:none;
     /* positioning styling */
     width:150px;
-    margin-top:5vh;
+    margin-top:-5vh;
     box-shadow:none;
 }

@@ -1,7 +1,5 @@
 .popup {
     position:fixed;
-    top: 0;
-    left: 0;
     width:100%;
     height:100vh;
     background:rgba(0,0,0,0.2);
@@ -11,60 +9,81 @@
 }
 .popup-inner {
     position:relative;
-    padding:32px;
+    padding:5px 50px 20px 50px;
     width:100%;
     max-width:500px;
     background:#FAF8F1;
     color:black;
     border-radius:15px;
+    font-weight:500;
 
 }
 .popup-inner .header {
-    font-size:34px;
+    font-size:35px;
+    height: 30px;
 }
 .popup-inner h5  {
     color:black;
-    font-size:24px;
-    line-height:36px;
     font-weight:600;
-    text-decoration:none;
-    top:0px;
 }
 .popup-inner ul {
-    list-style:none;
-    padding-left:0;
+    padding:0px;
 }
 .popup-inner ul li {
     font-size:20px;
     padding:5px;
     position:relative;
+    text-transform:capitalize;
+    font-weight:600;
 }
 .popup-inner ul li input{
     position:fixed;
-    left:50vw;
+    left:49vw;
+    height: 30px;
+    width: 250px;
+    border:none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius:15px;
 }
-
+.popup-inner ul li textarea{
+    position:fixed;
+    left:49vw;
+    width: 250px;
+    border:none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius:15px;
+}
+.popup-inner ul .css-b62m3t-container{
+    position:absolute;
+    left: 11.25vw;
+    top: 3px;
+    width: 250px;
+}
+li:not(:last-child) {
+    margin-bottom: 30px;
+}
 .popup-inner .back-btn {
-    position:relative;
+    width:150px;
     padding:10px;
     border-radius:25px;
-    color:#FFFFFFFF;
     background:#A67438;
+    color:#FFFFFFFF;
+    position:relative;
+    margin-top: 15px;
+    left: 65px;
+    border:none;
     cursor:pointer;
-    outline:inherit;
     font-size:30px;
-    width:150px;
 }
 .popup-inner .ok-btn{
-    position:relative;
-    padding:10px;
-    border-radius:25px;
-    color:#FFFFFFFF;
-    background:#DD9D34;
-    cursor:pointer;
-    outline:inherit;
-    font-size:30px;
     width:150px;
+    padding:10px;
+    border-radius:30px;
+    background:#DD9D34;
+    color:#FFFFFFFF;
+    position:fixed;
+    cursor:pointer;
+    font-size:30px;
 }
 .popup-btns li {
     display:inline;
@@ -75,9 +94,14 @@
     border-radius:25px;
     background:#DD9D34;
     color:#FFFFFFFF;
-    border:5px solid #DD9D34;
+    position:relative;
+    margin-top: 15px;
+    left: 125px;
+    border:none;
     cursor:pointer;
     font-size:30px;
+    box-shadow: none;
+    height: 55px;
 }
 .success{
     text-align:center;

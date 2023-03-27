@@ -4,7 +4,7 @@
 
 
 
-.Container { 
+.Container{ 
   color:#FAF8F1;
   font-family:'Inter', sans-serif;
   display:grid;
@@ -19,14 +19,13 @@
 }
 /* contains sidebar, navbar and table */
 
-/* sidebar containing categories */
-.sidebar { 
-  padding:10px;
+/* sidebar containing categories & buttons */
+.sidebar{ /*side part*/
   grid-area: sidebar; 
   background-color:#A67438;
-  
+  width: 260px;
 }
-#title h1{
+#title{ /*inventory tracker text*/
   font-weight:900;
   font-size:33px;
   line-height:40px;
@@ -36,106 +35,97 @@
   float:left;
   position:relative;
 }
-.sidecontent{
+.sidecontent{ /*hello admin + category*/
   position:relative;
   top:10vh;
   font-style:normal;
   font-weight:400;
   font-size: 33px;
   line-height:40px;
+  left: 15px;
 }
-.sidecontent button{
-  background:none;
+.sidecontent button{ /*buttons on the side*/
   color:inherit;
   border:none;
-  padding:0;
+  padding:10px 15px 10px 15px;
   cursor:pointer;
-  outline:inherit;
   font-style:inherit;
   font-size:inherit;
   font-weight:400;
+  border-radius: 15px;
+  position: fixed;
+  width: 230px;
+}
+.sidecontent #move-to-admin{ /*manage staff button*/
+  background:#DD9D34;
+  left: 15px;
+  bottom: 110px;
+}
+#move-to-admin:hover{
+  background:#e1a74a;
+  border:none;
+}
+.sidecontent #logout{ /*logout button*/
+  background:#F13F26;
+  left: 15px;
+  bottom: 30px;
+}
+#logout:hover{
+  background:#ff4f34;
+  border:none;
+}
+.sidebutton{ /*back button in account management page*/
+  background: #B8ABA9;
+  left: 15px;
+  bottom: 30px;
+}
+.sidebutton:hover{
+  background:#c3b8b6;
+  border:none;
 }
 
-#cancel_btn{
-  position:relative;
-  top:47vh;
+#cancel_btn{ /*cancel button in delete page*/
+  bottom: 110px;
   text-align:center;
   justify-content:center;
-  display:flex;
-  flex-direction:row;
   background:#B8ABA9;
-  border:solid 5px #B8ABA9;
+  border:none;
   border-radius:15px;
-  padding:10px 20px;
-}
-#delete_btn{
-  position:relative;
-  top:50vh;
-  text-align:center;
-  justify-content:center;
-  display:flex;
-  flex-direction:row;
-  background:#ff2200;
-  border:solid 5px #ff2200;
-  border-radius:15px;
-  padding:10px 20px;
-}
-
-#cancel_btn{
-  position:relative;
-  top:40vh;
-  text-align:center;
-  justify-content:center;
-  display:flex;
-  flex-direction:row;
-  background:#B8ABA9;
-  border:solid 5px #B8ABA9;
-  border-radius:15px;
-  padding:10px 20px;
+  z-index: 1; /*covers manage staff button*/
 }
 #cancel_btn:hover{
   background:#c6bab8;
-  border:solid 5px #c6bab8;
+  border:none;
 }
-#delete_btn{
-  position:relative;
-  top:45vh;
+#delete_btn{ /*delete button in delete page*/
+  bottom: 30px;
   text-align:center;
   justify-content:center;
-  display:flex;
-  flex-direction:row;
-  background:#ff2200;
-  border:solid 5px #ff2200;
+  background:#F13F26;
+  border:none;
   border-radius:15px;
-  padding:10px 20px;
+  z-index: 1; /*covers logout button*/
 }
 #delete_btn:hover{
   background:#ff4f34;
-  border:solid 5px #ff4f34;
+  border:none;
 }
 
-
-
-.nav{ 
-
-  padding:1px;
+.nav{ /*top part*/
   grid-area: nav; 
   background-color:#A67438;
-
 }
-/* .nav #home_text{
-  
-  margin-left:2vw;
-  font-weight:600;
-  font-size:33px;
-
-} */
 .nav ul{
-  list-style:none;
   padding-left:0;
   margin-left:75vw;
 }
-.nav ul li{
+#first{ /*home & account management text*/
+  position:absolute;
+  font-weight:800;
+  font-size:33px;
+  left: 280px;
+}
+.nav ul li{ /*add & delete button*/
   display:inline;
   padding:5px;
 }
@@ -147,17 +137,8 @@
   cursor:pointer;
   outline:inherit;
 }
-#first{
-  display:flex;
-  position:absolute;
-  margin-right:6vw;
-  font-weight:600;
-  font-size:44px;
-  right:75vw;
-}
 .add{
   background:red;
-  
   display:relative;
 }
 
@@ -203,6 +184,7 @@
   display:inline-block;
   min-width:100px;
   text-align:left;
+  width: 230px;
 }
 
 .category-btn{
