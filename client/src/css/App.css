@@ -159,6 +159,8 @@
   background:none;
   color:#A67438;
   margin:5px;
+  height: 40px;
+  width: 40px;
   border-radius:50%;
   height: 30px;
   width: 30px;
@@ -168,18 +170,30 @@
   font-weight:300;
   font-size:15px;
 }
+.stock-edit input{
+  border-radius:30px;
+  padding: 10px;
+  height: 10px;
+  width: 75px;
+}
 .sales-edit button{
   background:none;
   color:#A67438;
   margin:5px;
-  border-radius: 50%;
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  border-radius:50%;
   border:#A67438 solid 2px;
   padding:10px;
   cursor:pointer;
   font-weight:300;
   font-size:15px;
+}
+.sales-edit input{
+  border-radius:30px;
+  padding: 10px;
+  height: 10px;
+  width: 75px;
 }
 .category-drop{
   position:relative;
