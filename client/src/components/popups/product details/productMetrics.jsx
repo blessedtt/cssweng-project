@@ -10,7 +10,6 @@ export default function ProductMetrics({product}){
             <h4>Amount Sold: <span>{product.sales}</span></h4>
             <h4>Revenue: <span>{product.revenue}</span></h4>
             <h4>Average Value: <span>{product.avg_value}</span></h4>
-			<br />
 			<h4>Amount Currently Ordered:<span>{product.order_amt}</span> </h4>
         </div>
     )
