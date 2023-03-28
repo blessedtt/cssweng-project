@@ -14,15 +14,19 @@ const ConfirmUserPopup =(
 
     return (
         <div>
+			<button className='confirm-exit'>
+				X
+			</button>
 			<h5 className='header'>
 				Confirm Delete
 			</h5>
-			<form name = 'prodForm'>
-			    <label>
-					Enter admin password to confirm deletion: 
-				</label>
+			<form className='submit-text' name = 'prodForm'>
+				<span >Enter admin password to confirm deletion: </span>
+				<br />
 				<input type = 'password' />
-				<input type = 'submit' value ='Submit' onClick={setConfirm(true)} />
+				<br />
+				<input className='submit-conf' type = 'submit' value ='Submit' onClick={setConfirm(true)} />
+				
 			</form>
 		</div>
     )

@@ -128,3 +128,30 @@ li:not(:last-child) {
     background:gray;
     justify-content: left;
 }
+.confirm-exit{
+    background:none;
+    position:relative;
+    left:17vw;
+    color:black;
+    font:inherit;
+    outline:inherit;
+    cursor:pointer;
+    border:none;
+    font-size:30px;
+}
+
+.submit-conf{
+    background:#DD9D34;
+    color:white;
+    margin-top: 1vh;
+    font:inherit;
+    cursor:pointer;
+    outline:inherit;
+    border-radius:40px;
+    border:#DD9D34;
+    padding:10px;
+}
+.submit-text{
+    position:relative;
+    top:-5vh;
+}
