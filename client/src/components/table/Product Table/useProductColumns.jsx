@@ -52,7 +52,9 @@ export default function useProductColumns(props) {
 				<>
 					<p>{cellProps.row.original["name"]}</p>
 					{/*Button to activate product details */}
-					<button onClick={() => {
+					<button 
+						className='submit-btn'
+						onClick={() => {
 							props.setSelectedDetails(cellProps.row.original);
 							props.setShowType(1);
 						}}>
@@ -88,6 +90,7 @@ export default function useProductColumns(props) {
 					<>
 						<p>{cellProps.value}</p>
 						<button
+							className='submit-btn'
 							onClick={() => {
 								props.setSelectedDetails(cellProps.row.original);
 								props.setShowType(2);

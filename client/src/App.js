@@ -319,6 +319,7 @@ function App() {
 				setDeletePopup={setDeletePopup} 
 				logout={logout}
 				name={user.name}
+				password={user.password}
 				isAuth={isAuth}
 			/>
 

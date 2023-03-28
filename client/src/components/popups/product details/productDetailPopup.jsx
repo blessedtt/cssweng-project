@@ -12,7 +12,7 @@ export default function ProductDetailPopup({ setDetailPopup, setEditPopup, selec
 	return (
 	<div>
 		{selectProductDetail(showType, selectedDetails)}
-			<button
+			<button className='back-btn'
 				onClick={() => {
 					setDetailPopup(false);
 				}}
@@ -20,7 +20,7 @@ export default function ProductDetailPopup({ setDetailPopup, setEditPopup, selec
 			</button>
 
 			{user.type === "Admin" ? 
-			<button
+			<button className='submit-btn'
 				onClick={() => {
 					setDetailPopup(false);
 					setEditPopup(true);

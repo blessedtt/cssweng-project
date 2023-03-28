@@ -10,11 +10,11 @@ export default function SidebarAccount({ user }) {
             <h1 id="title">inventory tracker</h1>
             <div className="sidecontent">
                 <div id="hello">
-                    Hello{user ? " , " + user.name : "!"}
+                    Hello{user ? ", " + user.name : "!"}
                 </div>
 
 
-            	<button onClick={() => navigate("/home")} className="sidebutton">Back to Products</button>
+            	<button onClick={() => navigate("/home")} className="sidebutton">Back</button>
                
             </div>
         </div>
