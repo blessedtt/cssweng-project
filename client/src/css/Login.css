@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap'); 
 /* fonts used in this webapp */
+
 body{
     background:#FAF8F1;
 }
-
 .login-container{
     background:#FAF8F1;
     text-align:center;
@@ -16,23 +16,30 @@ body{
     font-size: 70px;
     line-height: 85px;
 }
-
-ul{
+.login-elements ul{
     list-style:none;
 }
-ul li{
+.login-elements ul li{
     padding:5px;
 }
-
-.login-enter{
+.login-elements ul li input{
+    height: 10px;
+    border:none;
+    padding: 15px;
+    margin-left: 20px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius:20px;
+}
+.login-elements .login-enter{
     /* default button styling */
     background:#DD9D34;
-    border-radius:15px;
+    border-radius:30px;
     font-size:30px;
     color:#FAF8F1;
     padding:10px;
     cursor:pointer;
     border:none;
+    height: 55px;
     /* positioning styling */
     width:150px;
     margin-top:-5vh;

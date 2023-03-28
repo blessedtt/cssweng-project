@@ -1,4 +1,4 @@
-.popup {
+.popup { /*the whole popup*/
     position:fixed;
     top: 0;
     left: 0;
@@ -9,7 +9,7 @@
     justify-content:center;
     align-items:center;
 }
-.popup-inner {
+.popup-inner { /*inside the popup*/
     position:relative;
     padding:5px 50px 20px 50px;
     width:100%;
@@ -18,68 +18,111 @@
     color:black;
     border-radius:15px;
     font-weight:500;
-
 }
-.popup-inner .header {
+.popup-inner .header { /*Add New Product heading*/
     font-size:35px;
     height: 30px;
 }
-.popup-inner h5  {
+.popup-inner h5 { /*Add New Product heading*/
     color:black;
     font-weight:600;
     text-decoration:none;
     top:0px;
 }
-.popup-inner ul {
+.popup-inner ul { /*list in popup*/
     padding:0px;
+    list-style:none;
 }
-.popup-inner ul li {
+.popup-inner ul li { /*per list in popup*/
     font-size:20px;
     padding:5px;
     position:relative;
     text-transform:capitalize;
     font-weight:600;
 }
-.popup-inner ul li input{
+.popup-inner ul li:nth-of-type(4) { /*4th of the list*/
+    top: 30px;
+}
+.popup-inner ul li:nth-of-type(5) { /*5th of the list*/
+    top: 30px;
+}
+.popup-inner ul li:nth-of-type(6) { /*6th of the list*/
+    top: 30px;
+}
+.popup-inner ul li input { /*text boxes in add popup*/
     position:fixed;
     left:49vw;
-    height: 30px;
-    width: 250px;
+    height: 10px;
+    width: 225px;
+    padding: 15px;
     border:none;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius:15px;
 }
-.popup-inner ul li textarea{
+.popup-inner ul li textarea { /*description textbox in add new product*/
     position:fixed;
     left:49vw;
-    width: 250px;
+    width: 225px;
+    padding: 15px;
     border:none;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius:15px;
 }
-.popup-inner ul .css-b62m3t-container{
+.popup-inner ul .css-b62m3t-container { /*category drop down in add new product*/
     position:absolute;
     left: 232.5px;
-    top: 3px;
+    top: 5px;
     width: 250px;
 }
-li:not(:last-child) {
+li:not(:last-child) { /*spacing between per list*/
     margin-bottom: 30px;
 }
-.popup-inner .back-btn {
+
+.popup-inner h1 { /*product details heading*/
+    margin-top: 55px;;
+    font-size:35px;
+    height: 30px;
+}
+h4 { /*per list in details*/
+    text-transform:capitalize;
+    font-weight:600;
+}
+.product h4 { /*per list in product details*/
+    padding:5px;
+}
+.product span { /*textbox in product details*/
+    margin-left: 20px;
+    background:white;
+    justify-content: left;
+    font-weight:500;
+    position:fixed;
+    left:49vw;
+    height: 25px;
+    width: 225px;
+    padding: 10px;
+    border:none;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius:15px;
+}
+.popup-inner button { /*back/submit/cancel/ok button*/
+    height: 55px;
     width:150px;
     padding:10px;
-    border-radius:25px;
-    background:#A67438;
-    color:#FFFFFFFF;
+    border-radius:30px;
     position:relative;
-    margin-top: 15px;
-    left: 65px;
-    border:none;
     cursor:pointer;
     font-size:30px;
+    border:none;
+    text-transform:capitalize;
 }
-.popup-inner .ok-btn{
+.popup-inner .back-btn { /*back & close button*/
+    background:#A67438;
+    color:#FFFFFFFF;
+    left: 60px;
+    margin-bottom: 20px;
+}
+.popup-inner .submit-btn { /*submit button*/
+    height: 55px;
     width:150px;
     padding:10px;
     border-radius:30px;
@@ -88,47 +131,62 @@ li:not(:last-child) {
     position:relative;
     cursor:pointer;
     font-size:30px;
-}
-
-.popup-btns li {
-    display:inline;
-}
-.popup-inner .submit-btn{
-    width:150px;
-    padding:10px;
-    border-radius:25px;
-    background:#DD9D34;
-    color:#FFFFFFFF;
-    position:relative;
-    margin-top: 15px;
     left: 125px;
     border:none;
-    cursor:pointer;
-    font-size:30px;
+    margin-top: 15px;
+    text-transform:capitalize;
     box-shadow: none;
-    height: 55px;
 }
-.success{
+.popup-inner .cancel-btn { /*cancel button*/
+    background:#A67438;
+    color:#FFFFFFFF;
+    left: -30px;
+}
+.popup-inner .ok-btn { /*ok button*/
+    background:#DD9D34;
+    color:#FFFFFFFF;
+    left: 35px;
+}
+.popup-btns li { /*for buttons in add popup*/
+    display:inline;
+}
+.popup-btns .back-btn { /*for add popup styling to overwrite*/
+    margin-top: 50px;
+    margin-bottom: 0px;
+}
+.popup-btns .submit-btn { /*for add popup styling to overwrite*/
+    margin-top: 15px;
+}
+#Edit .popup-inner ul li:nth-of-type(4) { /*4th of the list in update product to overwrite*/
+    top: 0px;
+}
+
+/*success popup*/
+.success { /*inside success popup*/
     text-align:center;
 }
-.success ul li{
+.success ul li { /* components inside success popup*/
     margin-top:50px;
 }
-
-.delete-success{
+.success svg { /*check icon*/
+    height: 65px;
+    width:65px;
+}
+.success button { /*ok button inside success popup to overwite*/
+    margin-left: -70px;
+}
+.delete-success { /*inside delete success popup*/
     text-align:center;
 }
-.delete-success ul li{
+.delete-success ul li { /* components inside delete success popup*/
     margin-top:30px;
 }
-
-.product span{
-    border-radius:40px;
-    margin-left: 300px;
-    background:gray;
-    justify-content: left;
+.delete-success svg { /*trash icon*/
+    height: 65px;
+    width:65px;
 }
-.confirm-exit{
+
+.confirm-exit {
     background:none;
     position:relative;
     left:17vw;
@@ -139,8 +197,7 @@ li:not(:last-child) {
     border:none;
     font-size:30px;
 }
-
-.submit-conf{
+.submit-conf {
     background:#DD9D34;
     color:white;
     margin-top: 1vh;
@@ -148,10 +205,10 @@ li:not(:last-child) {
     cursor:pointer;
     outline:inherit;
     border-radius:40px;
-    border:#DD9D34;
+    border:none;
     padding:10px;
 }
-.submit-text{
+.submit-text {
     position:relative;
     top:-5vh;
 }
