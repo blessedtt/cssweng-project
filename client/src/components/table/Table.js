@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useTable, useSortBy, useRowSelect } from 'react-table'
+import { useTable, useSortBy, useRowSelect, useFilters } from 'react-table'
 import '../../css/table_style.css'
 
 import Popup from '../Popup';
@@ -10,6 +10,7 @@ function Table({
 	columns,
 	setSelectedRowData,
 	isDelete,
+	nameFilter,
 	}){
     
     //product details popup states
@@ -18,6 +19,7 @@ function Table({
     // used alongside useTable (react table)
     const tableInstance = useTable(
 		{ columns, data },
+		useFilters,
         useSortBy,
         useRowSelect,
         )
@@ -30,6 +32,7 @@ function Table({
         prepareRow,         //preparing rows
         selectedFlatRows,   //selected rows
 		toggleHideColumn,   //hide columns
+		setFilter,			//filter columns
     } = tableInstance
 
     //send selected row data ids to parent component
@@ -42,6 +45,10 @@ function Table({
 			toggleHideColumn('delete', !isDelete);
 	}, [isDelete]);
 
+	useEffect(() => {
+		setFilter('name', nameFilter);
+	}, [nameFilter])
+
 	return (
 		<table {...getTableProps()}>
 			<thead>
@@ -53,9 +60,7 @@ function Table({
 									//sort options
 									<th {...column.getHeaderProps(column.getSortByToggleProps())}>
 										{column.render('Header')}
-										<span>
-										{column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ' - '}
-										</span>
+										<span>{ column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ' - ' }</span>
 									</th>
 								))
 							}

@@ -6,6 +6,7 @@ export default function ProductTable({
 	data,
 	isFetching,
 	isDelete,
+	nameFilter,
 	setSelectedRowData,
 	setCurrentSelectedProduct,
 	setShowType,
@@ -37,6 +38,7 @@ export default function ProductTable({
 				columns={columns}
 				setSelectedRowData={setSelectedRowData}
 				isDelete={isDelete}
+				nameFilter={nameFilter}
 			/>
 		);
 }

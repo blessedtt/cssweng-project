@@ -32,6 +32,7 @@ import CategoryEditAPI from './api/pcategory/CategoryEditAPI';
 import CategoryDeleteAPI from './api/pcategory/CategoryDeleteAPI';
 
 import { useAuth } from './auth/authContext';
+import { SearchBar } from './components/SearchBar';
 
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
@@ -72,10 +73,17 @@ function App() {
 	const [salesUpdate, setSalesUpdate] = useState({});
 	const [stockUpdate, setStockUpdate] = useState({});
 
+	//authentication state
 	const [isAuth, setIsAuth] = useState(false);
+	
 	//filter category state
 	const [filterCategory, setFilterCategory] = useState([]);
 
+	//filter by name
+	const [showSearch, setShowSearch] = useState(false);
+	const [nameFilter, setNameFilter] = useState('');
+
+	//actual displayed products
 	const [displayedProducts, setDisplayedProducts] = useState([]);
 
 
@@ -165,6 +173,11 @@ function App() {
 			const resProducts = await ProductGetAPI({FETCH_URL});
 			const resCategories = await CategoryGetAPI({FETCH_URL});
 
+			//append brand to product name
+			resProducts.forEach(product => {
+				product.name = product.name + ' - ' + product.brand;
+			});
+
 			setProducts(resProducts);
 			setCategories(resCategories);
 			
@@ -179,7 +192,8 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await ProductEditAPI({productData: data, FETCH_URL})
+			const {name, brand, type, ...updateData} = data;
+			await ProductEditAPI({productData: updateData, FETCH_URL})
 			updateDisplay('Product edited successfully.');
 		}
 		catch(err){
@@ -268,19 +282,27 @@ function App() {
 		
 		setStockUpdate({});
 	}, [stockUpdate]);
+
+
 	
 	//filter out products that are not in the selected category
 	useEffect(() => {
 		if (Object.keys(filterCategory).length === 0 || filterCategory.category_ID === 0) {
 			setDisplayedProducts(products);
+			setNameFilter('');
 			return;
 		};
 		
 		const filteredProducts = products.filter(product => product.type === filterCategory.category_ID);
 		setIsFetching(true);
 			setDisplayedProducts(filteredProducts);
+			setNameFilter('');
 		setIsFetching(false);
 	}, [filterCategory, products]);
+
+	useEffect(() => {
+		setNameFilter('');
+	}, [showSearch])
 
 
 	/*************************************
@@ -302,16 +324,25 @@ function App() {
 
 			<Navbar 
 				setAdd={setAddPopup} 
-				setDelete={setDelete} 
+				setDelete={setDelete}
+				showSearch={showSearch}
+				setShowSearch={setShowSearch}
 				isDelete={isDelete} 
 				isAuth={isAuth}
-			/>
+			>
+				{showSearch ? <SearchBar
+					nameFilter={nameFilter}
+					setNameFilter={setNameFilter}
+					/> 
+				: null}
+			</Navbar>
 
 			<main className ="content">
 				<ProductTable 
 					data={displayedProducts} 
 					isFetching={isFetching} 
 					isDelete={isDelete}
+					nameFilter={nameFilter}
 					setSelectedRowData={setProductsToDelete}  
 					setCurrentSelectedProduct={setSelectedProduct}
 					setShowType={setDetailType}

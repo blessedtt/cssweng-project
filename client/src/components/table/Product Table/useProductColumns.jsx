@@ -3,6 +3,8 @@ import { format } from 'date-fns';
 import SalesEdit from './cell components/salesEdit';
 import StockEdit from './cell components/stockEdit';
 
+import { ColumnFilter } from '../ColumnFilter';
+
 
 //generates special column cells for the product table
 
@@ -48,7 +50,7 @@ export default function useProductColumns(props) {
 				accessor: 'name',
 				Cell: (cellProps) => (
 				<>
-					<p>{cellProps.row.original["name"]+ " - " + cellProps.row.original["brand"]}</p>
+					<p>{cellProps.row.original["name"]}</p>
 					{/*Button to activate product details */}
 					<button onClick={() => {
 							props.setSelectedDetails(cellProps.row.original);
@@ -57,7 +59,7 @@ export default function useProductColumns(props) {
 						details
 					</button>
 				</>
-					)
+					),
 			},
 			{
 				Header: 'ON-HAND STOCK',

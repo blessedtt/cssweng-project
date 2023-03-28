@@ -1,13 +1,16 @@
-import React from 'react';
-import { IoAddCircleOutline, IoPencil, IoTrashSharp, IoCheckmarkCircleOutline } from 'react-icons/io5';
+import React, {Children} from 'react';
+import { IoAddCircleOutline, IoPencil, IoTrashSharp, IoSearchCircleSharp, IoCheckmarkCircleOutline } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 
 
 function Navbar({
 	setAdd, 
 	setDelete,
+	setShowSearch,
+	showSearch,
 	isDelete,
-	isAuth
+	isAuth,
+	children
 }) {
 	return (
 		<div className ="nav">   
@@ -15,6 +18,19 @@ function Navbar({
 				<li id = 'first'>
 					HOME
 				</li>
+				<li>
+					{children}
+				</li>
+				<li>
+					<button onClick={() => setShowSearch(!showSearch)}>
+					<IconContext.Provider
+						value ={{ color: '#FFFFFFFF', size:'44px'}}
+					>
+						<IoSearchCircleSharp />
+					</IconContext.Provider>
+					</button>
+				</li>
+
 				{isAuth ? 
 				<>
 					<li>
