@@ -294,3 +294,14 @@
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
 }
+#SearchBar{
+  border-radius:30px;
+  border:5px solid #FAF8F1;
+  padding:5px;
+  position:fixed;
+  left:75vw;
+  top:1.4vw;
+  font:inherit;
+  /* left:-12vw;
+  top:1.75vw; */
+}
