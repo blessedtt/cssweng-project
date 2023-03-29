@@ -1,10 +1,11 @@
 import { IconContext } from 'react-icons';
 import { IoTrashBinSharp } from 'react-icons/io5';
 
-
 export default function DeleteUserPopup({setDelete, setDeletePopup}) {
+	
 	return (
 		<div className='delete-success'>
+
 			<ul>
 				<li>
 					<IconContext.Provider value={{ color: '#DD9D34', size:'44px'}}>
@@ -21,6 +22,7 @@ export default function DeleteUserPopup({setDelete, setDeletePopup}) {
 					}}>
 						No
 					</button>
+					
 					<button className='ok-btn' onClick={() => {
 						setDeletePopup(false)
 						setDelete(true)
@@ -29,6 +31,7 @@ export default function DeleteUserPopup({setDelete, setDeletePopup}) {
 					</button>
 				</li>
 			</ul>
+			
 		</div>
 	);
 }
