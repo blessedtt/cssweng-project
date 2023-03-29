@@ -9,6 +9,7 @@ import passport from 'passport';
 import userCheckAuth from '../services/user/auth/userCheckAuth';
 import userNoAuth from '../services/user/auth/userNoAuth';
 import { verifyAuth } from '../services/user/auth/verifyAuth';
+import verifyAdmin from '../services/user/auth/verifyAdmin';
 
 
 const UserAuthRouter = express.Router();
@@ -25,11 +26,9 @@ UserAuthRouter.get('/test', userCheckAuth, async(req, res) => {
 	res.send("Test Successful, user is authenticated.");
 });
 
-UserAuthRouter.get('/checkAuth', verifyAuth);
+UserAuthRouter.post('/verifyAdmin', verifyAdmin);
 
-UserAuthRouter.get('/login', userNoAuth, (req, res, next) => {
-	res.render('login');
-});
+UserAuthRouter.get('/checkAuth', verifyAuth);
 
 // Login Handle
 UserAuthRouter.post('/login', userNoAuth, passport.authenticate('login'), (req, res) => {

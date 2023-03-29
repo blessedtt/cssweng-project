@@ -8,7 +8,7 @@ import NavbarAccountManagement from './components/users/account management/Navba
 import Popup from './components/Popup';
 
 //popup components
-import DeletePopup from './components/popups/deleteUserPopup';     //change to deleteUserPopup - will be done by Sophia
+import DeletePopup from './components/popups/deleteUserPopup';
 import PopupMessage from './components/popups/popupMessage';
 
 
@@ -25,6 +25,8 @@ import UserAddAPI from './api/user/UserAddAPI';       //change to user
 import UserGetAPI from './api/user/UserGetAPI';        //change to user
 import UserDeleteAPI from './api/user/UserDeleteAPI';  //change to user
 import SidebarAccount from './components/users/account management/sidebarAccountManagement';
+import { verifyAuthAPI } from './api/user/verifyAuthAPI';
+import ConfirmUserDelPopup from './components/popups/confirmUserDelPopup';
 
 //url to fetch data from
 const FETCH_URL = 'http://localhost:3001';
@@ -36,7 +38,11 @@ function AccountPage() {
 
 	const [statusPopup, setStatusPopup] = useState(false);
 	const [deletePopup, setDeletePopup] = useState(false);
+	const [validateAdminPopup, setValidateAdminPopup] = useState(false);
 	const [addPopup, setAddPopup] = useState(false);
+
+	//pass to check
+	const [pass, setPass] = useState('');
 
 	//general popup message states
 	const [isSuccess, setIsSuccess] = useState(false);
@@ -111,6 +117,20 @@ function AccountPage() {
 		}
 	}
 
+	const verifyAdmin = async (data) => {
+		setStatusPopup(true)
+		try{
+			await verifyAuthAPI({password: pass});
+			setPass('');
+			setStatusPopup(false);
+			setDeletePopup(true);
+		}
+		catch(err){
+			errorPopup(String(err.response.data.message))
+			setUserDeleteEmail('');
+		}
+	}
+
 	//fetches data from api
 	const fetchData = async () => {
 		setIsFetching(true);
@@ -156,20 +176,35 @@ function AccountPage() {
 	}, [isDeleteConfirm]);
 	
 
+	//triggers delete popup to open
 	useEffect(() => {
 		if (userDeleteEmail === '') return;
 			console.log(userDeleteEmail);
-			setDeletePopup(true);
+			setValidateAdminPopup(true);
 	}, [userDeleteEmail])
 
 
+	//triggers delete popup to clear data when closed
 	useEffect(() => {
 		if (!deletePopup){
 			setUserDeleteEmail('');
 			return;
 		}
-
 	}, [deletePopup])
+
+	//triggers validate popup to clear its data when closed
+	useEffect(() => {
+		if (!validateAdminPopup && !deletePopup){
+			setPass('');
+			return;
+		}
+	}, [validateAdminPopup])
+
+	//when password changes, call verification api
+	useEffect(() =>{
+		if (pass === '') return;
+		verifyAdmin(pass);
+	}, [pass])
 	
 	/*************************************
 	 * 		    	 Render              *
@@ -211,6 +246,7 @@ function AccountPage() {
 				/>
 			</Popup>
 			
+			{/* delete user popup */}
 			<Popup trigger = {deletePopup} id="Delete">
 				<DeletePopup 
 					setDelete={setDeleteConfirm} 
@@ -218,6 +254,13 @@ function AccountPage() {
 				/>
 			</Popup>
 
+			{/* validate admin first before delete popup */}
+			<Popup trigger = {validateAdminPopup} id="validateAdmin">
+				<ConfirmUserDelPopup
+					setPopup={setValidateAdminPopup}
+					setPass={setPass}
+				/>
+			</Popup>
 		</div>
 	);
 }

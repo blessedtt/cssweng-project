@@ -13,11 +13,13 @@ export default async function verifyAdmin(req: Request, res: Response){
 		const { password } = req.body;
 
 		//@ts-ignore
-		const userData = await userGetUnique(sessionUser.email.toLowerCase());
+		const userData = await userGetUnique({email: sessionUser.email});
 
 		if (userData !== null && await bcryptjs.compare(password, userData.pass)) {
+			console.log("Verify Success");
 			res.status(200).json({ message: "Success" });
 		} else {
+			console.log("Verify Failure: Incorrect Password");
 			res.status(401).json({ message: "Failure: Incorrect Password" });
 		}
 
