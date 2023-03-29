@@ -155,17 +155,17 @@
   
 }
 
+
+
 .stock-edit button{
   background:none;
   color:#A67438;
   margin:5px;
-  height: 40px;
-  width: 40px;
+  height: 10%;
+  width: 15%;
   border-radius:50%;
-  height: 40px;
-  width: 40px;
   border:#A67438 solid 2px;
-  padding:10px;
+  padding:8px;
   cursor:pointer;
   font-weight:300;
   font-size:15px;
@@ -174,14 +174,15 @@
   border-radius:30px;
   padding: 10px;
   height: 10px;
-  width: 75px;
+  width: 25%;
 }
+
 .sales-edit button{
   background:none;
   color:#A67438;
   margin:5px;
-  height: 40px;
-  width: 40px;
+  height: 10%;
+  width: 20%;
   border-radius:50%;
   border:#A67438 solid 2px;
   padding:10px;
@@ -193,7 +194,7 @@
   border-radius:30px;
   padding: 10px;
   height: 10px;
-  width: 75px;
+  width: 30%;
 }
 .category-drop{
   position:relative;
