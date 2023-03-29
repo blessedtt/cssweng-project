@@ -1,7 +1,8 @@
+import '../../css/Popup.css';
 import { useForm } from 'react-hook-form';
-
 import { verifyAuthAPI } from '../../api/user/verifyAuthAPI';
-
+import { IoPersonSharp } from 'react-icons/io5';
+import { IconContext } from 'react-icons';
 const ConfirmUserDelPopup =(
     {
         setPopup,
@@ -16,10 +17,18 @@ const ConfirmUserDelPopup =(
 	}
 
     return (
-        <div>
+        <div className='conf-div'>
 			<button className='confirm-exit' onClick={() => setPopup(false)}>
 				X
 			</button>
+			<br />
+			<span>
+			<IconContext.Provider
+							value ={{ color: '#A67438', size:'70px'}}
+						>
+						<IoPersonSharp className='conf-icon' />
+			</IconContext.Provider>
+			</span>
 			<h5 className='header'>
 				Confirm Delete
 			</h5>

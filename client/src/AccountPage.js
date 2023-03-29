@@ -1,7 +1,6 @@
 import './css/App.css';
 import { useEffect, useState } from 'react';
 import { useAuth } from './auth/authContext';
-
 //UI components
 import sidebarAccount from './components/users/account management/sidebarAccountManagement';
 import NavbarAccountManagement from './components/users/account management/NavbarAccountManagement';
