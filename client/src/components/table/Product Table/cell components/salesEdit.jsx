@@ -11,6 +11,25 @@ export default function SalesEdit({props, cellProps}){
 	
 	return (
 		<div className="sales-edit">
+
+		<button onClick={() => {
+			if (Number(inputData) !== 0){
+				const rowData = {...cellProps.row.original};
+				rowData["sales"] = rowData["sales"] - Number(inputData);
+				
+				props.updateSales(rowData);
+			}
+		}}
+		>-</button>
+
+		<input 
+			type="number" 
+			min="0" max="100" 
+			defaultValue={0} 
+			onKeyDown={(e) => { preventNegativeInput(e) }}
+			onChange={(e) => { setInputData(e.target.value) }}
+		/>
+
 		<button onClick={() => {
 			if (Number(inputData) !== 0){
 				//calculate new stock
@@ -23,24 +42,6 @@ export default function SalesEdit({props, cellProps}){
 			}
 		}}
 		>+</button>
-
-		<input 
-			type="number" 
-			min="0" max="100" 
-			defaultValue={0} 
-			onKeyDown={(e) => { preventNegativeInput(e) }}
-			onChange={(e) => { setInputData(e.target.value) }}
-		/>
-
-		<button onClick={() => {
-			if (Number(inputData) !== 0){
-				const rowData = {...cellProps.row.original};
-				rowData["sales"] = rowData["sales"] - Number(inputData);
-				
-				props.updateSales(rowData);
-			}
-		}}
-		>-</button>
 	</div>
 	)
 

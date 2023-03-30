@@ -11,6 +11,25 @@ export default function StockEdit({props, cellProps}){
 	
 	return (
 		<div className="stock-edit">
+			<button onClick={() => {
+			if (Number(inputData) !== 0){
+				const rowData = {...cellProps.row.original};
+				rowData["stock"] = rowData["stock"] - Number(inputData);
+				
+				console.log(rowData)
+				props.updateStock(rowData);
+			}
+		}}
+		>-</button>
+
+		<input 
+			type="number" 
+			min="0" max="100" 
+			defaultValue={0} 
+			onKeyDown={(e) => { preventNegativeInput(e) }}
+			onChange={(e) => { setInputData(e.target.value) }}
+		/>
+
 		<button onClick={() => {
 			if (Number(inputData) !== 0){
 				console.log(inputData)
@@ -25,25 +44,6 @@ export default function StockEdit({props, cellProps}){
 			}
 		}}
 		>+</button>
-
-		<input 
-			type="number" 
-			min="0" max="100" 
-			defaultValue={0} 
-			onKeyDown={(e) => { preventNegativeInput(e) }}
-			onChange={(e) => { setInputData(e.target.value) }}
-		/>
-
-		<button onClick={() => {
-			if (Number(inputData) !== 0){
-				const rowData = {...cellProps.row.original};
-				rowData["stock"] = rowData["stock"] - Number(inputData);
-				
-				console.log(rowData)
-				props.updateStock(rowData);
-			}
-		}}
-		>-</button>
 	</div>
 	)
 
