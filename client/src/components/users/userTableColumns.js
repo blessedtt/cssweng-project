@@ -12,7 +12,7 @@ export default function useUserColumns(props){
 		Cell: (cellProps => (
 			<>
 				{/* create delete button that returns the data of the row to props.setDeleteID */}
-				<li>
+				<span>
 					<button onClick={() => {
 						props.setDeleteID(cellProps.row.original.email);
 					}}>
@@ -22,7 +22,7 @@ export default function useUserColumns(props){
 					<IoTrashSharp />
 					</IconContext.Provider>
 					</button>	
-				</li>
+				</span>
 			</>
 		))
 	},
