@@ -193,10 +193,15 @@ function AccountPage() {
 
 	//triggers validate popup to clear its data when closed
 	useEffect(() => {
-		if (!validateAdminPopup && !deletePopup){
+		if (!validateAdminPopup){
+			if (pass === ''){
+				setUserDeleteEmail('');
+				return;
+			}
 			setPass('');
 			return;
 		}
+
 	}, [validateAdminPopup])
 
 	//when password changes, call verification api
