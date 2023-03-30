@@ -152,9 +152,14 @@
   background:#FFFFFFFF     ;
   overflow-x:scroll;
   overflow-y:scroll;
-  
 }
-
+.content span button{
+  background:none;
+  border: none;
+  border-radius:50%;
+  border:white solid 5px;
+  padding:10px;
+}
 
 
 .stock-edit button{
