@@ -39,12 +39,12 @@ const AddProductPopup = (
             <ul>
                 <li>
                 <label htmlFor ='product'> Product </label>
-                <input name ='product' type='text' {...register('name')} required></input>
+                <input name ='product' type='text' minLength={0} maxLength={15} {...register('name')} required></input>
                 </li>
 
 				<li>
                 <label htmlFor = 'brand' >Brand</label>
-                <input name ='brand' type='text' {...register('brand')} required></input>
+                <input name ='brand' type='text' minLength={0} maxLength={10} {...register('brand')} required></input>
                 </li>
 
 				<li>
