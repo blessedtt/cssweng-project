@@ -103,6 +103,8 @@ h4 { /*per list in details*/
     border:none;
     box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius:15px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .popup-inner button { /*back/submit/cancel/ok button*/
     height: 55px;
