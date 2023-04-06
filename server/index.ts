@@ -8,8 +8,8 @@ import passport from 'passport';
 
 //custom imports
 import { loadMiddlewares } from './settings';
-import { LoadRoutes } from './routes/mainRoute';
-import initializePassport from './services/user/auth/passport/passport-config';
+import { LoadRoutes } from './src/routes/mainRoute';
+import initializePassport from './src/services/user/auth/passport/passport-config';
 
 initializePassport(passport);
 
