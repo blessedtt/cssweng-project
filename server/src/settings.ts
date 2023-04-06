@@ -42,6 +42,7 @@ export const loadMiddlewares = (app: Express) => {
 	app.use(passport.session());
 	app.use(passport.initialize());
 
-	app.set('view engine', 'ejs');
-	app.use(express.static('views'));
+	//set path to build folder
+	app.set('view engine', 'html');
+	app.use(express.static('build'));
 }

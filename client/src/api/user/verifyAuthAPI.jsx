@@ -3,7 +3,7 @@ import axios from 'axios';
 export const verifyAuthAPI = async ({password}) => {
 
 	try{
-		const result = await axios.post("/verifyAdmin", 
+		const result = await axios.post("/auth/verifyAdmin", 
 		JSON.stringify({
 			password: password
 		}),

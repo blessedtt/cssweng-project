@@ -14,24 +14,13 @@ import verifyAdmin from '../services/user/auth/verifyAdmin';
 
 const UserAuthRouter = express.Router();
 
-UserAuthRouter.get('/', userCheckAuth, async (req, res, next) => {
-	const user = await req.user;
-	console.log("Home: ");
-	console.log(user);
-	//@ts-ignore
-	res.render('index', {name: user.name});
-});
-
-UserAuthRouter.get('/test', userCheckAuth, async(req, res) => {
-	res.send("Test Successful, user is authenticated.");
-});
-
 UserAuthRouter.post('/verifyAdmin', verifyAdmin);
 
 UserAuthRouter.get('/checkAuth', verifyAuth);
 
 // Login Handle
 UserAuthRouter.post('/login', userNoAuth, passport.authenticate('login'), (req, res) => {
+	console.log("Logged in user");
 	//@ts-ignore
 	res.status(200).json({message: "Successfully Logged in.", userdata: {name: req.user.name, email: req.user.email, type: req.user.user_category.utype_title, expiry: req.session.cookie.expires}});
 });
@@ -42,9 +31,8 @@ UserAuthRouter.delete('/logout', userCheckAuth, (req, res, next) => {
 	req.logOut((err) => {
 		if (err) return next(err);
 		res.status(200).json({message: "Successfully Logged out."});
-		console.log("done");
+		console.log("Logged out user");
 	});
 });
-
 
 export default UserAuthRouter;

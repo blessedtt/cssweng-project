@@ -3,7 +3,7 @@ import axios from 'axios';
 export const loginUserAPI = async (data) => {
 
 	try{
-		const result = await axios.post("/login", 
+		const result = await axios.post("/auth/login", 
 		JSON.stringify({
 			email: data.email,
 			password: data.password

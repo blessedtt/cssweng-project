@@ -3,7 +3,7 @@ import axios from 'axios';
 //requests an edit of a product in the database
 async function ProductEditAPI({productData, FETCH_URL}){
 	try{
-		let url = FETCH_URL+'/product/'+productData.product_ID;
+		let url = '/product/'+productData.product_ID;
 		const result = await axios.put(url, JSON.stringify(productData), 
 			{
 				mode: 'cors',

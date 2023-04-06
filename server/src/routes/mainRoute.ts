@@ -15,10 +15,21 @@ import userCheckAuth from '../services/user/auth/userCheckAuth';
 import userCheckAdmin from '../services/user/auth/userCheckAdmin';
 
 export const LoadRoutes = (app: Router) => {
+
 	app.use('/product', userCheckAuth, ProductRouter);
 	app.use('/category', userCheckAuth, CategoryRouter);
 	app.use('/user', userCheckAuth, userCheckAdmin, UserRouter);
-	app.use('/', UserAuthRouter);
+	app.use('/auth', UserAuthRouter);
+
+	//index is in build, from react app in `client`
+	app.get('/', (req, res) => {
+		res.sendFile('index.html');
+  	});	
 
 	app.use(ErrorHandler);
+
+	//redirect all other routes to index
+	app.get('*', (req, res) => {
+		res.redirect('/');
+	})
 };

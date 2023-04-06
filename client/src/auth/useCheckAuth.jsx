@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-//check if session exists on server with GET '/checkAuth'
+//check if session exists on server with GET '/auth/checkAuth'
 export const useCheckAuth = () => {
 	const [authdata, setAuthdata] = useState({});
 	const [loading, setLoading] = useState(true);
 
 	const checkAuth = () => {
 		setLoading(true);
-		axios.get('/checkAuth')
+		axios.get('/auth/checkAuth')
 		.then((result) => {
 			setAuthdata(result.data.userdata);
 			setLoading(false);

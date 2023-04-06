@@ -3,6 +3,7 @@
  * @description This file is the entry point of the application
  */
 import express, {Express, Request, Response} from 'express';
+import path from 'path';
 import passport from 'passport';
 
 //custom imports

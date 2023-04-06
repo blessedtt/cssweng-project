@@ -5,7 +5,7 @@ async function ProductDeleteAPI({productIDList, FETCH_URL}) {
     if (productIDList.length === 0) throw new Error('No products selected');
 	
 	try{
-		const result = await axios.delete(FETCH_URL+'/product/remove', {
+		const result = await axios.delete('/product/remove', {
 			mode: 'cors',
 			withCredentials: true,
 			headers: {
