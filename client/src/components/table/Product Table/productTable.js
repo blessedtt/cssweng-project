@@ -37,6 +37,16 @@ export default function ProductTable({
 				data={data}
 				columns={columns}
 				setSelectedRowData={setSelectedRowData}
+				tableOptions={{
+					initialState: {
+						sortBy: [
+							{
+								id: 'last_updated',
+								desc: true,
+							}
+						]
+					}
+				}}
 				isDelete={isDelete}
 				nameFilter={nameFilter}
 			/>

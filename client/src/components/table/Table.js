@@ -9,6 +9,7 @@ function Table({
 	data, 
 	columns,
 	setSelectedRowData,
+	tableOptions,
 	isDelete,
 	nameFilter,
 	}){
@@ -18,7 +19,7 @@ function Table({
 
     // used alongside useTable (react table)
     const tableInstance = useTable(
-		{ columns, data },
+		{ columns, data, ...tableOptions},
 		useFilters,
         useSortBy,
         useRowSelect,
