@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function CategoryDeleteAPI({categoryIDList, FETCH_URL}){
+async function CategoryDeleteAPI({categoryIDList}){
     if (categoryIDList.length === 0) throw new Error('No categories selected');
 
     try{

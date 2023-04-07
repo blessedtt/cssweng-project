@@ -2,9 +2,9 @@ import axios from 'axios';
 
 
 //API call to add product
-async function UserAddAPI(userData, FETCH_URL){
+async function UserAddAPI(userData){
     try{
-		const result = await axios.post(FETCH_URL+'/user/add', JSON.stringify(userData), {
+		const result = await axios.post('/user/add', JSON.stringify(userData), {
 			mode: 'cors',
 			withCredentials: true,
 			headers: {

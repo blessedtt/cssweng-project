@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 ///fetches data from backend API
-async function UserGetAPI({FETCH_URL}){
+async function UserGetAPI(){
     try{
-		const result = await axios.get(FETCH_URL+"/user/get", {withCredentials: true, mode: 'cors'})
+		const result = await axios.get("/user/get", {withCredentials: true, mode: 'cors'})
 		return result.data;
 	}
 	catch(err){

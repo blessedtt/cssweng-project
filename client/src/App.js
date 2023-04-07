@@ -34,9 +34,6 @@ import CategoryDeleteAPI from './api/pcategory/CategoryDeleteAPI';
 import { useAuth } from './auth/authContext';
 import { SearchBar } from './components/SearchBar';
 
-//url to fetch data from
-const FETCH_URL = 'http://localhost:3001';
-
 
 function App() {
 
@@ -122,7 +119,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await ProductAddAPI(data, FETCH_URL)
+			await ProductAddAPI(data)
 			updateDisplay('Product added successfully.');
 		}
 		catch(err){
@@ -134,7 +131,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await CategoryAddAPI(data, FETCH_URL)
+			await CategoryAddAPI(data)
 			updateDisplay('Category added successfully.');
 		}
 		catch(err){
@@ -147,7 +144,7 @@ function App() {
 	const deleteProduct = async () => {
 		setIsLoading(true);
 		try{
-			await ProductDeleteAPI({productIDList: productsToDelete, FETCH_URL});
+			await ProductDeleteAPI({productIDList: productsToDelete});
 			updateDisplay('Product deleted successfully.');
 		}
 		catch(err){
@@ -158,7 +155,7 @@ function App() {
 	const deleteCategory = async () => {
 		setIsLoading(true);
 		try{
-			await CategoryDeleteAPI({categoryIDList: categoriesToDelete, FETCH_URL});
+			await CategoryDeleteAPI({categoryIDList: categoriesToDelete});
 			updateDisplay('Category deleted successfully.');
 		}
 		catch(err){
@@ -170,8 +167,8 @@ function App() {
 	const fetchData = async () => {
 		setIsFetching(true);
 		try{	
-			const resProducts = await ProductGetAPI({FETCH_URL});
-			const resCategories = await CategoryGetAPI({FETCH_URL});
+			const resProducts = await ProductGetAPI();
+			const resCategories = await CategoryGetAPI();
 
 			//append brand to product name
 			resProducts.forEach(product => {
@@ -193,7 +190,7 @@ function App() {
 		try{
 			setStatusPopup(true);
 			const {name, brand, type, ...updateData} = data;
-			await ProductEditAPI({productData: updateData, FETCH_URL})
+			await ProductEditAPI({productData: updateData})
 			updateDisplay('Product edited successfully.');
 		}
 		catch(err){
@@ -205,7 +202,7 @@ function App() {
 		setIsLoading(true);
 		try{
 			setStatusPopup(true);
-			await CategoryEditAPI({categoryData: data, FETCH_URL})
+			await CategoryEditAPI({categoryData: data})
 			updateDisplay('Category edited successfully.');
 		}
 		catch(err){

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 ///fetches category data from backend API
-async function CategoryGetAPI({FETCH_URL}){
+async function CategoryGetAPI(){
     try{
 		const result = await axios.get("/category/get", {withCredentials: true, mode: 'cors'})
 		return result.data;

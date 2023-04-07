@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function CategoryEditAPI({categoryData, FETCH_URL}){
+async function CategoryEditAPI({categoryData}){
     try{
         let url = '/product/'+categoryData.category_ID;
         const result = await axios.put(url, JSON.stringify(categoryData),

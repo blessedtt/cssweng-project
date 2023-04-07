@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 //api call to delete user/s
-async function UserDeleteAPI({userID, FETCH_URL}) {
+async function UserDeleteAPI({userID}) {
     if (userID.length === null) throw new Error('No user selected');
 	
 	try{
-		const result = await axios.delete(FETCH_URL+'/user/'+userID, {
+		const result = await axios.delete('/user/'+userID, {
 			mode: 'cors',
 			withCredentials: true,
 			headers: {

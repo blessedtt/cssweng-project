@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 ///fetches data from backend API
-async function ProductGetAPI({FETCH_URL}){
+async function ProductGetAPI(){
     try{
 		const result = await axios.get("/product/get", {withCredentials: true, mode: 'cors'});
 		return result.data;

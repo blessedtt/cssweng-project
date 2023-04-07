@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //api call to delete product/s
-async function ProductDeleteAPI({productIDList, FETCH_URL}) {
+async function ProductDeleteAPI({productIDList}) {
     if (productIDList.length === 0) throw new Error('No products selected');
 	
 	try{

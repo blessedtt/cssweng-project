@@ -21,15 +21,15 @@ export const LoadRoutes = (app: Router) => {
 	app.use('/user', userCheckAuth, userCheckAdmin, UserRouter);
 	app.use('/auth', UserAuthRouter);
 
-	//index is in build, from react app in `client`
-	app.get('/', (req, res) => {
-		res.sendFile('index.html');
-  	});	
-
 	app.use(ErrorHandler);
 
-	//redirect all other routes to index
-	app.get('*', (req, res) => {
-		res.redirect('/');
+	//main route to react app
+	app.get('/', (req, res) => {
+		res.sendFile('index.html', {root: 'build'});
 	})
+
+	//redirect all other routes to index
+	app.use('/*', (req, res) => {
+		res.redirect('/');
+	});
 };
