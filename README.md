@@ -1,4 +1,14 @@
-# cssweng-project
+# 9 Works Inventory Management System
+
+Developed By Team 1 - CSSWENG S11
+This is a project for 9 Works Hardware, also in fulfillment of the CSSWENG course.
+
+Currently hosted at Render: https://nineworks-inventory.onrender.com/
+
+This program is an inventory management system for use of 9 Works Hardware.
+
+Developed in React and Express, this application allows the user to add, edit, search, and remove products.
+Also includes user-based permission for pages.
 
 For testing:
 install all dependencies on both `client` and `server` folders using ``npm install`` on their directories.
@@ -12,5 +22,4 @@ On the server terminal:
 
 Once installed, use `npm start` on the client terminal, and `npm run start` on the server terminal.
 
-Currently, the server is located at `http://localhost:3001`, while the client is on `http://localhost:3000`.
-The database is live on a Planetscale database. If you need access to it, send me a message so i can add you to the team there.
+The Planetscale connection has been removed in order to protect access of the database.
